@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/title_bar_bg" >
+
+    <TextView
+        android:id="@+id/mTextViewLeft"
+		style="@style/title_bar_tv_style"
+		android:layout_alignParentLeft="true"
+		android:visibility="gone"
+        android:layout_marginLeft="@dimen/title_bar_tv_margin"
+        android:background="@drawable/ic_back"/>
+
+
+
+    <TextView
+        android:id="@+id/mTextviewCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/mTextviewRight1"
+        style="@style/title_bar_tv_style"
+        android:layout_marginRight="@dimen/title_bar_tv_margin"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:background="@drawable/ic_more" />
+    
+     <TextView
+        android:id="@+id/mTextviewRight2"
+        style="@style/title_bar_tv_style"
+        android:layout_toLeftOf="@id/mTextviewRight1"
+        android:layout_marginRight="@dimen/title_bar_tv_margin"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:background="@drawable/ic_search" /> 
+    
+     <TextView
+        android:id="@+id/mTextviewRight3"
+        style="@style/title_bar_tv_style"
+        android:layout_toLeftOf="@id/mTextviewRight2"
+        android:layout_marginRight="@dimen/title_bar_tv_margin"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:background="@drawable/ic_cancle" /> 
+
+
+</RelativeLayout>
