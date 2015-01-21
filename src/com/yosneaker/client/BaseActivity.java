@@ -15,10 +15,12 @@ import android.widget.Toast;
 /**
  * 
  * 自定义所有Activity基类,封装常用方法
+ * 
  * @author chendd
- *
+ * 
  */
 public abstract class BaseActivity extends FragmentActivity implements OnClickListener{
+	
 
 	/**
 	 * 从当前activity跳转到目标activity,
@@ -83,7 +85,11 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
     public boolean setTitleBarText(String titleText) { 
         TextView tv = (TextView) findViewById(R.id.mTextviewCenter); 
         if (null != tv) { 
-            tv.setText(titleText); 
+        	if(titleText == null) {
+        		tv.setText(getTitle().toString()); 
+        	}else {
+        		tv.setText(titleText); 
+        	}
             return true; 
         } 
         return false; 
@@ -107,7 +113,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
      * 是否显示右侧按钮3(默认隐藏)
      * @param isShow
      */
-    public void hideTextViewRight3(boolean isShow) { 
+    public void showTextViewRight3(boolean isShow) { 
     	TextView bt = getTextViewRight3(); 
         if (null != bt) { 
         	if (isShow) 
@@ -121,7 +127,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
      * 是否显示右侧按钮2(默认隐藏)
      * @param isShow
      */
-    public void hideTextViewRight2(boolean isShow) { 
+    public void showTextViewRight2(boolean isShow) { 
     	TextView bt = getTextViewRight2();
     	if (null != bt) { 
             if (isShow) 
@@ -135,7 +141,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
      * 是否显示右侧按钮1(默认隐藏)
      * @param isShow
      */
-    public void hideTextViewRight1(boolean isShow) { 
+    public void showTextViewRight1(boolean isShow) { 
     	TextView bt = getTextViewRight1();
     	if (null != bt) { 
             if (isShow) 

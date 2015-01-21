@@ -19,17 +19,24 @@ import android.view.ViewGroup;
 import com.yosneaker.client.R;
 import com.yosneaker.client.view.PagerSlidingTabStrip;
 
-public class CommentFragment extends Fragment {
+/**
+ * 
+ * 评测Fragment
+ * 
+ * @author chendd
+ *
+ */
+public class CommentFragment extends BaseFragment {
 	
 	/** 
      * 广场界面的Fragment 
      */  
-    private SquareFragment squareFragment;  
+    private SquareCommentFragment squareFragment;  
   
     /** 
      * 朋友界面的Fragment 
      */  
-    private FriendFragment friendFragment;  
+    private FriendCommentFragment friendFragment;  
 	
 	private  PagerSlidingTabStrip mTabStrip;
 	
@@ -37,17 +44,17 @@ public class CommentFragment extends Fragment {
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View messageLayout = inflater.inflate(R.layout.fragment_comment,
+		View view = inflater.inflate(R.layout.fragment_comment,
 				container, false);
 
-        ViewPager pager = (ViewPager) messageLayout.findViewById(R.id.pager);
-        mTabStrip = (PagerSlidingTabStrip) messageLayout.findViewById(R.id.tabs);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
+        mTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         dm = getResources().getDisplayMetrics(); 
         pager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));  
         mTabStrip.setViewPager(pager);  
         setTabsValue();  
       
-		return messageLayout;
+		return view;
 	}
 	
 	/** 
@@ -99,12 +106,12 @@ public class CommentFragment extends Fragment {
             switch (position) {  
             case 0:  
                 if (squareFragment == null) {  
-                	squareFragment = new SquareFragment();  
+                	squareFragment = new SquareCommentFragment();  
                 }  
                 return squareFragment;  
             case 1:  
                 if (friendFragment == null) {  
-                	friendFragment = new FriendFragment();  
+                	friendFragment = new FriendCommentFragment();  
                 }  
                 return friendFragment;  
             default:  

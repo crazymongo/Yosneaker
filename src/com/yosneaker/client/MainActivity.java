@@ -18,105 +18,69 @@ import com.yosneaker.client.fragment.MessageFragment;
 import com.yosneaker.client.fragment.MineFragment;
 
 /**
+ * 
  * 项目的主Activity，所有的Fragment都嵌入在这里。
  * 
  * @author chendd
+ * 
  */
 public class MainActivity extends BaseActivity implements OnClickListener {
 
-	/**
-	 * 用于展示消息的Fragment
-	 */
-	private CommentFragment messageFragment;
+	/** 用于展示评测的Fragment */
+	private CommentFragment mCommentFragment;
 
-	/**
-	 * 用于展示联系人的Fragment
-	 */
-	private IdentifyFragment contactsFragment;
+	/** 用于展示鉴定的Fragment */
+	private IdentifyFragment mIdentifyFragment;
 
-	/**
-	 * 用于展示动态的Fragment
-	 */
-	private MessageFragment newsFragment;
+	/** 用于展示消息的Fragment */
+	private MessageFragment mMessageFragment;
 
-	/**
-	 * 用于展示设置的Fragment
-	 */
-	private MineFragment settingFragment;
+	/** 用于展示"我的"的Fragment */
+	private MineFragment mMineFragment;
 	
-	/**
-	 * 用于展示添加的Fragment
-	 */
-	private AddFragment addFragment;
+	/** 用于展示"发布"的Fragment */
+	private AddFragment mAddFragment;
 
-	/**
-	 * 消息界面布局
-	 */
-	private View messageLayout;
+	/** 评测界面布局 */
+	private View commentView;
 
-	/**
-	 * 联系人界面布局
-	 */
-	private View contactsLayout;
+	/** 鉴定界面布局 */
+	private View identifyView;
 
-	/**
-	 * 添加界面布局
-	 */
-	private View addLayout;
+	/** 发布界面布局 */
+	private View addView;
 	
-	/**
-	 * 动态界面布局
-	 */
-	private View newsLayout;
+	/** 消息界面布局 */
+	private View mssageView;
 
-	/**
-	 * 设置界面布局
-	 */
-	private View settingLayout;
+	/** "我的"界面布局 */
+	private View mineView;
 
-	/**
-	 * 在Tab布局上显示消息图标的控件
-	 */
+	/** 在Tab布局上显示评测图标的控件 */
+	private ImageView commentImage;
+
+	/** 在Tab布局上显示鉴定图标的控件 */
+	private ImageView identifyImage;
+
+	/** 在Tab布局上显示消息图标的控件 */
 	private ImageView messageImage;
 
-	/**
-	 * 在Tab布局上显示联系人图标的控件
-	 */
-	private ImageView contactsImage;
+	/** 在Tab布局上显示"我的"图标的控件 */
+	private ImageView mineImage;
 
-	/**
-	 * 在Tab布局上显示动态图标的控件
-	 */
-	private ImageView newsImage;
+	/** 在Tab布局上显示评测标题的控件 */
+	private TextView commentText;
 
-	/**
-	 * 在Tab布局上显示设置图标的控件
-	 */
-	private ImageView settingImage;
+	/** 在Tab布局上显示鉴定标题的控件 */
+	private TextView identifyText;
 
-	/**
-	 * 在Tab布局上显示消息标题的控件
-	 */
+	/** 在Tab布局上显示消息标题的控件 */
 	private TextView messageText;
 
-	/**
-	 * 在Tab布局上显示联系人标题的控件
-	 */
-	private TextView contactsText;
+	/** 在Tab布局上显示"我的"标题的控件 */
+	private TextView mineText;
 
-	/**
-	 * 在Tab布局上显示动态标题的控件
-	 */
-	private TextView newsText;
-
-	/**
-	 * 在Tab布局上显示设置标题的控件
-	 */
-	private TextView settingText;
-
-	/**
-	 * 用于对Fragment进行管理
-	 */
+	/** 用于对Fragment进行管理 */
 	private FragmentManager fragmentManager;
 
 	private ColorStateList tabTextSelectedColor;
@@ -138,27 +102,27 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void initViews() {
 		
-		tabTextSelectedColor = getResources().getColorStateList(R.drawable.tab_text_selected);
-		tabTextNormalColor = getResources().getColorStateList(R.drawable.tab_text_normal);
+		tabTextSelectedColor = getResources().getColorStateList(R.color.tab_text_selected);
+		tabTextNormalColor = getResources().getColorStateList(R.color.tab_text_normal);
 		
-		messageLayout = findViewById(R.id.comment_layout);
-		contactsLayout = findViewById(R.id.identify_layout);
-		addLayout = findViewById(R.id.add_layout);
-		newsLayout = findViewById(R.id.message_layout);
-		settingLayout = findViewById(R.id.mine_layout);
-		messageImage = (ImageView) findViewById(R.id.comment_image);
-		contactsImage = (ImageView) findViewById(R.id.identify_image);
-		newsImage = (ImageView) findViewById(R.id.message_image);
-		settingImage = (ImageView) findViewById(R.id.mine_image);
-		messageText = (TextView) findViewById(R.id.comment_text);
-		contactsText = (TextView) findViewById(R.id.identify_text);
-		newsText = (TextView) findViewById(R.id.message_text);
-		settingText = (TextView) findViewById(R.id.mine_text);
-		messageLayout.setOnClickListener(this);
-		contactsLayout.setOnClickListener(this);
-		newsLayout.setOnClickListener(this);
-		settingLayout.setOnClickListener(this);
-		addLayout.setOnClickListener(this);
+		commentView = findViewById(R.id.comment_layout);
+		identifyView = findViewById(R.id.identify_layout);
+		addView = findViewById(R.id.add_layout);
+		mssageView = findViewById(R.id.message_layout);
+		mineView = findViewById(R.id.mine_layout);
+		commentImage = (ImageView) findViewById(R.id.comment_image);
+		identifyImage = (ImageView) findViewById(R.id.identify_image);
+		messageImage = (ImageView) findViewById(R.id.message_image);
+		mineImage = (ImageView) findViewById(R.id.mine_image);
+		commentText = (TextView) findViewById(R.id.comment_text);
+		identifyText = (TextView) findViewById(R.id.identify_text);
+		messageText = (TextView) findViewById(R.id.message_text);
+		mineText = (TextView) findViewById(R.id.mine_text);
+		commentView.setOnClickListener(this);
+		identifyView.setOnClickListener(this);
+		mssageView.setOnClickListener(this);
+		mineView.setOnClickListener(this);
+		addView.setOnClickListener(this);
 	}
 
 	@Override
@@ -204,74 +168,67 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		hideFragments(transaction);
 		switch (index) {
 		case 0:
+			//设置导航栏标题
 			setTitleBarText(getResources().getString(R.string.tab_comment));
 			// 当点击了消息tab时，改变控件的图片和文字颜色
-			messageImage.setImageResource(R.drawable.tab_comment_selected);
-			messageText.setTextColor(R.drawable.tab_text_normal);
-			if (messageFragment == null) {
-				// 如果MessageFragment为空，则创建一个并添加到界面上
-				messageFragment = new CommentFragment();
-				transaction.add(R.id.content, messageFragment);
+			commentImage.setImageResource(R.drawable.tab_comment_selected);
+			commentText.setTextColor(tabTextSelectedColor);
+			if (mCommentFragment == null) {
+				// 如果mCommentFragment为空，则创建一个并添加到界面上
+				mCommentFragment = new CommentFragment();
+				transaction.add(R.id.content, mCommentFragment);
 			} else {
-				// 如果MessageFragment不为空，则直接将它显示出来
-				transaction.show(messageFragment);
+				// 如果mCommentFragment不为空，则直接将它显示出来
+				transaction.show(mCommentFragment);
 			}
 			break;
 		case 1:
 			setTitleBarText(getResources().getString(R.string.tab_identify));
-			// 当点击了联系人tab时，改变控件的图片和文字颜色
-			contactsImage.setImageResource(R.drawable.tab_identify_selected);
-			contactsText.setTextColor(tabTextSelectedColor);
-			if (contactsFragment == null) {
-				// 如果ContactsFragment为空，则创建一个并添加到界面上
-				contactsFragment = new IdentifyFragment();
-				transaction.add(R.id.content, contactsFragment);
+			identifyImage.setImageResource(R.drawable.tab_identify_selected);
+			identifyText.setTextColor(tabTextSelectedColor);
+			if (mIdentifyFragment == null) {
+				mIdentifyFragment = new IdentifyFragment();
+				transaction.add(R.id.content, mIdentifyFragment);
 			} else {
-				// 如果ContactsFragment不为空，则直接将它显示出来
-				transaction.show(contactsFragment);
+				transaction.show(mIdentifyFragment);
 			}
 			break;
 		case 2:
 			setTitleBarText(getResources().getString(R.string.tab_add));
-			// 当点击了动态tab时，改变控件的图片和文字颜色
-//			newsImage.setImageResource(R.drawable.tab_message_selected);
-//			newsText.setTextColor(tabTextSelectedColor);
-			if (addFragment == null) {
-				// 如果NewsFragment为空，则创建一个并添加到界面上
-				addFragment = new AddFragment();
-				transaction.add(R.id.content, addFragment);
+			// 当点击了动态tab时，不用改变控件的图片和文字颜色
+//			messageImage.setImageResource(R.drawable.tab_message_selected);
+//			messageText.setTextColor(tabTextSelectedColor);
+			if (mAddFragment == null) {
+				mAddFragment = new AddFragment();
+				transaction.add(R.id.content, mAddFragment);
 			} else {
-				// 如果NewsFragment不为空，则直接将它显示出来
-				transaction.show(addFragment);
+				transaction.show(mAddFragment);
 			}
 			break;
 		case 3:
 			setTitleBarText(getResources().getString(R.string.tab_message));
-			// 当点击了动态tab时，改变控件的图片和文字颜色
-			newsImage.setImageResource(R.drawable.tab_message_selected);
-			newsText.setTextColor(tabTextSelectedColor);
-			if (newsFragment == null) {
-				// 如果NewsFragment为空，则创建一个并添加到界面上
-				newsFragment = new MessageFragment();
-				transaction.add(R.id.content, newsFragment);
+			messageImage.setImageResource(R.drawable.tab_message_selected);
+			messageText.setTextColor(tabTextSelectedColor);
+			if (mMessageFragment == null) {
+				mMessageFragment = new MessageFragment();
+				transaction.add(R.id.content, mMessageFragment);
 			} else {
-				// 如果NewsFragment不为空，则直接将它显示出来
-				transaction.show(newsFragment);
+				transaction.show(mMessageFragment);
 			}
 			break;
 		case 4:
 		default:
 			setTitleBarText(getResources().getString(R.string.tab_mine));
 			// 当点击了设置tab时，改变控件的图片和文字颜色
-			settingImage.setImageResource(R.drawable.tab_mine_selected);
-			settingText.setTextColor(tabTextSelectedColor);
-			if (settingFragment == null) {
+			mineImage.setImageResource(R.drawable.tab_mine_selected);
+			mineText.setTextColor(tabTextSelectedColor);
+			if (mMineFragment == null) {
 				// 如果SettingFragment为空，则创建一个并添加到界面上
-				settingFragment = new MineFragment();
-				transaction.add(R.id.content, settingFragment);
+				mMineFragment = new MineFragment();
+				transaction.add(R.id.content, mMineFragment);
 			} else {
 				// 如果SettingFragment不为空，则直接将它显示出来
-				transaction.show(settingFragment);
+				transaction.show(mMineFragment);
 			}
 			break;
 		}
@@ -282,14 +239,14 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	 * 清除掉所有的选中状态。
 	 */
 	private void clearSelection() {
-		messageImage.setImageResource(R.drawable.tab_comment_normal);
+		commentImage.setImageResource(R.drawable.tab_comment_normal);
+		commentText.setTextColor(tabTextNormalColor);
+		identifyImage.setImageResource(R.drawable.tab_identify_normal);
+		identifyText.setTextColor(tabTextNormalColor);
+		messageImage.setImageResource(R.drawable.tab_message_normal);
 		messageText.setTextColor(tabTextNormalColor);
-		contactsImage.setImageResource(R.drawable.tab_identify_normal);
-		contactsText.setTextColor(tabTextNormalColor);
-		newsImage.setImageResource(R.drawable.tab_message_normal);
-		newsText.setTextColor(tabTextNormalColor);
-		settingImage.setImageResource(R.drawable.tab_mine_normal);
-		settingText.setTextColor(tabTextNormalColor);
+		mineImage.setImageResource(R.drawable.tab_mine_normal);
+		mineText.setTextColor(tabTextNormalColor);
 	}
 
 	/**
@@ -299,20 +256,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	 *            用于对Fragment执行操作的事务
 	 */
 	private void hideFragments(FragmentTransaction transaction) {
-		if (messageFragment != null) {
-			transaction.hide(messageFragment);
+		if (mCommentFragment != null) {
+			transaction.hide(mCommentFragment);
 		}
-		if (contactsFragment != null) {
-			transaction.hide(contactsFragment);
+		if (mIdentifyFragment != null) {
+			transaction.hide(mIdentifyFragment);
 		}
-		if (addFragment != null) {
-			transaction.hide(addFragment);
+		if (mAddFragment != null) {
+			transaction.hide(mAddFragment);
 		}
-		if (newsFragment != null) {
-			transaction.hide(newsFragment);
+		if (mMessageFragment != null) {
+			transaction.hide(mMessageFragment);
 		}
-		if (settingFragment != null) {
-			transaction.hide(settingFragment);
+		if (mMineFragment != null) {
+			transaction.hide(mMineFragment);
 		}
 	}
 }

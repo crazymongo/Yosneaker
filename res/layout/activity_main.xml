@@ -4,7 +4,7 @@
     android:orientation="vertical" >
 
     <include android:id="@+id/mTitleBar" 
-            	 layout="@layout/titlebar"/>
+            	 layout="@layout/title_bar"/>
     
     <FrameLayout
         android:id="@+id/content"
@@ -16,13 +16,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/tab_divise_bg" />
+        android:background="@color/tab_divise_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/white" >
+        android:background="@color/white" >
 
         <RelativeLayout
             android:id="@+id/comment_layout"
@@ -49,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_comment"
-                    android:textColor="@drawable/tab_text_normal" />
+                    android:textSize="@dimen/tab_text_size"
+                    android:textColor="@color/tab_text_normal" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -78,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_identify"
-                    android:textColor="@drawable/tab_text_normal" />
+                    android:textSize="@dimen/tab_text_size"
+                    android:textColor="@color/tab_text_normal" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -96,8 +97,8 @@
 
                 <ImageView
                     android:id="@+id/add_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/tab_add" />
             </LinearLayout>
@@ -128,7 +129,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_message"
-                    android:textColor="@drawable/tab_text_normal" />
+                    android:textSize="@dimen/tab_text_size"
+                    android:textColor="@color/tab_text_normal" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -157,7 +159,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_mine"
-                    android:textColor="@drawable/tab_text_normal" />
+                    android:textSize="@dimen/tab_text_size"
+                    android:textColor="@color/tab_text_normal" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

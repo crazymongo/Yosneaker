@@ -8,7 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AddFragment extends Fragment {
+/**
+ * 
+ * 发布Fragment
+ * 
+ * @author chendd
+ *
+ */
+public class AddFragment extends BaseFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

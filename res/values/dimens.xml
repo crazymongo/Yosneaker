@@ -4,4 +4,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="title_bar_tv_margin">10dp</dimen>
+    <dimen name="tab_text_size">12sp</dimen>
+    <dimen name="list_comment_tb_padding">5dp</dimen>
+    <dimen name="list_comment_lr_padding">15dp</dimen>
+    <dimen name="title_bar_tv_size">30dp</dimen>
+    
 </resources>

@@ -2,25 +2,26 @@
 <resources>
 
     <!-- 基础颜色 -->
-    <drawable name="dkgray">#80808ff0</drawable>
-    <drawable name="white">#ffffff</drawable>
-    <drawable name="black">#ff000000</drawable>
-    <drawable name="blue">#ff0000ff</drawable>
-    <drawable name="cyan">#ff00ffff</drawable>
-    <drawable name="gray">#ff888888</drawable>
-    <drawable name="green">#ff00ff00</drawable>
-    <drawable name="ltgray">#ffcccccc</drawable>
-    <drawable name="magenta">#ffff00ff</drawable>
-    <drawable name="red">#ffff0000</drawable>
-    <drawable name="orange">#ffe97607</drawable>
-    <drawable name="yellow">#ffffff00</drawable>
-    <drawable name="transparent">#00000000</drawable>
+    <color name="dkgray">#80808ff0</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#ff0000ff</color>
+    <color name="cyan">#ff00ffff</color>
+    <color name="gray">#ff888888</color>
+    <color name="green">#ff00ff00</color>
+    <color name="ltgray">#ffcccccc</color>
+    <color name="magenta">#ffff00ff</color>
+    <color name="red">#ffff0000</color>
+    <color name="orange">#ffe97607</color>
+    <color name="yellow">#ffffff00</color>
+    <color name="transparent">#00000000</color>
 	
     <!-- 自定义标题栏背景色 -->
-    <drawable name="titlebar_bg">#282828</drawable>
-    <drawable name="tab_text_normal">#BBBBBB</drawable>
-    <drawable name="tab_text_selected">#FA5A7E</drawable>
-    <drawable name="tab_divise_bg">#F0F0F0</drawable>
-    <drawable name="background_tab_pressed">#6633B5E5</drawable>
+    <color name="tab_text_normal">#BBBBBB</color>
+    <color name="tab_text_selected">#FA5A7E</color>
+    <color name="tab_divise_bg">#F0F0F0</color>    
+    <color name="tab_pressed_bg">#6633B5E5</color>
+    
+    <color name="comment_item__bg">#fbfbfb</color>
     
 </resources>
