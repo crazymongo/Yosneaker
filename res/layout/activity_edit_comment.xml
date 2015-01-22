@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
+
+    <include
+        android:id="@+id/mMainImg"
+        layout="@layout/view_comment_detail_main_img" />
+    
+</LinearLayout>

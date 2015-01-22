@@ -1,14 +1,12 @@
 package com.yosneaker.client;
 
-import android.app.Activity;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +18,26 @@ import android.widget.Toast;
  * 
  */
 public abstract class BaseActivity extends FragmentActivity implements OnClickListener{
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		initViews();
+		addListnners() ;
+		fillDatas();
+
+	}
+	
+	/** 初始化所需要的控件 */
+	public abstract void initViews();
+
+	/** 添加所需要的监听器 */
+	public abstract void addListnners();
+	
+	/** 添加所需要的数据 */
+	public abstract void fillDatas();
 	
 
 	/**

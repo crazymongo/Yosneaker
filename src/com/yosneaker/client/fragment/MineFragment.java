@@ -2,7 +2,6 @@ package com.yosneaker.client.fragment;
 
 import com.yosneaker.client.R;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

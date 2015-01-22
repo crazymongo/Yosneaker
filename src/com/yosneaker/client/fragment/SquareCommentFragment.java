@@ -2,7 +2,6 @@ package com.yosneaker.client.fragment;
 
 import java.util.ArrayList;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;

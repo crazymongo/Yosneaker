@@ -2,9 +2,7 @@ package com.yosneaker.client.fragment;
 
 
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,6 +40,7 @@ public class CommentFragment extends BaseFragment {
 	
 	private DisplayMetrics dm; 
 	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_comment,

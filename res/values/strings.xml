@@ -9,12 +9,18 @@
     <string name="tab_identify">鉴定</string>
     <string name="tab_add">发布</string>
     <string name="tab_message">消息</string>
-    <string name="tab_mine">我的</string>
-    
+    <string name="tab_mine">我的</string>   
     <string name="tab_square">广场</string>
     <string name="tab_friend">好友</string>
     
     <string name="title_comment_detail">测评详情</string>
+    <string name="title_comment_title">测评标题</string>
+    <string name="off_line_write_comment">离线撰写测评</string>
+    <string name="title_btn_next">下一步</string>
+    
+    <string name="dialog_add_what">选择您要发布的类别?</string>
+    <string name="dialog_add_comment">发布测评</string>
+    <string name="dialog_add_identify">发布鉴定</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>

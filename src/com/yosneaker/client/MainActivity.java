@@ -1,8 +1,9 @@
 package com.yosneaker.client;
 
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yosneaker.client.fragment.AddFragment;
 import com.yosneaker.client.fragment.CommentFragment;
 import com.yosneaker.client.fragment.IdentifyFragment;
 import com.yosneaker.client.fragment.MessageFragment;
@@ -24,7 +24,7 @@ import com.yosneaker.client.fragment.MineFragment;
  * @author chendd
  * 
  */
-public class MainActivity extends BaseActivity implements OnClickListener {
+public class MainActivity extends BaseActivity implements OnClickListener{
 
 	/** 用于展示评测的Fragment */
 	private CommentFragment mCommentFragment;
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private MineFragment mMineFragment;
 	
 	/** 用于展示"发布"的Fragment */
-	private AddFragment mAddFragment;
+//	private AddFragment mAddFragment;
 
 	/** 评测界面布局 */
 	private View commentView;
@@ -87,20 +87,20 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private ColorStateList tabTextNormalColor;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {		
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.activity_main);
-		// 初始化布局元素
-		initViews();
-		fragmentManager = getSupportFragmentManager();
-		// 第一次启动时选中第0个tab
-		setTabSelection(0);
+		
+		super.onCreate(savedInstanceState);			
 	}
 
-	/**
-	 * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
-	 */
-	private void initViews() {
+
+	@Override
+	public void initViews() {
+		
+		fragmentManager = getSupportFragmentManager();
 		
 		tabTextSelectedColor = getResources().getColorStateList(R.color.tab_text_selected);
 		tabTextNormalColor = getResources().getColorStateList(R.color.tab_text_normal);
@@ -118,35 +118,59 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		identifyText = (TextView) findViewById(R.id.identify_text);
 		messageText = (TextView) findViewById(R.id.message_text);
 		mineText = (TextView) findViewById(R.id.mine_text);
+
+	}
+
+	@Override
+	public void addListnners() {
+		
 		commentView.setOnClickListener(this);
 		identifyView.setOnClickListener(this);
 		mssageView.setOnClickListener(this);
 		mineView.setOnClickListener(this);
 		addView.setOnClickListener(this);
+		
+	}
+
+	@Override
+	public void fillDatas() {
+		// 第一次启动时选中第0个tab
+		setTabSelection(0);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.comment_layout:
-			// 当点击了消息tab时，选中第1个tab
 			setTabSelection(0);
 			break;
 		case R.id.identify_layout:
-			// 当点击了联系人tab时，选中第2个tab
 			setTabSelection(1);
 			break;
 		case R.id.add_layout:
-			// 当点击了联系人tab时，选中第3个tab
-			setTabSelection(2);
+			
+			Builder builder = new Builder(MainActivity.this);
+//			builder.setTitle(getResources().getString(R.string.dialog_add_what));
+            final String[] items = {getResources().getString(R.string.dialog_add_comment),getResources().getString(R.string.dialog_add_identify)};
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                	if (which == 0) {
+                		MainActivity.this.gotoExistActivity(AddCommentTitleActivity.class, new Bundle());
+					} else if(which == 1){
+
+					}
+                }
+
+            }).show();
 			break;
 		case R.id.message_layout:
-			// 当点击了动态tab时，选中第4个tab
-			setTabSelection(3);
+			setTabSelection(2);
 			break;
 		case R.id.mine_layout:
-			// 当点击了设置tab时，选中第5个tab
-			setTabSelection(4);
+			setTabSelection(3);
 			break;
 		default:
 			break;
@@ -194,18 +218,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 		case 2:
-			setTitleBarText(getResources().getString(R.string.tab_add));
-			// 当点击了动态tab时，不用改变控件的图片和文字颜色
-//			messageImage.setImageResource(R.drawable.tab_message_selected);
-//			messageText.setTextColor(tabTextSelectedColor);
-			if (mAddFragment == null) {
-				mAddFragment = new AddFragment();
-				transaction.add(R.id.content, mAddFragment);
-			} else {
-				transaction.show(mAddFragment);
-			}
-			break;
-		case 3:
 			setTitleBarText(getResources().getString(R.string.tab_message));
 			messageImage.setImageResource(R.drawable.tab_message_selected);
 			messageText.setTextColor(tabTextSelectedColor);
@@ -216,7 +228,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				transaction.show(mMessageFragment);
 			}
 			break;
-		case 4:
+		case 3:
 		default:
 			setTitleBarText(getResources().getString(R.string.tab_mine));
 			// 当点击了设置tab时，改变控件的图片和文字颜色
@@ -262,9 +274,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		if (mIdentifyFragment != null) {
 			transaction.hide(mIdentifyFragment);
 		}
-		if (mAddFragment != null) {
-			transaction.hide(mAddFragment);
-		}
+//		if (mAddFragment != null) {
+//			transaction.hide(mAddFragment);
+//		}
 		if (mMessageFragment != null) {
 			transaction.hide(mMessageFragment);
 		}
@@ -272,4 +284,5 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			transaction.hide(mMineFragment);
 		}
 	}
+
 }
