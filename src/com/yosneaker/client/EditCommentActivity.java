@@ -2,6 +2,7 @@ package com.yosneaker.client;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -13,11 +14,15 @@ import android.widget.RelativeLayout;
  */
 public class EditCommentActivity extends BaseActivity{
 
-
+	private LinearLayout ll_edit_intro;
+	private LinearLayout ll_edit_item;
+	private LinearLayout ll_edit_summarize;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
-		setContentView(R.layout.activity_add_comment_title);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);	
+		setContentView(R.layout.activity_edit_comment);
 		
 		super.onCreate(savedInstanceState);
 	}
@@ -28,17 +33,20 @@ public class EditCommentActivity extends BaseActivity{
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
-		showTextViewRight1(true);
-		getTextViewRight1().setBackgroundResource(R.drawable.ic_next);
+
+		ll_edit_intro = (LinearLayout) findViewById(R.id.ll_edit_intro);
+		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
+		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
 		
 	}
 
 	@Override
 	public void addListnners() {
 		
-		getTextViewLeft().setOnClickListener(this);		
-		getTextViewRight1().setOnClickListener(this);		
-	
+		getTextViewLeft().setOnClickListener(this);			
+		ll_edit_intro.setOnClickListener(this);
+		ll_edit_item.setOnClickListener(this);
+		ll_edit_summarize.setOnClickListener(this);
 	}
 
 	@Override
@@ -52,8 +60,12 @@ public class EditCommentActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
 			onBackPressed();
-		}else if (v == getTextViewRight1()) {
-			showToast("下一步");
+		}else if (v == ll_edit_intro) {
+			gotoExistActivity(EditCommentIntroActivity.class, new Bundle());
+		}else if (v == ll_edit_item) {
+			gotoExistActivity(EditCommentItemActivity.class, new Bundle());
+		}else if (v == ll_edit_summarize) {
+			gotoExistActivity(EditCommentSummarizeActivity.class, new Bundle());
 		}
 	}
 

@@ -29,16 +29,50 @@
         <activity
             android:name="com.yosneaker.client.CommentDetailActivity"
             android:label="@string/title_comment_detail" 
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar">
+            android:screenOrientation="portrait">
         </activity>
         
-        <!-- 测评标题 -->
+        <!-- 编辑测评标题 -->
         <activity
             android:name="com.yosneaker.client.AddCommentTitleActivity"
             android:label="@string/title_comment_title" 
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar">
+            >
+        </activity>
+        
+        <!-- 编辑测评详情 -->
+        <activity
+            android:name="com.yosneaker.client.EditCommentActivity"
+            android:label="@string/title_comment_detail" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        
+        <!-- 编辑测评简介 -->
+        <activity
+            android:name="com.yosneaker.client.EditCommentIntroActivity"
+            android:label="@string/comment_detail_intro" 
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        
+        <!-- 编辑测评项 -->
+        <activity
+            android:name="com.yosneaker.client.EditCommentItemActivity"
+            android:label="@string/comment_detail_class" 
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        
+        <!-- 编辑测评总评 -->
+        <activity
+            android:name="com.yosneaker.client.EditCommentSummarizeActivity"
+            android:label="@string/comment_detail_summarize" 
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"
+            >
         </activity>
         
     </application>

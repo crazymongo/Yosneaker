@@ -2,6 +2,7 @@ package com.yosneaker.client;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -17,6 +18,7 @@ public class AddCommentTitleActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_add_comment_title);
 		
 		super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class AddCommentTitleActivity extends BaseActivity{
 		if (v == getTextViewLeft()) {
 			onBackPressed();
 		}else if (v == getTextViewRight1()) {
-			showToast("下一步");
+			gotoExistActivity(EditCommentActivity.class, new Bundle());
 		}
 	}
 

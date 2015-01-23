@@ -2,6 +2,7 @@ package com.yosneaker.client;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.LinearLayout;
 
@@ -30,6 +31,7 @@ public class CommentDetailActivity extends BaseActivity implements OnScrollListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_comment_detail);
 		
 		super.onCreate(savedInstanceState);

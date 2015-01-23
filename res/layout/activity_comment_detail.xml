@@ -7,11 +7,10 @@
     <include android:id="@+id/mTitleBar" 
             	 layout="@layout/title_bar"/>
 
- 
     <com.yosneaker.client.view.CustomScrollView
         android:id="@+id/scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -30,173 +29,21 @@
                     android:id="@+id/buy"
                     layout="@layout/view_comment_detail_buy" />
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2px"
-                    android:background="?android:attr/listDivider" />
+                <include
+                    android:id="@+id/intro"
+                    layout="@layout/view_comment_detail_intro" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal" >
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/item_spilt" />
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" 简介" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="或许年轻人还无法体会那么多，但作为老将就不一样了，征战NBA多年的保罗.皮尔斯今天早些时候通过社交平台向大家展示了他的圣诞大战战靴，而最重要的是他将会在比赛结束后在网络进行慈善拍卖该鞋款，希望能用这些善款去帮助更多的人。"
-                        android:textSize="12sp"
-                        android:typeface="monospace" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2px"
-                    android:background="?android:attr/listDivider" />
-
-                <!-- 个人数据start -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal" >
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/item_spilt" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="个人数据" />
-                    </LinearLayout>
-
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="5dp" >
-
-                        <TableRow
-                            android:id="@+id/tableRow1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="身高" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="体重" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="弹跳" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/tableRow2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="190cm" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="74kg" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:paddingLeft="20dp"
-                                android:paddingRight="20dp"
-                                android:text="60cm" />
-                        </TableRow>
-                    </TableLayout>
-                </LinearLayout>
-                <!-- 个人数据end -->
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2px"
-                    android:background="?android:attr/listDivider" />
+               <include
+                    android:id="@+id/personal"
+                    layout="@layout/view_comment_detail_personal" />
 
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_comment_detail_item" />
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2px"
-                    android:background="?android:attr/listDivider" />
-
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_comment_detail_buy_img" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="2px"
-                    android:background="?android:attr/listDivider" />
 
                 <include
                     android:id="@+id/comment"

@@ -12,15 +12,42 @@
     <string name="tab_mine">我的</string>   
     <string name="tab_square">广场</string>
     <string name="tab_friend">好友</string>
+
+    <string name="dialog_add_what">选择您要发布的类别?</string>
+    <string name="dialog_add_comment">发布测评</string>
+    <string name="dialog_add_identify">发布鉴定</string>
     
     <string name="title_comment_detail">测评详情</string>
     <string name="title_comment_title">测评标题</string>
     <string name="off_line_write_comment">离线撰写测评</string>
     <string name="title_btn_next">下一步</string>
     
-    <string name="dialog_add_what">选择您要发布的类别?</string>
-    <string name="dialog_add_comment">发布测评</string>
-    <string name="dialog_add_identify">发布鉴定</string>
+    <string name="comment_detail_intro">简介</string>
+    <string name="comment_detail_class">测评项</string>
+    <string name="comment_detail_summarize">总评</string>
+    <string name="comment_detail_personal">个人数据</string>
+    <string name="comment_detail_want_buy">想入</string>
+    <string name="comment_detail_yet_buy">已入</string>
+    <string name="comment_detail_hot_discussion">热门评论</string>
+    
+    <string name="comment_edit_add_intro">添加简介</string>
+    <string name="comment_edit_add_item">添加测评项</string>
+    <string name="comment_edit_write_item">撰写测评项</string>
+    <string name="comment_edit_add_summarize">添加总评</string>
+    <string name="comment_edit_necessarily">(必填)</string>
+    
+    <string name="comment_edit_intro_maxText">500</string>
+    <string name="comment_edit_summarize_maxText">800</string>
+    <string name="comment_edit_summarize_evaluate">评价</string>
+    <string name="comment_edit_summarize_inpute">输入内容</string>
+    <string name="comment_edit_summarize_tip">评价为必填项,为评测做个完美总结吧!</string>
+    <string name="comment_edit_item_title">测评项标题</string>
+    <string name="comment_edit_item_tip">标题,评价,内容为必填,深度测评更容易结交志同道合的鞋友喔!</string>
+    <string name="toast_comment_edit_maxText">超过字数限制,%1$s最多%2$d个字</string>
+    
+    <string name="personal_item_height">身高</string>
+    <string name="personal_item_weight">体重</string>
+    <string name="personal_item_bounce">弹跳</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>

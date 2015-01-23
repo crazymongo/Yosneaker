@@ -8,7 +8,19 @@
         layout="@layout/title_bar" />
 
     <include
-        android:id="@+id/mMainImg"
-        layout="@layout/view_comment_detail_main_img" />
+        android:id="@+id/in_edit_main_img"
+        layout="@layout/view_edit_comment_main_img" />
+    
+    <include
+        android:id="@+id/in_edit_intro"
+        layout="@layout/view_edit_comment_intro" />
+    
+    <include
+        android:id="@+id/in_edit_item"
+        layout="@layout/view_edit_comment_item" />
+    
+    <include
+        android:id="@+id/in_edit_summarize"
+        layout="@layout/view_edit_comment_summarize" />
     
 </LinearLayout>

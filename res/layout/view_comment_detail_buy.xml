@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.02"
-            android:text="已入" />
+            android:text="@string/comment_detail_yet_buy" />
 
         <TextView
             android:id="@+id/textView3"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.02"
-            android:text="想入" />
+            android:text="@string/comment_detail_want_buy" />
 
         <TextView
             android:id="@+id/textView4"
@@ -65,5 +65,10 @@
             android:layout_weight="0.1"
             android:text="5362" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

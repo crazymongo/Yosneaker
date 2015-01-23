@@ -89,8 +89,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_main);
 		
 		super.onCreate(savedInstanceState);			

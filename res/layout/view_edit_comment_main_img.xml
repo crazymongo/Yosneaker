@@ -38,5 +38,15 @@
         android:text="韦德之道2&quot;踏冰&quot; 开箱测评"
         android:textColor="@color/white"
         android:textSize="12sp" />
+    
+    <ImageView 
+        android:id="@+id/iv_edit"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_toRightOf="@id/textView3"
+        android:layout_above="@id/textView4"
+        android:layout_marginBottom="-3dp"
+        android:background="@drawable/ic_next"
+        />
 
 </RelativeLayout>
