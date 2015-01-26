@@ -11,13 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.yosneaker.client.R;
-import com.yosneaker.client.model.Comment;
+import com.yosneaker.client.model.CommentList;
 
-public class CommentAdapter extends ArrayAdapter<Comment> {
+public class CommentAdapter extends ArrayAdapter<CommentList> {
 	
 	private LayoutInflater mInflater;
 	
-    public CommentAdapter(Context context, ArrayList<Comment> Articles) {
+    public CommentAdapter(Context context, ArrayList<CommentList> Articles) {
         super(context, android.R.layout.simple_list_item_1, Articles);
         this.mInflater = LayoutInflater.from(context);
     }
@@ -31,7 +31,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
         }
 
         // configure the view for this Article
-        Comment c = getItem(position);
+        CommentList c = getItem(position);
 
         TextView titleTextView =
             (TextView)convertView.findViewById(R.id.comment_title);

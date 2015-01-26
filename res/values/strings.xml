@@ -12,7 +12,11 @@
     <string name="tab_mine">我的</string>   
     <string name="tab_square">广场</string>
     <string name="tab_friend">好友</string>
-
+	<string name="tab_discuss">评论</string>
+    <string name="tab_wish">心愿</string>
+    <string name="tab_fans">粉丝</string>
+    <string name="tab_inform">通知</string>
+    
     <string name="dialog_add_what">选择您要发布的类别?</string>
     <string name="dialog_add_comment">发布测评</string>
     <string name="dialog_add_identify">发布鉴定</string>
@@ -45,9 +49,17 @@
     <string name="comment_edit_item_tip">标题,评价,内容为必填,深度测评更容易结交志同道合的鞋友喔!</string>
     <string name="toast_comment_edit_maxText">超过字数限制,%1$s最多%2$d个字</string>
     
+    <string name="picker_image_see_detail">查看大图</string>
+    <string name="picker_image_back">返回</string>
+    <string name="picker_image_album">相册</string>
+    <string name="picker_image_camera">相机</string>
+    <string name="toast_picker_image_over_max">已达到最多图片数量</string>
+    
     <string name="personal_item_height">身高</string>
     <string name="personal_item_weight">体重</string>
     <string name="personal_item_bounce">弹跳</string>
+    
+    <string name="identify_detail_quality">正品</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>

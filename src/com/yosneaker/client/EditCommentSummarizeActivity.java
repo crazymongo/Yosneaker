@@ -67,6 +67,7 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 
 	public class EditTextWatcher implements TextWatcher {
 
+		@Override
 		public void afterTextChanged(Editable arg0) {
 			 String edit = edit_text.getText().toString();
 			 
@@ -82,9 +83,11 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 			}
 		}
 
+		@Override
 		public void beforeTextChanged(CharSequence cs, int arg1, int arg2,int arg3) {
 		}
 
+		@Override
 		public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
 		}
 

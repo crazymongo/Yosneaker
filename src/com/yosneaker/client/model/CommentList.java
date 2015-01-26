@@ -1,12 +1,12 @@
 package com.yosneaker.client.model;
 
 /**
- * 测评项
+ * 测评列表
  * 
  * @author chendd
  *
  */
-public class Comment {
+public class CommentList {
 	
 	/** 测评标题 */
 	private String title;
@@ -17,14 +17,14 @@ public class Comment {
 	/** 测评日期 */
 	private String date;
 	
-	public Comment(String title, int reader, String date) {
+	public CommentList(String title, int reader, String date) {
 		super();
 		this.title = title;
 		this.reader = reader;
 		this.date = date;
 	}
 
-	public Comment(String title, int reader) {
+	public CommentList(String title, int reader) {
 		super();
 		this.title = title;
 		this.reader = reader;
