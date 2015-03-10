@@ -3,6 +3,14 @@ package com.yosneaker.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.util.AsyncHttpClientUtil;
+import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.PickerImageUtil;
 
 import android.app.AlertDialog;
@@ -12,6 +20,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,11 +131,51 @@ public class EditCommentItemActivity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		String picPath = mPickerImageUtil.getBitmapFilePath(requestCode,
 				resultCode, data);
+		Log.d(Constants.TAG, "picPath:"+picPath);
 		Bitmap bmp = mPickerImageUtil.getBitmapByOpt(picPath);
 		if (bmp != null) {
 			viewList.add(0, bmp);
 			adapter.notifyDataSetChanged();
 		}
+		
+		// 测试get json请求
+		AsyncHttpClientUtil.get("resources/json", null, new AsyncHttpResponseHandler() {
+							
+				@Override
+				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+					String responseStr = new String(arg2);
+					Log.d(Constants.TAG, "get json success:"+responseStr);
+					showToast("get json success:"+responseStr);
+				}
+							
+				@Override
+				public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+					String responseStr = new String(arg2);
+					Log.d(Constants.TAG, "get json failure:"+responseStr);
+					showToast("get json failure:"+responseStr);
+				}
+			});
+		
+		// 测试post图片到服务器
+		RequestParams params = new RequestParams();  
+        params.put("image", BitmapUtil.bitmap2Base64Str(getApplicationContext(), bmp));
+		AsyncHttpClientUtil.post("resources/image", params, new AsyncHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				String responseStr = new String(arg2);
+				Log.d(Constants.TAG, "post image success:"+responseStr);
+				showToast("post image success:"+responseStr);
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				String responseStr = new String(arg2);
+				Log.d(Constants.TAG, "post image failure:"+responseStr);
+				showToast("post image failure:"+responseStr);
+			}
+		});
+        
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	

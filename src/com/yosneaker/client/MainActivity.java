@@ -30,10 +30,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private CommentFragment mCommentFragment;
 
 	/** 用于展示鉴定的Fragment */
-	private IdentifyFragment mIdentifyFragment;
+//	private IdentifyFragment mIdentifyFragment;
 
 	/** 用于展示消息的Fragment */
-	private MessageFragment mMessageFragment;
+//	private MessageFragment mMessageFragment;
 
 	/** 用于展示"我的"的Fragment */
 	private MineFragment mMineFragment;
@@ -45,13 +45,13 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private View commentView;
 
 	/** 鉴定界面布局 */
-	private View identifyView;
+//	private View identifyView;
 
 	/** 发布界面布局 */
 	private View addView;
 	
 	/** 消息界面布局 */
-	private View mssageView;
+//	private View mssageView;
 
 	/** "我的"界面布局 */
 	private View mineView;
@@ -60,10 +60,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private ImageView commentImage;
 
 	/** 在Tab布局上显示鉴定图标的控件 */
-	private ImageView identifyImage;
+//	private ImageView identifyImage;
 
 	/** 在Tab布局上显示消息图标的控件 */
-	private ImageView messageImage;
+//	private ImageView messageImage;
 
 	/** 在Tab布局上显示"我的"图标的控件 */
 	private ImageView mineImage;
@@ -72,10 +72,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private TextView commentText;
 
 	/** 在Tab布局上显示鉴定标题的控件 */
-	private TextView identifyText;
+//	private TextView identifyText;
 
 	/** 在Tab布局上显示消息标题的控件 */
-	private TextView messageText;
+//	private TextView messageText;
 
 	/** 在Tab布局上显示"我的"标题的控件 */
 	private TextView mineText;
@@ -105,17 +105,17 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		tabTextNormalColor = getResources().getColorStateList(R.color.tab_text_normal);
 		
 		commentView = findViewById(R.id.comment_layout);
-		identifyView = findViewById(R.id.identify_layout);
+//		identifyView = findViewById(R.id.identify_layout);
 		addView = findViewById(R.id.add_layout);
-		mssageView = findViewById(R.id.message_layout);
+//		mssageView = findViewById(R.id.message_layout);
 		mineView = findViewById(R.id.mine_layout);
 		commentImage = (ImageView) findViewById(R.id.comment_image);
-		identifyImage = (ImageView) findViewById(R.id.identify_image);
-		messageImage = (ImageView) findViewById(R.id.message_image);
+//		identifyImage = (ImageView) findViewById(R.id.identify_image);
+//		messageImage = (ImageView) findViewById(R.id.message_image);
 		mineImage = (ImageView) findViewById(R.id.mine_image);
 		commentText = (TextView) findViewById(R.id.comment_text);
-		identifyText = (TextView) findViewById(R.id.identify_text);
-		messageText = (TextView) findViewById(R.id.message_text);
+//		identifyText = (TextView) findViewById(R.id.identify_text);
+//		messageText = (TextView) findViewById(R.id.message_text);
 		mineText = (TextView) findViewById(R.id.mine_text);
 
 	}
@@ -124,8 +124,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	public void addListnners() {
 		
 		commentView.setOnClickListener(this);
-		identifyView.setOnClickListener(this);
-		mssageView.setOnClickListener(this);
+//		identifyView.setOnClickListener(this);
+//		mssageView.setOnClickListener(this);
 		mineView.setOnClickListener(this);
 		addView.setOnClickListener(this);
 		
@@ -143,9 +143,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		case R.id.comment_layout:
 			setTabSelection(0);
 			break;
-		case R.id.identify_layout:
-			setTabSelection(1);
-			break;
+//		case R.id.identify_layout:
+//			setTabSelection(1);
+//			break;
 		case R.id.add_layout:
 			
 			Builder builder = new Builder(MainActivity.this);
@@ -165,9 +165,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
             }).show();
 			break;
-		case R.id.message_layout:
-			setTabSelection(2);
-			break;
+//		case R.id.message_layout:
+//			setTabSelection(2);
+//			break;
 		case R.id.mine_layout:
 			setTabSelection(3);
 			break;
@@ -205,28 +205,28 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 				transaction.show(mCommentFragment);
 			}
 			break;
-		case 1:
-			setTitleBarText(getResources().getString(R.string.tab_identify));
-			identifyImage.setImageResource(R.drawable.tab_identify_selected);
-			identifyText.setTextColor(tabTextSelectedColor);
-			if (mIdentifyFragment == null) {
-				mIdentifyFragment = new IdentifyFragment();
-				transaction.add(R.id.content, mIdentifyFragment);
-			} else {
-				transaction.show(mIdentifyFragment);
-			}
-			break;
-		case 2:
-			setTitleBarText(getResources().getString(R.string.tab_message));
-			messageImage.setImageResource(R.drawable.tab_message_selected);
-			messageText.setTextColor(tabTextSelectedColor);
-			if (mMessageFragment == null) {
-				mMessageFragment = new MessageFragment();
-				transaction.add(R.id.content, mMessageFragment);
-			} else {
-				transaction.show(mMessageFragment);
-			}
-			break;
+//		case 1:
+//			setTitleBarText(getResources().getString(R.string.tab_identify));
+//			identifyImage.setImageResource(R.drawable.tab_identify_selected);
+//			identifyText.setTextColor(tabTextSelectedColor);
+//			if (mIdentifyFragment == null) {
+//				mIdentifyFragment = new IdentifyFragment();
+//				transaction.add(R.id.content, mIdentifyFragment);
+//			} else {
+//				transaction.show(mIdentifyFragment);
+//			}
+//			break;
+//		case 2:
+//			setTitleBarText(getResources().getString(R.string.tab_message));
+//			messageImage.setImageResource(R.drawable.tab_message_selected);
+//			messageText.setTextColor(tabTextSelectedColor);
+//			if (mMessageFragment == null) {
+//				mMessageFragment = new MessageFragment();
+//				transaction.add(R.id.content, mMessageFragment);
+//			} else {
+//				transaction.show(mMessageFragment);
+//			}
+//			break;
 		case 3:
 		default:
 			setTitleBarText(getResources().getString(R.string.tab_mine));
@@ -252,10 +252,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private void clearSelection() {
 		commentImage.setImageResource(R.drawable.tab_comment_normal);
 		commentText.setTextColor(tabTextNormalColor);
-		identifyImage.setImageResource(R.drawable.tab_identify_normal);
-		identifyText.setTextColor(tabTextNormalColor);
-		messageImage.setImageResource(R.drawable.tab_message_normal);
-		messageText.setTextColor(tabTextNormalColor);
+//		identifyImage.setImageResource(R.drawable.tab_identify_normal);
+//		identifyText.setTextColor(tabTextNormalColor);
+//		messageImage.setImageResource(R.drawable.tab_message_normal);
+//		messageText.setTextColor(tabTextNormalColor);
 		mineImage.setImageResource(R.drawable.tab_mine_normal);
 		mineText.setTextColor(tabTextNormalColor);
 	}
@@ -270,15 +270,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		if (mCommentFragment != null) {
 			transaction.hide(mCommentFragment);
 		}
-		if (mIdentifyFragment != null) {
-			transaction.hide(mIdentifyFragment);
-		}
+//		if (mIdentifyFragment != null) {
+//			transaction.hide(mIdentifyFragment);
+//		}
 //		if (mAddFragment != null) {
 //			transaction.hide(mAddFragment);
 //		}
-		if (mMessageFragment != null) {
-			transaction.hide(mMessageFragment);
-		}
+//		if (mMessageFragment != null) {
+//			transaction.hide(mMessageFragment);
+//		}
 		if (mMineFragment != null) {
 			transaction.hide(mMineFragment);
 		}

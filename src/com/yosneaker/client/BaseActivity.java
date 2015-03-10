@@ -16,8 +16,7 @@ import android.widget.Toast;
  * 
  */
 public abstract class BaseActivity extends FragmentActivity implements OnClickListener{
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

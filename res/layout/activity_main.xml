@@ -53,7 +53,7 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
+        <!-- <RelativeLayout
             android:id="@+id/identify_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -81,7 +81,7 @@
                     android:textSize="@dimen/tab_text_size"
                     android:textColor="@color/tab_text_normal" />
             </LinearLayout>
-        </RelativeLayout>
+        </RelativeLayout> -->
 
         <RelativeLayout
             android:id="@+id/add_layout"
@@ -104,7 +104,7 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
+        <!-- <RelativeLayout
             android:id="@+id/message_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -132,7 +132,7 @@
                     android:textSize="@dimen/tab_text_size"
                     android:textColor="@color/tab_text_normal" />
             </LinearLayout>
-        </RelativeLayout>
+        </RelativeLayout> -->
 
         <RelativeLayout
             android:id="@+id/mine_layout"
