@@ -37,19 +37,19 @@
 
                 <ImageView
                     android:id="@+id/comment_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/tab_comment_normal" />
 
-                <TextView
+<!--                 <TextView
                     android:id="@+id/comment_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_comment"
                     android:textSize="@dimen/tab_text_size"
-                    android:textColor="@color/tab_text_normal" />
+                    android:textColor="@color/tab_text_normal" /> -->
             </LinearLayout>
         </RelativeLayout>
 
@@ -148,19 +148,19 @@
 
                 <ImageView
                     android:id="@+id/mine_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/tab_mine_normal" />
 
-                <TextView
+<!--                 <TextView
                     android:id="@+id/mine_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tab_mine"
                     android:textSize="@dimen/tab_text_size"
-                    android:textColor="@color/tab_text_normal" />
+                    android:textColor="@color/tab_text_normal" /> -->
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

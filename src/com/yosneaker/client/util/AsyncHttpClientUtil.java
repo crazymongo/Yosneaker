@@ -1,5 +1,7 @@
 package com.yosneaker.client.util;
 
+import android.util.Log;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -19,7 +21,8 @@ public class AsyncHttpClientUtil {
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.post(getAbsoluteUrl(url), params, responseHandler);
+    	Log.d(Constants.TAG, "getAbsoluteUrl(url):"+getAbsoluteUrl(url));
+    	client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {

@@ -139,27 +139,27 @@ public class EditCommentItemActivity extends BaseActivity{
 		}
 		
 		// 测试get json请求
-		AsyncHttpClientUtil.get("resources/json", null, new AsyncHttpResponseHandler() {
-							
-				@Override
-				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-					String responseStr = new String(arg2);
-					Log.d(Constants.TAG, "get json success:"+responseStr);
-					showToast("get json success:"+responseStr);
-				}
-							
-				@Override
-				public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-					String responseStr = new String(arg2);
-					Log.d(Constants.TAG, "get json failure:"+responseStr);
-					showToast("get json failure:"+responseStr);
-				}
-			});
+//		AsyncHttpClientUtil.get("resources/json", null, new AsyncHttpResponseHandler() {
+//							
+//				@Override
+//				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+//					String responseStr = new String(arg2);
+//					Log.d(Constants.TAG, "get json success:"+responseStr);
+//					showToast("get json success:"+responseStr);
+//				}
+//							
+//				@Override
+//				public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+//					String responseStr = new String(arg2);
+//					Log.d(Constants.TAG, "get json failure:"+responseStr);
+//					showToast("get json failure:"+responseStr);
+//				}
+//			});
 		
 		// 测试post图片到服务器
 		RequestParams params = new RequestParams();  
         params.put("image", BitmapUtil.bitmap2Base64Str(getApplicationContext(), bmp));
-		AsyncHttpClientUtil.post("resources/image", params, new AsyncHttpResponseHandler() {
+		AsyncHttpClientUtil.post("resources/picture.json", params, new AsyncHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {

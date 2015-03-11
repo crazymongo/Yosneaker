@@ -2,10 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <include android:id="@+id/mTitleBar" 
             	 layout="@layout/title_bar"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/hot_brand_tag"
+        android:textSize="20sp"
+        android:text="@string/hot_brand_nike" />
     
     <RelativeLayout
         android:layout_width="wrap_content"

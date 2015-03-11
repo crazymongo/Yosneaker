@@ -59,6 +59,16 @@
     <string name="personal_item_weight">体重</string>
     <string name="personal_item_bounce">弹跳</string>
     
+    <string name="hot_brand_nike">Nike</string>
+    <string name="hot_brand_adidas">Adidas</string>
+    <string name="hot_brand_lining">李宁</string>
+    <string name="hot_brand_reebok">Reebok</string>
+    <string name="hot_brand_ua">UA</string>
+    <string name="hot_brand_pick">匹克</string>
+    <string name="hot_brand_anta">安踏</string>
+    <string name="hot_brand_361">361°</string>
+    <string name="hot_brand_other">其他</string>
+        
     <string name="identify_detail_quality">正品</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>

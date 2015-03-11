@@ -1,7 +1,5 @@
 package com.yosneaker.client;
 
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yosneaker.client.fragment.CommentFragment;
-import com.yosneaker.client.fragment.IdentifyFragment;
-import com.yosneaker.client.fragment.MessageFragment;
 import com.yosneaker.client.fragment.MineFragment;
 
 /**
@@ -69,7 +65,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private ImageView mineImage;
 
 	/** 在Tab布局上显示评测标题的控件 */
-	private TextView commentText;
+//	private TextView commentText;
 
 	/** 在Tab布局上显示鉴定标题的控件 */
 //	private TextView identifyText;
@@ -78,7 +74,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //	private TextView messageText;
 
 	/** 在Tab布局上显示"我的"标题的控件 */
-	private TextView mineText;
+//	private TextView mineText;
 
 	/** 用于对Fragment进行管理 */
 	private FragmentManager fragmentManager;
@@ -113,10 +109,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //		identifyImage = (ImageView) findViewById(R.id.identify_image);
 //		messageImage = (ImageView) findViewById(R.id.message_image);
 		mineImage = (ImageView) findViewById(R.id.mine_image);
-		commentText = (TextView) findViewById(R.id.comment_text);
+//		commentText = (TextView) findViewById(R.id.comment_text);
 //		identifyText = (TextView) findViewById(R.id.identify_text);
 //		messageText = (TextView) findViewById(R.id.message_text);
-		mineText = (TextView) findViewById(R.id.mine_text);
+//		mineText = (TextView) findViewById(R.id.mine_text);
 
 	}
 
@@ -148,22 +144,22 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //			break;
 		case R.id.add_layout:
 			
-			Builder builder = new Builder(MainActivity.this);
+//			Builder builder = new Builder(MainActivity.this);
 //			builder.setTitle(getResources().getString(R.string.dialog_add_what));
-            final String[] items = {getResources().getString(R.string.dialog_add_comment),getResources().getString(R.string.dialog_add_identify)};
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    
-                	if (which == 0) {
+//            final String[] items = {getResources().getString(R.string.dialog_add_comment),getResources().getString(R.string.dialog_add_identify)};
+//            builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    
+//                	if (which == 0) {
                 		MainActivity.this.gotoExistActivity(AddCommentTitleActivity.class, new Bundle());
-					} else if(which == 1){
-
-					}
-                }
-
-            }).show();
+//					} else if(which == 1){
+//
+//					}
+//                }
+//
+//            }).show();
 			break;
 //		case R.id.message_layout:
 //			setTabSelection(2);
@@ -195,7 +191,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			setTitleBarText(getResources().getString(R.string.tab_comment));
 			// 当点击了消息tab时，改变控件的图片和文字颜色
 			commentImage.setImageResource(R.drawable.tab_comment_selected);
-			commentText.setTextColor(tabTextSelectedColor);
+//			commentText.setTextColor(tabTextSelectedColor);
 			if (mCommentFragment == null) {
 				// 如果mCommentFragment为空，则创建一个并添加到界面上
 				mCommentFragment = new CommentFragment();
@@ -232,7 +228,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			setTitleBarText(getResources().getString(R.string.tab_mine));
 			// 当点击了设置tab时，改变控件的图片和文字颜色
 			mineImage.setImageResource(R.drawable.tab_mine_selected);
-			mineText.setTextColor(tabTextSelectedColor);
+//			mineText.setTextColor(tabTextSelectedColor);
 			if (mMineFragment == null) {
 				// 如果SettingFragment为空，则创建一个并添加到界面上
 				mMineFragment = new MineFragment();
@@ -251,13 +247,13 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void clearSelection() {
 		commentImage.setImageResource(R.drawable.tab_comment_normal);
-		commentText.setTextColor(tabTextNormalColor);
+//		commentText.setTextColor(tabTextNormalColor);
 //		identifyImage.setImageResource(R.drawable.tab_identify_normal);
 //		identifyText.setTextColor(tabTextNormalColor);
 //		messageImage.setImageResource(R.drawable.tab_message_normal);
 //		messageText.setTextColor(tabTextNormalColor);
 		mineImage.setImageResource(R.drawable.tab_mine_normal);
-		mineText.setTextColor(tabTextNormalColor);
+//		mineText.setTextColor(tabTextNormalColor);
 	}
 
 	/**

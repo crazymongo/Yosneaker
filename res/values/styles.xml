@@ -22,5 +22,5 @@
         <item name="android:layout_height">@dimen/title_bar_tv_size</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
-
+    
 </resources>
