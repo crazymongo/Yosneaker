@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.http.Header;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.yosneaker.client.define.Constants;

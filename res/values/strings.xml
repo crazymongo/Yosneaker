@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Yosneaker</string>
+    <string name="app_name">YOSNEAKER</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -10,7 +10,7 @@
     <string name="tab_add">发布</string>
     <string name="tab_message">消息</string>
     <string name="tab_mine">我的</string>   
-    <string name="tab_square">广场</string>
+    <string name="tab_square">最新</string>
     <string name="tab_friend">好友</string>
 	<string name="tab_discuss">评论</string>
     <string name="tab_wish">心愿</string>
