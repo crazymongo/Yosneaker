@@ -397,6 +397,8 @@ containing a value of this type.
         public static final int comment_edit_add_intro=0x7f06001c;
         public static final int comment_edit_add_item=0x7f06001d;
         public static final int comment_edit_add_summarize=0x7f06001f;
+        public static final int comment_edit_intro_inpute1=0x7f06003c;
+        public static final int comment_edit_intro_inpute2=0x7f06003d;
         public static final int comment_edit_intro_maxText=0x7f060021;
         public static final int comment_edit_item_tip=0x7f060027;
         public static final int comment_edit_item_title=0x7f060026;
@@ -410,16 +412,16 @@ containing a value of this type.
         public static final int dialog_add_identify=0x7f060010;
         public static final int dialog_add_what=0x7f06000e;
         public static final int hello_world=0x7f060001;
-        public static final int hot_brand_361=0x7f060038;
-        public static final int hot_brand_adidas=0x7f060032;
-        public static final int hot_brand_anta=0x7f060037;
-        public static final int hot_brand_lining=0x7f060033;
-        public static final int hot_brand_nike=0x7f060031;
-        public static final int hot_brand_other=0x7f060039;
-        public static final int hot_brand_pick=0x7f060036;
-        public static final int hot_brand_reebok=0x7f060034;
-        public static final int hot_brand_ua=0x7f060035;
-        public static final int identify_detail_quality=0x7f06003a;
+        public static final int hot_brand_361=0x7f060039;
+        public static final int hot_brand_adidas=0x7f060033;
+        public static final int hot_brand_anta=0x7f060038;
+        public static final int hot_brand_lining=0x7f060034;
+        public static final int hot_brand_nike=0x7f060032;
+        public static final int hot_brand_other=0x7f06003a;
+        public static final int hot_brand_pick=0x7f060037;
+        public static final int hot_brand_reebok=0x7f060035;
+        public static final int hot_brand_ua=0x7f060036;
+        public static final int identify_detail_quality=0x7f06003e;
         public static final int off_line_write_comment=0x7f060013;
         public static final int personal_item_bounce=0x7f060030;
         public static final int personal_item_height=0x7f06002e;
@@ -428,6 +430,8 @@ containing a value of this type.
         public static final int picker_image_back=0x7f06002a;
         public static final int picker_image_camera=0x7f06002c;
         public static final int picker_image_see_detail=0x7f060029;
+        public static final int select_brand=0x7f060031;
+        public static final int select_model=0x7f06003b;
         public static final int tab_add=0x7f060005;
         public static final int tab_comment=0x7f060003;
         public static final int tab_discuss=0x7f06000a;
@@ -444,12 +448,12 @@ containing a value of this type.
         public static final int title_comment_title=0x7f060012;
         public static final int toast_comment_edit_maxText=0x7f060028;
         public static final int toast_picker_image_over_max=0x7f06002d;
-        public static final int xlistview_footer_hint_normal=0x7f06003f;
-        public static final int xlistview_footer_hint_ready=0x7f060040;
-        public static final int xlistview_header_hint_loading=0x7f06003d;
-        public static final int xlistview_header_hint_normal=0x7f06003b;
-        public static final int xlistview_header_hint_ready=0x7f06003c;
-        public static final int xlistview_header_last_time=0x7f06003e;
+        public static final int xlistview_footer_hint_normal=0x7f060043;
+        public static final int xlistview_footer_hint_ready=0x7f060044;
+        public static final int xlistview_header_hint_loading=0x7f060041;
+        public static final int xlistview_header_hint_normal=0x7f06003f;
+        public static final int xlistview_header_hint_ready=0x7f060040;
+        public static final int xlistview_header_last_time=0x7f060042;
     }
     public static final class style {
         /** 

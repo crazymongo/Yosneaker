@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">YOSNEAKER</string>
+    <string name="app_name">Yonseaker</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -59,6 +59,7 @@
     <string name="personal_item_weight">体重</string>
     <string name="personal_item_bounce">弹跳</string>
     
+    <string name="select_brand">选择品牌</string>
     <string name="hot_brand_nike">Nike</string>
     <string name="hot_brand_adidas">Adidas</string>
     <string name="hot_brand_lining">李宁</string>
@@ -69,6 +70,10 @@
     <string name="hot_brand_361">361°</string>
     <string name="hot_brand_other">其他</string>
         
+    <string name="select_model">选择型号</string>
+    <string name="comment_edit_intro_inpute1">输入对应型号</string>
+    <string name="comment_edit_intro_inpute2">快向大家介绍这款球鞋吧!</string>
+    
     <string name="identify_detail_quality">正品</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
