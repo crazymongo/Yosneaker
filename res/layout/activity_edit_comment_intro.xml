@@ -10,98 +10,115 @@
         layout="@layout/title_bar" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/tab_text_selected"
-        android:text="@string/select_brand"
-        android:textSize="18sp" />
+        style="@style/intro_text_label_style"
+        android:text="@string/select_brand" />
     
-    <com.yosneaker.client.view.FlowLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
          >
 
+        <LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+         	>
+        
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
+            style="@style/intro_brand_style"
             android:text="@string/hot_brand_nike"
-            android:textSize="18sp" />
+             />
+        
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_adidas"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_adidas" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_lining"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_lining"/>
+        
+        </LinearLayout>
+        
+        <LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+         	>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_reebok"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_reebok" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_ua"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_ua"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_pick"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_pick"/>
+        </LinearLayout>
+        
+        <LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+         	>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_anta"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_anta"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_361"
-            android:textSize="18sp" />
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_361"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:background="@drawable/hot_brand_tag"
-            android:text="@string/hot_brand_other"
-            android:textSize="18sp" />
-    </com.yosneaker.client.view.FlowLayout>
+            style="@style/intro_brand_style"
+            android:text="@string/hot_brand_other"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/tab_text_selected"
-        android:text="@string/select_model"
-        android:textSize="18sp" />
+        style="@style/intro_text_label_style"
+        android:layout_marginBottom="6dp"
+        android:text="@string/select_model" />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />
     
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+         >
+    	<EditText
+            android:id="@+id/edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/edit_text_size"
+            android:hint="@string/comment_edit_item_title"
+            android:background="@null"/>
+    
+    </RelativeLayout>
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />
+    
+    <TextView
+        style="@style/intro_text_label_style"
+        android:layout_marginBottom="6dp"
+        android:text="@string/comment_edit_summarize_evaluate" />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp" >
 
         <EditText
             android:id="@+id/edit_text"
@@ -111,8 +128,9 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:gravity="top"
-            android:hint="@string/comment_detail_intro"
-            android:minLines="100" />
+            android:textSize="@dimen/edit_text_size"
+            android:hint="@string/comment_edit_intro_inpute2"
+            android:minLines="6" />
 
         <TextView
             android:id="@+id/text_view"
@@ -125,4 +143,36 @@
             android:textColor="@color/gray" />
     </RelativeLayout>
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />
+    
+    <LinearLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:layout_marginTop="20dp"
+    	android:layout_marginLeft="10dp"
+    	android:gravity="center" >
+    
+        <ImageView 
+            android:layout_width="24dp"
+    		android:layout_height="24dp"
+    		android:background="@drawable/act_tip"
+            />
+        
+        <TextView 
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_marginLeft="10dp"
+    		android:layout_marginRight="10dp"
+    		android:textSize="@dimen/tip_text_size"
+    		android:textColor="@color/gray"
+    		android:text="@string/comment_edit_intro_inpute3"
+            />
+
+        
+    </LinearLayout>
+    
 </LinearLayout>

@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/comment_edit_item_title"
+            android:textSize="@dimen/edit_text_size"
             android:background="@null"/>
     
     </RelativeLayout>
@@ -37,7 +38,7 @@
         <TextView 
             android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
-    		android:textSize="20sp"
+    		android:textSize="@dimen/label_text_size"
     		android:layout_marginLeft="10dp"
     		android:text="@string/comment_edit_summarize_evaluate"
     		android:textColor="@color/gray"
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:textSize="@dimen/edit_text_size"
             android:hint="@string/comment_edit_summarize_inpute"
             android:minLines="6"
             android:background="@null"
@@ -136,7 +138,7 @@
         <TextView 
             android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
-    		android:textSize="16sp"
+    		android:textSize="@dimen/tip_text_size"
     		android:layout_marginLeft="10dp"
     		android:layout_marginRight="10dp"
     		android:textColor="@color/gray"
@@ -145,5 +147,16 @@
 
         
     </LinearLayout>
+    
+    	<Button 
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_gravity="center"
+    		android:layout_marginTop="20dp"
+    		android:textSize="@dimen/btn_text_size"
+    		android:layout_marginLeft="10dp"
+    		android:text="@string/comment_edit_item_goon"
+    		android:textColor="@color/gray"
+            />
     
 </LinearLayout>

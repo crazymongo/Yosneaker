@@ -16,11 +16,33 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+   
+    <!-- 标题栏样式 -->
     <style name="title_bar_tv_style">
         <item name="android:layout_width">@dimen/title_bar_tv_size</item>
         <item name="android:layout_height">@dimen/title_bar_tv_size</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+    
+    <!-- 编辑简介,品牌标签样式 -->
+    <style name="intro_brand_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:background">@drawable/hot_brand_tag</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
+    <!-- 编辑简介,文本标签样式 -->
+    <style name="intro_text_label_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">@color/tab_text_selected</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
     </style>
     
 </resources>

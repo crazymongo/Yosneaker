@@ -39,6 +39,8 @@
     <string name="comment_edit_write_item">撰写测评项</string>
     <string name="comment_edit_add_summarize">添加总评</string>
     <string name="comment_edit_necessarily">(必填)</string>
+    <string name="comment_edit_save_time">更新时间:</string>
+    <string name="comment_edit_save_draft">保存草稿</string>
     
     <string name="comment_edit_intro_maxText">500</string>
     <string name="comment_edit_summarize_maxText">800</string>
@@ -48,6 +50,7 @@
     <string name="comment_edit_item_title">测评项标题</string>
     <string name="comment_edit_item_tip">标题,评价,内容为必填,深度测评更容易结交志同道合的鞋友喔!</string>
     <string name="toast_comment_edit_maxText">超过字数限制,%1$s最多%2$d个字</string>
+    <string name="comment_edit_item_goon">继续添加测评项</string>
     
     <string name="picker_image_see_detail">查看大图</string>
     <string name="picker_image_back">返回</string>
@@ -73,7 +76,7 @@
     <string name="select_model">选择型号</string>
     <string name="comment_edit_intro_inpute1">输入对应型号</string>
     <string name="comment_edit_intro_inpute2">快向大家介绍这款球鞋吧!</string>
-    
+    <string name="comment_edit_intro_inpute3">对，如同初恋般的感觉，写下对该球鞋第一印象，初次穿着感受及实战后的快感，当然，也可以根据个人喜好，自由阐述</string>
     <string name="identify_detail_quality">正品</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
