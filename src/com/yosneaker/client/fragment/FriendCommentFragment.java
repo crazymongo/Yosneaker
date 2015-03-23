@@ -90,7 +90,7 @@ public class FriendCommentFragment extends BaseFragment implements IXListViewLis
 	
 	private void geneItems() {
 		for (int i = 0; i != 5; ++i) {
-			items.add(new CommentList("樱花AJ 测评"+(++start),(++start),"五分钟以前"));
+			items.add(new CommentList("樱花AJ 测评"+(++start),(++start),"五分钟前"));
 		}
 	}
 
