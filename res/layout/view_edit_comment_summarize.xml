@@ -66,10 +66,11 @@
         </LinearLayout>
         
         <TextView
-            android:id="@+id/tv_intro_detail"
+            android:id="@+id/tv_summarize_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:layout_marginLeft="50dp"
             android:text="或许年轻人还无法体会那么多，但作为老将就不一样了，征战NBA多年的保罗.皮尔斯今天早些时候通过社交平台向大家展示了他的圣诞大战战靴，而最重要的是他将会在比赛结束后在网络进行慈善拍卖该鞋款，希望能用这些善款去帮助更多的人。"
             android:textSize="12sp"
             android:visibility="gone"

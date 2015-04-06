@@ -1,11 +1,20 @@
 package com.yosneaker.client;
 
+import com.yosneaker.client.model.CommentDraft;
+
+import android.R.integer;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -18,7 +27,11 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 
 	private EditText edit_text;
 	private TextView text_view;
+	private RatingBar rating_bar;
 	private int BigIndex;
+	
+	private String sumText;
+	private int sumStar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -37,18 +50,20 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 		
 		edit_text = (EditText)findViewById(R.id.edit_text);
 		text_view = (TextView)findViewById(R.id.text_view);
-		edit_text.addTextChangedListener(new EditTextWatcher());
+		rating_bar = (RatingBar)findViewById(R.id.rating_bar);
+		
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
-		
+		showTextViewRight1(true);
+		getTextViewRight1().setBackgroundResource(R.drawable.ic_cancle);
 	}
 
 	@Override
-	public void addListnners() {
-		
-		getTextViewLeft().setOnClickListener(this);			
-	
+	public void addListnners() {	
+		getTextViewLeft().setOnClickListener(this);	
+		getTextViewRight1().setOnClickListener(this);
+		edit_text.addTextChangedListener(new EditTextWatcher());
 	}
 
 	@Override
@@ -61,11 +76,20 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
-			onBackPressed();
+			customBackPressed();
+		} else if (v == getTextViewRight1()) {
+			sumText = edit_text.getText().toString();
+			sumStar = (int) (rating_bar.getRating()*2);
+			if (sumStar == 0) {
+				showToast(getResources().getString(
+						R.string.error_comment_sumstar_no_null));
+			} else {
+				gotoEditComment(sumStar, sumText);
+			}
 		}
 	}
 
-	public class EditTextWatcher implements TextWatcher {
+	private class EditTextWatcher implements TextWatcher {
 
 		@Override
 		public void afterTextChanged(Editable arg0) {
@@ -92,5 +116,57 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 		}
 
 	}
+	
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event)   {  
+		customBackPressed();
+        return false;           
+    }  
+	
+	
+	public void customBackPressed() {
+		sumText = edit_text.getText().toString();
+		sumStar = (int) (rating_bar.getRating()*2);
+		if ((!TextUtils.isEmpty(sumText))) {
+			Builder builder = new Builder(EditCommentSummarizeActivity.this);
+            final String[] items = {getResources().getString(R.string.dialog_comment_save_sum),getResources().getString(R.string.dialog_comment_drop_sum) };
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                	if (which == 0) {
+                		gotoEditComment(sumStar, sumText);
+					} else if(which == 1){
+						setResult(RESULT_CANCELED, new Intent());
+						EditCommentSummarizeActivity.this.finish();
+					}
+                }
+
+            }).show();
+		}else {
+			super.onBackPressed();
+		}
+	}
+	
+	public void gotoEditComment(int sumStar,String sumText) {
+		Intent intent = new Intent();
+		CommentDraft commentDraft = new CommentDraft();
+		if (sumStar != 0) {
+			if (sumStar != 0) {
+				commentDraft.setComment_sum_star(sumStar);
+			}
+			if (!TextUtils.isEmpty(sumText)) {
+				commentDraft.setComment_sum_content(sumText);
+			}
+			intent.putExtra("CommentDraft",commentDraft);
+			setResult(RESULT_OK, intent);
+		}else {
+			setResult(RESULT_CANCELED, intent);
+		}		
+		EditCommentSummarizeActivity.this.finish();
+	}
+	
+	
 	
 }

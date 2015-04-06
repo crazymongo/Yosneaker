@@ -1,8 +1,14 @@
 package com.yosneaker.client;
 
+import com.yosneaker.client.app.YosneakerAppState;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 
 /**
  * 发布测评标题
@@ -12,7 +18,8 @@ import android.view.Window;
  */
 public class AddCommentTitleActivity extends BaseActivity{
 
-
+	private EditText et_comment_title;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
@@ -30,6 +37,8 @@ public class AddCommentTitleActivity extends BaseActivity{
 		showTextViewLeft(true);
 		showTextViewRight1(true);
 		getTextViewRight1().setBackgroundResource(R.drawable.ic_next);
+		
+		et_comment_title = (EditText) findViewById(R.id.et_comment_title);
 		
 	}
 
@@ -53,7 +62,17 @@ public class AddCommentTitleActivity extends BaseActivity{
 		if (v == getTextViewLeft()) {
 			onBackPressed();
 		}else if (v == getTextViewRight1()) {
-			gotoExistActivity(EditCommentActivity.class, new Bundle());
+			String commentTitle = et_comment_title.getText().toString();
+			if (TextUtils.isEmpty(commentTitle)) {
+				et_comment_title.setError(getResources().getString(R.string.error_comment_title_no_null));
+			}else {
+//				YosneakerAppState.db.insertCommentTitle(commentTitle,0);
+				Bundle bundle = new Bundle();
+				bundle.putString("commentTitle", commentTitle);
+				gotoExistActivity(EditCommentActivity.class, bundle);
+				AddCommentTitleActivity.this.finish();
+			}
+			
 		}
 	}
 

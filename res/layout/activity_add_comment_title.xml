@@ -14,6 +14,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="30dp"
+        android:maxLength="30"
         android:background="@drawable/input_bg_focus"
         android:hint="@string/title_comment_title" />
 

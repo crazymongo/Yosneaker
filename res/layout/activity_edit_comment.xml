@@ -3,10 +3,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    
+    
     <include
         android:id="@+id/mTitleBar"
         layout="@layout/title_bar" />
 
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="vertical" >
+    
+        <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+        
     <include
         android:id="@+id/in_edit_main_img"
         layout="@layout/view_edit_comment_main_img" />
@@ -45,7 +57,7 @@
         />
     </LinearLayout>
     <Button 
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
     		android:layout_height="wrap_content"
     		android:layout_gravity="center"
     		android:layout_marginTop="20dp"
@@ -54,5 +66,29 @@
     		android:text="@string/comment_edit_save_draft"
     		android:textColor="@color/gray"
             />
+  
     
+    <Button 
+            android:layout_width="240dp"
+    		android:layout_height="wrap_content"
+    		android:layout_gravity="center"
+    		android:layout_marginTop="16dp"
+    		android:textSize="@dimen/btn_text_size"
+    		android:layout_marginLeft="10dp"
+    		android:text="@string/comment_edit_publisht"
+    		android:textColor="@color/gray"
+            />
+    
+    <Button 
+            android:layout_width="240dp"
+    		android:layout_height="wrap_content"
+    		android:layout_gravity="center"
+    		android:layout_marginTop="16dp"
+    		android:textSize="@dimen/btn_text_size"
+    		android:layout_marginLeft="10dp"
+    		android:text="@string/comment_edit_delete_draft"
+    		android:textColor="@color/gray"
+            />
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

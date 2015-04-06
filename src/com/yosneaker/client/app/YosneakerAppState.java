@@ -1,5 +1,6 @@
 package com.yosneaker.client.app;
 
+import com.yosneaker.client.db.DatabaseHelper;
 import com.yosneaker.client.define.Constants;
 
 import android.content.Context;
@@ -12,7 +13,11 @@ public class YosneakerAppState {
 
 	private static YosneakerAppState INSTANCE;
 	private static Context mContext;
-	private float mScreenDensity;//屏幕密度
+	
+	public float mScreenDensity;//屏幕密度
+	public static DatabaseHelper db;
+	
+	public static int user_id;// 当前用户id
 
 	public static YosneakerAppState getInstance() {
 		if (INSTANCE == null) {
@@ -25,6 +30,12 @@ public class YosneakerAppState {
 		if (mContext != null) {
 			Log.w(Constants.TAG,"setApplicationContext called twice!");
 		}
+		// 数据库初始化
+		db = new DatabaseHelper(context,1);
+		db.getWritableDatabase();
+		
+		user_id = 10000;//临时写法
+		
 		mContext = context.getApplicationContext();
 	}
 	
@@ -34,6 +45,7 @@ public class YosneakerAppState {
 		}
 		
 		mScreenDensity = mContext.getResources().getDisplayMetrics().density;
+		
 	}
 	
 	public Context getContext() {
@@ -43,5 +55,5 @@ public class YosneakerAppState {
 	public float getmScreenDensity() {
 		return mScreenDensity;
 	}
- 	
+	
 }

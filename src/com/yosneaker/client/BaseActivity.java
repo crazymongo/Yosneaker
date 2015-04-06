@@ -1,5 +1,6 @@
 package com.yosneaker.client;
 
+import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -51,6 +52,20 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
 		startActivity(intent);
 	}
 
+	/**
+	 * 从当前activity跳转到目标activity,
+	 * 如果目标activity曾经打开过,就重新展现,
+	 * 如果从来没打开过,就新建一个打开,之后返回数据给上个activity
+	 * 
+	 * @param cls bundle requestCode
+	 */
+	public void gotoExistActivityForResult(Class<?> cls, Bundle bundle,int requestCode) {
+		Intent intent;
+		intent = new Intent(this, cls);
+		intent.putExtras(bundle);
+		startActivityForResult(intent, requestCode);
+	}
+		
 	/**
 	 * toast弹出消息
 	 * @param msg

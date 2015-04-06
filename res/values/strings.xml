@@ -35,12 +35,16 @@
     <string name="comment_detail_hot_discussion">热门评论</string>
     
     <string name="comment_edit_add_intro">添加简介</string>
+    <string name="comment_edit_alter_intro">修改简介</string>
     <string name="comment_edit_add_item">添加测评项</string>
     <string name="comment_edit_write_item">撰写测评项</string>
     <string name="comment_edit_add_summarize">添加总评</string>
+    <string name="comment_edit_alter_summarize">修改总评</string>
     <string name="comment_edit_necessarily">(必填)</string>
     <string name="comment_edit_save_time">更新时间:</string>
     <string name="comment_edit_save_draft">保存草稿</string>
+    <string name="comment_edit_publisht">发布</string>
+    <string name="comment_edit_delete_draft">删除该测评</string>
     
     <string name="comment_edit_intro_maxText">500</string>
     <string name="comment_edit_summarize_maxText">800</string>
@@ -85,5 +89,17 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    
+    <!-- setError string -->
+    <string name="error_comment_title_no_null">o(╯□╰)o标题不可为空哦！</string>
+    <string name="error_comment_brand_no_null">o(╯□╰)o请选择球鞋品牌！</string>
+    <string name="error_comment_model_no_null">o(╯□╰)o请选择球鞋型号！</string>
+    <string name="error_comment_intro_no_null">o(╯□╰)o面对爱鞋，怎么也得写个20字表达下感受吧？</string>
+    <string name="error_comment_sumstar_no_null">o(╯□╰)o来给爱鞋打个总分吧~</string>
+    
+    <string name="dialog_comment_save_intro">保存简介</string>
+    <string name="dialog_comment_drop_intro">舍弃简介</string>
+    <string name="dialog_comment_save_sum">保存总评</string>
+    <string name="dialog_comment_drop_sum">舍弃总评</string>
     
 </resources>

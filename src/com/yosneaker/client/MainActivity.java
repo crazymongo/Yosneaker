@@ -151,7 +151,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 //                public void onClick(DialogInterface dialog, int which) {
 //                    
 //                	if (which == 0) {
-                		MainActivity.this.gotoExistActivity(AddCommentTitleActivity.class, new Bundle());
+						Bundle bundle = new Bundle();
+						bundle.putInt("action", 1);
+                		MainActivity.this.gotoExistActivity(AddCommentTitleActivity.class, bundle);
 //					} else if(which == 1){
 //
 //					}

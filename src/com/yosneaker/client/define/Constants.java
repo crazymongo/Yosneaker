@@ -17,4 +17,10 @@ public interface Constants {
 	/** 日志Tag */
 	public static final String TAG = "Yosneaker";
 	
+	//requestCode 10000+
+	public static final int COMMENT_TITLE_REQUEST_CODE = 10001;
+	public static final int COMMENT_INTRO_REQUEST_CODE = 10002;
+	public static final int COMMENT_ITEM_REQUEST_CODE = 10003;
+	public static final int COMMENT_SUMMARIZE_REQUEST_CODE = 10004;
+	
 }

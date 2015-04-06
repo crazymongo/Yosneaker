@@ -52,7 +52,7 @@
             android:src="@drawable/act_addpic_pressed" />
 
         <TextView
-            android:id="@+id/tv_add_summarize"
+            android:id="@+id/tv_add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
