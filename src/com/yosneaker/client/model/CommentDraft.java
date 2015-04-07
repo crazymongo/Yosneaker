@@ -2,9 +2,6 @@ package com.yosneaker.client.model;
 
 import java.io.Serializable;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * 测评草稿
  * @author lenovo

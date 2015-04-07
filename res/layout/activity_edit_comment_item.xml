@@ -26,7 +26,7 @@
                 android:layout_marginTop="10dp" >
 
                 <EditText
-                    android:id="@+id/edit_text"
+                    android:id="@+id/et_item_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -54,11 +54,12 @@
                     android:textSize="@dimen/label_text_size" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar"
+                    android:id="@+id/rb_item_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/yo_rating_bar"
                     android:numStars="5"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
 
             <View
@@ -73,7 +74,7 @@
                 android:layout_marginTop="10dp" >
 
                 <EditText
-                    android:id="@+id/edit_text"
+                    android:id="@+id/et_item_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -85,10 +86,10 @@
                     android:textSize="@dimen/edit_text_size" />
 
                 <TextView
-                    android:id="@+id/text_view"
+                    android:id="@+id/tv_item_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/edit_text"
+                    android:layout_alignBottom="@id/et_item_intro"
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
                     android:text="@string/comment_edit_summarize_maxText"

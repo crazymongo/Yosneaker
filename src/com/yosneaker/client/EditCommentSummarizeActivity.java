@@ -2,7 +2,6 @@ package com.yosneaker.client;
 
 import com.yosneaker.client.model.CommentDraft;
 
-import android.R.integer;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -56,7 +55,7 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 		setTitleBarText(null);
 		showTextViewLeft(true);
 		showTextViewRight1(true);
-		getTextViewRight1().setBackgroundResource(R.drawable.ic_cancle);
+		getTextViewRight1().setBackgroundResource(R.drawable.ic_ok);
 	}
 
 	@Override
@@ -79,7 +78,7 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 			customBackPressed();
 		} else if (v == getTextViewRight1()) {
 			sumText = edit_text.getText().toString();
-			sumStar = (int) (rating_bar.getRating()*2);
+			sumStar = (int) (rating_bar.getRating());
 			if (sumStar == 0) {
 				showToast(getResources().getString(
 						R.string.error_comment_sumstar_no_null));
@@ -126,7 +125,7 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 	
 	public void customBackPressed() {
 		sumText = edit_text.getText().toString();
-		sumStar = (int) (rating_bar.getRating()*2);
+		sumStar = (int) (rating_bar.getRating());
 		if ((!TextUtils.isEmpty(sumText))) {
 			Builder builder = new Builder(EditCommentSummarizeActivity.this);
             final String[] items = {getResources().getString(R.string.dialog_comment_save_sum),getResources().getString(R.string.dialog_comment_drop_sum) };

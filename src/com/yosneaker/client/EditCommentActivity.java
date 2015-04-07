@@ -27,6 +27,7 @@ public class EditCommentActivity extends BaseActivity{
 	private LinearLayout ll_edit_intro;
 	private LinearLayout ll_edit_item;
 	private LinearLayout ll_edit_summarize;
+	private LinearLayout ll_item_sun0;
 	
 	// in_edit_main_img部分控件
 	private ImageView iv_comment_bg;
@@ -62,6 +63,7 @@ public class EditCommentActivity extends BaseActivity{
 		ll_edit_intro = (LinearLayout) findViewById(R.id.ll_edit_intro);
 		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
+		ll_item_sun0 = (LinearLayout)findViewById(R.id.ll_item_sun0);
 		
 		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
 		riv_comment_user_icon = (RoundImageView) findViewById(R.id.riv_comment_user_icon);
@@ -146,7 +148,7 @@ public class EditCommentActivity extends BaseActivity{
 
 				break;
 			case Constants.COMMENT_ITEM_REQUEST_CODE:
-
+				ll_item_sun0.setVisibility(View.VISIBLE);
 				break;
 			case Constants.COMMENT_SUMMARIZE_REQUEST_CODE:
 				commentDraft = (CommentDraft) data

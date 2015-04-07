@@ -92,12 +92,12 @@ return true;
                     final RadioButton button = (RadioButton) view;
 
                
-                ((RadioButton) button).setOnTouchListener(new OnTouchListener() {
+                button.setOnTouchListener(new OnTouchListener() {
        
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-        ((RadioButton) button).setChecked(true);
-        checkRadioButton((RadioButton) button);
+        button.setChecked(true);
+        checkRadioButton(button);
         if(mOnCheckedChangeListener != null){
         mOnCheckedChangeListener.onCheckedChanged(RadioGroup.this, button.getId());
         }
@@ -132,7 +132,7 @@ return true;
         if(button == radioButton){
         // do nothing
         } else {
-        ((RadioButton) button).setChecked(false);
+        button.setChecked(false);
         }
     }
     }
@@ -198,7 +198,7 @@ return true;
 
     @Override
     protected LinearLayout.LayoutParams generateDefaultLayoutParams() {
-        return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        return new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
@@ -266,7 +266,8 @@ return true;
     }
 
     private class CheckedStateTracker implements CompoundButton.OnCheckedChangeListener {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        @Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             // prevents from infinite recursion
             if (mProtectFromCheckedChange) {
                 return;
@@ -289,7 +290,8 @@ return true;
         private ViewGroup.OnHierarchyChangeListener mOnHierarchyChangeListener;
 
        
-        public void onChildViewAdded(View parent, View child) {
+        @Override
+		public void onChildViewAdded(View parent, View child) {
             if (parent == RadioGroup.this && child instanceof RadioButton) {
                 int id = child.getId();
                 // generates an id if it's missing
@@ -307,7 +309,8 @@ return true;
         }
 
        
-        public void onChildViewRemoved(View parent, View child) {
+        @Override
+		public void onChildViewRemoved(View parent, View child) {
             if (parent == RadioGroup.this && child instanceof RadioButton) {
                 ((RadioButton) child).setOnCheckedChangeListener(null);
             }

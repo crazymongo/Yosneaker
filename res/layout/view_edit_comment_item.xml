@@ -33,6 +33,27 @@
         
     </LinearLayout>
 
+    <include
+                android:id="@+id/ll_item_sun0"
+                android:visibility="gone"
+                layout="@layout/view_edit_comment_item_sun" />
+    <include
+                android:id="@+id/ll_item_sun1"
+                android:visibility="gone"
+                layout="@layout/view_edit_comment_item_sun" />
+    <include
+                android:id="@+id/ll_item_sun2"
+                android:visibility="gone"
+                layout="@layout/view_edit_comment_item_sun" />
+    <include
+                android:id="@+id/ll_item_sun3"
+                android:visibility="gone"
+                layout="@layout/view_edit_comment_item_sun" />
+    <include
+                android:id="@+id/ll_item_sun4"
+                android:visibility="gone"
+                layout="@layout/view_edit_comment_item_sun" />
+    
     <LinearLayout
         android:id="@+id/ll_edit_item"
         android:layout_width="wrap_content"

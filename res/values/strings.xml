@@ -93,12 +93,17 @@
     <!-- setError string -->
     <string name="error_comment_title_no_null">o(╯□╰)o标题不可为空哦！</string>
     <string name="error_comment_brand_no_null">o(╯□╰)o请选择球鞋品牌！</string>
-    <string name="error_comment_model_no_null">o(╯□╰)o请选择球鞋型号！</string>
+    <string name="error_comment_model_no_null">o(╯□╰)o请选择球鞋型号！</string>   
+    <string name="error_comment_item_title_no_null">o(╯□╰)o测评项怎么可以没有标题！</string>
+    <string name="error_comment_item_sumstar_no_null">o(╯□╰)o请对该测评项打分！</string>
+    <string name="error_comment_item_intro_no_null">o(╯□╰)o面对爱鞋，怎么也得写个20字表达下感受吧？</string>
     <string name="error_comment_intro_no_null">o(╯□╰)o面对爱鞋，怎么也得写个20字表达下感受吧？</string>
     <string name="error_comment_sumstar_no_null">o(╯□╰)o来给爱鞋打个总分吧~</string>
     
     <string name="dialog_comment_save_intro">保存简介</string>
     <string name="dialog_comment_drop_intro">舍弃简介</string>
+    <string name="dialog_comment_save_item">保存测评项</string>
+    <string name="dialog_comment_drop_item">舍弃测评项</string>
     <string name="dialog_comment_save_sum">保存总评</string>
     <string name="dialog_comment_drop_sum">舍弃总评</string>
     

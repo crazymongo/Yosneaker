@@ -5,33 +5,36 @@ import java.util.List;
 
 import org.apache.http.Header;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.yosneaker.client.define.Constants;
-import com.yosneaker.client.util.AsyncHttpClientUtil;
-import com.yosneaker.client.util.BitmapUtil;
-import com.yosneaker.client.util.PickerImageUtil;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.util.AsyncHttpClientUtil;
+import com.yosneaker.client.util.BitmapUtil;
+import com.yosneaker.client.util.PickerImageUtil;
 
 /**
  * 编辑测评简介
@@ -57,9 +60,15 @@ public class EditCommentItemActivity extends BaseActivity{
 	private ImageButton sendPic;
 	private ImageButton sendCamera;
 	
-	private EditText edit_text;
-	private TextView text_view;
+	private EditText et_item_intro;
+	private TextView tv_item_intro;
+	private EditText et_item_title;
+	private RatingBar rb_item_star;
 	private int BigIndex;
+	
+	private String itemTitleText;
+	private String itemIntroText;
+	private int itemStar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -77,10 +86,11 @@ public class EditCommentItemActivity extends BaseActivity{
 		mPickerImageUtil = new PickerImageUtil(this);
 		BigIndex = Integer.parseInt(getResources().getString(R.string.comment_edit_intro_maxText));
 		
-		edit_text = (EditText)findViewById(R.id.edit_text);
-		text_view = (TextView)findViewById(R.id.text_view);
-		edit_text.addTextChangedListener(new EditTextWatcher());
-		
+		et_item_intro = (EditText)findViewById(R.id.et_item_intro);
+		tv_item_intro = (TextView)findViewById(R.id.tv_item_intro);
+		et_item_title = (EditText)findViewById(R.id.et_item_title);
+		rb_item_star = (RatingBar)findViewById(R.id.rb_item_star);
+
 		// 图库照相机BMP业务
 		sendmoreLyt = (LinearLayout) findViewById(R.id.layout_sendmore);
 		sendPic = (ImageButton) findViewById(R.id.sendPic);
@@ -94,6 +104,8 @@ public class EditCommentItemActivity extends BaseActivity{
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
+		showTextViewRight1(true);
+		getTextViewRight1().setBackgroundResource(R.drawable.ic_ok);
 		
 	}
 
@@ -101,9 +113,10 @@ public class EditCommentItemActivity extends BaseActivity{
 	public void addListnners() {
 		
 		getTextViewLeft().setOnClickListener(this);			
+		getTextViewRight1().setOnClickListener(this);	
 		sendPic.setOnClickListener(this);
 		sendCamera.setOnClickListener(this);
-		
+		et_item_intro.addTextChangedListener(new EditTextWatcher());
 	}
 
 	@Override
@@ -117,6 +130,22 @@ public class EditCommentItemActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
 			onBackPressed();
+		}else if (v == getTextViewRight1()) {
+			itemTitleText = et_item_title.getText().toString();
+			itemIntroText = et_item_intro.getText().toString();
+			itemStar = (int) (rb_item_star.getRating());
+			if (TextUtils.isEmpty(itemTitleText)) {
+				et_item_title.setError(getResources().getString(
+						R.string.error_comment_item_title_no_null));
+			}else if (itemStar == 0) {
+				showToast(getResources().getString(
+						R.string.error_comment_item_sumstar_no_null));
+			}else if (TextUtils.isEmpty(itemIntroText)) {
+				et_item_intro.setError(getResources().getString(
+						R.string.error_comment_item_intro_no_null));
+			}else {
+				gotoEditComment(itemStar, itemTitleText, itemIntroText);
+			}
 		}else if (v == sendCamera) {
 			mPickerImageUtil.OpenCamera();
 			sendmoreLyt.setVisibility(View.GONE);
@@ -125,6 +154,14 @@ public class EditCommentItemActivity extends BaseActivity{
 			sendmoreLyt.setVisibility(View.GONE);
 		}
 	}
+
+	private void gotoEditComment(int itemStar, String itemTitleText,
+			String itemIntroText) {
+		Intent intent = new Intent();
+		setResult(RESULT_OK, intent);
+		EditCommentItemActivity.this.finish();
+	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -263,14 +300,14 @@ public class EditCommentItemActivity extends BaseActivity{
 
 		@Override
 		public void afterTextChanged(Editable arg0) {
-			 String edit = edit_text.getText().toString();
+			 String edit = et_item_intro.getText().toString();
 			 
-			edit_text.setVisibility(View.VISIBLE);
+			et_item_intro.setVisibility(View.VISIBLE);
 			if (edit.length() <= BigIndex) {
-				text_view.setText(""+(BigIndex - edit.length()));
+				tv_item_intro.setText(""+(BigIndex - edit.length()));
 			} else {
-				 edit_text.setText(edit.substring(0,BigIndex));
-				 edit_text.setSelection(edit.substring(0,BigIndex).length());
+				 et_item_intro.setText(edit.substring(0,BigIndex));
+				 et_item_intro.setSelection(edit.substring(0,BigIndex).length());
 				 String tmp = getResources().getString(R.string.toast_comment_edit_maxText);
 				 String toastStr=String.format(tmp,getResources().getString(R.string.comment_detail_intro),BigIndex);
 				 showToast(toastStr);
@@ -285,6 +322,38 @@ public class EditCommentItemActivity extends BaseActivity{
 		public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
 		}
 
+	}
+	
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event)   {  
+		customBackPressed();
+        return false;           
+    }  
+	
+	
+	public void customBackPressed() {
+//		sumText = edit_text.getText().toString();
+//		sumStar = (int) (rating_bar.getRating()*2);
+//		if ((!TextUtils.isEmpty(sumText))) {
+//			Builder builder = new Builder(EditCommentSummarizeActivity.this);
+//            final String[] items = {getResources().getString(R.string.dialog_comment_save_sum),getResources().getString(R.string.dialog_comment_drop_sum) };
+//            builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    
+//                	if (which == 0) {
+//                		gotoEditComment(sumStar, sumText);
+//					} else if(which == 1){
+//						setResult(RESULT_CANCELED, new Intent());
+//						EditCommentSummarizeActivity.this.finish();
+//					}
+//                }
+//
+//            }).show();
+//		}else {
+//			super.onBackPressed();
+//		}
 	}
 	
 }

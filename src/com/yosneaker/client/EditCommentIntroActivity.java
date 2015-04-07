@@ -82,7 +82,7 @@ public class EditCommentIntroActivity extends BaseActivity implements
 		setTitleBarText(null);
 		showTextViewLeft(true);
 		showTextViewRight1(true);
-		getTextViewRight1().setBackgroundResource(R.drawable.ic_cancle);
+		getTextViewRight1().setBackgroundResource(R.drawable.ic_ok);
 	}
 
 	@Override
