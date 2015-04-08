@@ -2,6 +2,9 @@ package com.yosneaker.client.util;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.yosneaker.client.define.Constants;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,8 +22,7 @@ import android.widget.Toast;
 public class PickerImageUtil {
 
 	// ----------相机图片的业务相关
-	private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
-	private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+	
 
 	private Fragment fragment;
 	private Activity activity;
@@ -50,9 +52,9 @@ public class PickerImageUtil {
 		Intent intent = new Intent(Intent.ACTION_PICK);
 		intent.setType("image/*");
 		if (fragment != null) {
-			fragment.startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+			fragment.startActivityForResult(intent, Constants.PHOTO_GALLERY_REQUEST);
 		} else {
-			activity.startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+			activity.startActivityForResult(intent, Constants.PHOTO_GALLERY_REQUEST);
 		}
 	}
 
@@ -80,14 +82,14 @@ public class PickerImageUtil {
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		}
 		if (fragment != null) {
-			fragment.startActivityForResult(intent, PHOTO_REQUEST_CAREMA);
+			fragment.startActivityForResult(intent, Constants.PHOTO_CAREMA_REQUEST);
 		} else {
-			activity.startActivityForResult(intent, PHOTO_REQUEST_CAREMA);
+			activity.startActivityForResult(intent, Constants.PHOTO_CAREMA_REQUEST);
 		}
 	}
 
 	public String getBitmapFilePath(int requestCode, int resultCode, Intent data) {
-		if (requestCode == PHOTO_REQUEST_GALLERY) {
+		if (requestCode == Constants.PHOTO_GALLERY_REQUEST) {
 			if (data != null) {
 				Uri uri = data.getData();
 				String[] filePathColumn = { MediaColumns.DATA };
@@ -105,7 +107,7 @@ public class PickerImageUtil {
 				cursor.close();
 				return picturePath;
 			}
-		} else if (requestCode == PHOTO_REQUEST_CAREMA) {
+		} else if (requestCode == Constants.PHOTO_CAREMA_REQUEST) {
 			if (hasSdcard()) {
 				return tempFile.getAbsolutePath();
 			} else {

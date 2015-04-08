@@ -92,10 +92,10 @@ public class EditCommentActivity extends BaseActivity{
 	@Override
 	public void fillDatas() {
 		Intent intent = getIntent();
-		String commentTitle = intent.getExtras().getString("commentTitle");
-		tv_comment_title.setText(commentTitle);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		tv_comment_date.setText(df.format(new Date()));
+		CommentDraft commentDraft = (CommentDraft) intent.getSerializableExtra("CommentDraft");
+		tv_comment_title.setText(commentDraft.getComment_title());
+		int date = commentDraft.getComment_date();
+		tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
 		//Todo  设置iv_comment_bgr,iv_comment_user_icon
 		
 		
@@ -108,14 +108,13 @@ public class EditCommentActivity extends BaseActivity{
 		if (v == getTextViewLeft()) {
 			onBackPressed();
 		}else if (v == ll_edit_intro) {
-			gotoExistActivityForResult(EditCommentIntroActivity.class, new Bundle(),Constants.COMMENT_INTRO_REQUEST_CODE);
+			gotoExistActivityForResult(EditCommentIntroActivity.class, new Bundle(),Constants.COMMENT_INTRO_REQUEST);
 		}else if (v == ll_edit_item) {
-			gotoExistActivityForResult(EditCommentItemActivity.class, new Bundle(),Constants.COMMENT_ITEM_REQUEST_CODE);
+			gotoExistActivityForResult(EditCommentItemActivity.class, new Bundle(),Constants.COMMENT_ITEM_REQUEST);
 		}else if (v == ll_edit_summarize) {
-			gotoExistActivityForResult(EditCommentSummarizeActivity.class, new Bundle(),Constants.COMMENT_SUMMARIZE_REQUEST_CODE);
+			gotoExistActivityForResult(EditCommentSummarizeActivity.class, new Bundle(),Constants.COMMENT_SUMMARIZE_REQUEST);
 		}else if (v == iv_comment_edit) {
-			gotoExistActivity(AddCommentTitleActivity.class, new Bundle());
-			EditCommentActivity.this.finish();
+			gotoExistActivityForResult(AddCommentTitleActivity.class, new Bundle(),Constants.COMMENT_TITLE_REQUEST);
 		}
 	}
 
@@ -126,7 +125,14 @@ public class EditCommentActivity extends BaseActivity{
 		if (resultCode == RESULT_OK) {
 			CommentDraft commentDraft;
 			switch (requestCode) {
-			case Constants.COMMENT_INTRO_REQUEST_CODE:
+			case Constants.COMMENT_TITLE_REQUEST:
+				commentDraft = (CommentDraft) data
+				.getSerializableExtra("CommentDraft");
+				tv_comment_title.setText(commentDraft.getComment_title());
+				int date = commentDraft.getComment_date();
+				tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
+				break;
+			case Constants.COMMENT_INTRO_REQUEST:
 				commentDraft = (CommentDraft) data
 						.getSerializableExtra("CommentDraft");
 				String brand = commentDraft.getComment_intro_brands();
@@ -147,10 +153,10 @@ public class EditCommentActivity extends BaseActivity{
 				}
 
 				break;
-			case Constants.COMMENT_ITEM_REQUEST_CODE:
+			case Constants.COMMENT_ITEM_REQUEST:
 				ll_item_sun0.setVisibility(View.VISIBLE);
 				break;
-			case Constants.COMMENT_SUMMARIZE_REQUEST_CODE:
+			case Constants.COMMENT_SUMMARIZE_REQUEST:
 				commentDraft = (CommentDraft) data
 				.getSerializableExtra("CommentDraft");
 				int sumStar = commentDraft.getComment_sum_star();

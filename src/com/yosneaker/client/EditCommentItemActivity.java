@@ -1,5 +1,6 @@
 package com.yosneaker.client;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,10 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,6 +36,7 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.util.AsyncHttpClientUtil;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.PickerImageUtil;
@@ -69,6 +74,8 @@ public class EditCommentItemActivity extends BaseActivity{
 	private String itemTitleText;
 	private String itemIntroText;
 	private int itemStar;
+	
+	private Uri imageUri;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -165,14 +172,41 @@ public class EditCommentItemActivity extends BaseActivity{
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		String picPath = mPickerImageUtil.getBitmapFilePath(requestCode,
-				resultCode, data);
-		Log.d(Constants.TAG, "picPath:"+picPath);
-		Bitmap bmp = mPickerImageUtil.getBitmapByOpt(picPath);
-		if (bmp != null) {
-			viewList.add(0, bmp);
-			adapter.notifyDataSetChanged();
+		
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case Constants.PHOTO_CAREMA_REQUEST:
+			case Constants.PHOTO_GALLERY_REQUEST:
+				imageUri = data.getData();
+				Intent intent = new Intent("com.android.camera.action.CROP");
+				intent.setDataAndType(imageUri, "image/*");
+				intent.putExtra("scale", true);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(intent, Constants.PHOTO_CROP_REQUEST);
+				break;
+			case Constants.PHOTO_CROP_REQUEST:
+//				String picPath = mPickerImageUtil.getBitmapFilePath(requestCode,
+//						resultCode, data);
+//				Log.d(Constants.TAG, "picPath:"+picPath);
+//				Bitmap bmp = mPickerImageUtil.getBitmapByOpt(picPath);
+				Bitmap bmp;
+				try {
+					bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+					if (bmp != null) {
+						viewList.add(0, bmp);
+						adapter.notifyDataSetChanged();
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+				break;
+			default:
+				break;
+			}
 		}
+		
+		
 		
 		// 测试get json请求
 //		AsyncHttpClientUtil.get("resources/json", null, new AsyncHttpResponseHandler() {
@@ -193,24 +227,24 @@ public class EditCommentItemActivity extends BaseActivity{
 //			});
 		
 		// 测试post图片到服务器
-		RequestParams params = new RequestParams();  
-        params.put("image", BitmapUtil.bitmap2Base64Str(getApplicationContext(), bmp));
-		AsyncHttpClientUtil.post("resources/picture.json", params, new AsyncHttpResponseHandler() {
-			
-			@Override
-			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
-				String responseStr = new String(arg2);
-				Log.d(Constants.TAG, "post image success:"+responseStr);
-				showToast("post image success:"+responseStr);
-			}
-			
-			@Override
-			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
-				String responseStr = new String(arg2);
-				Log.d(Constants.TAG, "post image failure:"+responseStr);
-				showToast("post image failure:"+responseStr);
-			}
-		});
+//		RequestParams params = new RequestParams();  
+//        params.put("image", BitmapUtil.bitmap2Base64Str(getApplicationContext(), bmp));
+//		AsyncHttpClientUtil.post("resources/picture.json", params, new AsyncHttpResponseHandler() {
+//			
+//			@Override
+//			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+//				String responseStr = new String(arg2);
+//				Log.d(Constants.TAG, "post image success:"+responseStr);
+//				showToast("post image success:"+responseStr);
+//			}
+//			
+//			@Override
+//			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+//				String responseStr = new String(arg2);
+//				Log.d(Constants.TAG, "post image failure:"+responseStr);
+//				showToast("post image failure:"+responseStr);
+//			}
+//		});
         
 		super.onActivityResult(requestCode, resultCode, data);
 	}

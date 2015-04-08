@@ -1,7 +1,17 @@
 package com.yosneaker.client;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.yosneaker.client.model.CommentDraft;
+
+import android.R.integer;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -15,6 +25,8 @@ import android.widget.EditText;
 public class AddCommentTitleActivity extends BaseActivity{
 
 	private EditText et_comment_title;
+	private String commentTitle;
+	private int action;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -48,7 +60,7 @@ public class AddCommentTitleActivity extends BaseActivity{
 
 	@Override
 	public void fillDatas() {
-		
+		action = getIntent().getIntExtra("action", 0);
 	}
 
 	
@@ -58,18 +70,49 @@ public class AddCommentTitleActivity extends BaseActivity{
 		if (v == getTextViewLeft()) {
 			onBackPressed();
 		}else if (v == getTextViewRight1()) {
-			String commentTitle = et_comment_title.getText().toString();
+			commentTitle = et_comment_title.getText().toString();
 			if (TextUtils.isEmpty(commentTitle)) {
 				et_comment_title.setError(getResources().getString(R.string.error_comment_title_no_null));
-			}else {
-//				YosneakerAppState.db.insertCommentTitle(commentTitle,0);
-				Bundle bundle = new Bundle();
-				bundle.putString("commentTitle", commentTitle);
-				gotoExistActivity(EditCommentActivity.class, bundle);
+			}else {				
+				CommentDraft commentDraft = new CommentDraft();
+				commentDraft.setComment_title(commentTitle);
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+				commentDraft.setComment_date(Integer.parseInt(df.format(new Date())));
+				if (action == 0) {
+					Intent intent = new Intent();
+					intent.putExtra("CommentDraft",commentDraft);
+					setResult(RESULT_OK, intent);
+				}else {
+					Intent intent = new Intent(AddCommentTitleActivity.this,EditCommentActivity.class);
+					intent.putExtra("CommentDraft",commentDraft);
+					startActivity(intent);
+				}
 				AddCommentTitleActivity.this.finish();
 			}
-			
 		}
 	}
 
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event)   {  
+		customBackPressed();
+        return false;           
+    }  
+	
+	
+	public void customBackPressed() {
+		commentTitle = et_comment_title.getText().toString();
+		if (!TextUtils.isEmpty(commentTitle)) {
+			CommentDraft commentDraft = new CommentDraft();
+			commentDraft.setComment_title(commentTitle);
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+			commentDraft.setComment_date(Integer.parseInt(df.format(new Date())));
+			Intent intent = new Intent();
+			intent.putExtra("CommentDraft",commentDraft);
+			setResult(RESULT_OK, intent);
+			AddCommentTitleActivity.this.finish();
+		}else {
+			AddCommentTitleActivity.this.finish();
+		}
+	}
+	
 }

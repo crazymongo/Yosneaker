@@ -18,9 +18,12 @@ public interface Constants {
 	public static final String TAG = "Yosneaker";
 	
 	//requestCode 10000+
-	public static final int COMMENT_TITLE_REQUEST_CODE = 10001;
-	public static final int COMMENT_INTRO_REQUEST_CODE = 10002;
-	public static final int COMMENT_ITEM_REQUEST_CODE = 10003;
-	public static final int COMMENT_SUMMARIZE_REQUEST_CODE = 10004;
+	public static final int COMMENT_TITLE_REQUEST = 10001;
+	public static final int COMMENT_INTRO_REQUEST = 10002;
+	public static final int COMMENT_ITEM_REQUEST = 10003;
+	public static final int COMMENT_SUMMARIZE_REQUEST = 10004;
+	public static final int PHOTO_CROP_REQUEST = 10005;
+	public static final int PHOTO_CAREMA_REQUEST = 10006;// 拍照
+	public static final int PHOTO_GALLERY_REQUEST = 10007;// 从相册中选择
 	
 }
