@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myspace="http://schemas.android.com/apk/res/com.yosneaker.client"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-
-    <LinearLayout
-        android:id="@+id/ll_detail_comment_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +23,7 @@
                     android:src="@drawable/item_round" />
 
                 <TextView
-                    android:id="@+id/TextView02"
+                    android:id="@+id/tv_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -38,42 +33,26 @@
                     android:textSize="8dp" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/tv_item_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/imageView5"
                     android:layout_marginLeft="6dp"
                     android:text="1" />
 
-                <ImageView
-                    android:id="@+id/ImageView02"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_below="@id/TextView02"
-                    android:layout_toRightOf="@id/ImageView01"
-                    android:src="@drawable/item_star" />
-
-                <ImageView
-                    android:id="@+id/ImageView01"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_below="@id/TextView02"
-                    android:layout_toRightOf="@id/TextView01"
-                    android:src="@drawable/item_star"
-                    android:textSize="8dp" />
-
-                <ImageView
-                    android:id="@+id/TextView01"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_below="@id/TextView02"
-                    android:layout_toRightOf="@id/imageView5"
-                    android:src="@drawable/item_star" />
+                
+                <com.yosneaker.client.view.AssessStarView
+                    android:id="@+id/asv_item_assess"
+                    android:layout_width="wrap_content"
+                	android:layout_height="wrap_content"
+                	myspace:starNumber="2"
+                    android:layout_below="@id/tv_item_name"
+                    android:layout_toRightOf="@id/imageView5"/>
             </RelativeLayout>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_item_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -82,10 +61,11 @@
             android:text="谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点"
             android:textSize="12sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
+        <com.yosneaker.client.view.FlowLayout 
+            android:id="@+id/fl_item_image"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+<!-- 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="80dp"
@@ -103,7 +83,8 @@
                 android:layout_height="80dp"
                 android:padding="5dp"
                 android:src="@drawable/list_bg" />
-        </LinearLayout>
+ -->            
+        </com.yosneaker.client.view.FlowLayout>
 
         <!-- 测评项end -->
 
@@ -111,6 +92,5 @@
             android:layout_width="fill_parent"
             android:layout_height="2px"
             android:background="?android:attr/listDivider" />
-    </LinearLayout>
 
 </LinearLayout>

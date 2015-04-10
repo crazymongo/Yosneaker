@@ -57,7 +57,6 @@
                     android:id="@+id/rb_item_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:progressDrawable="@drawable/yo_rating_bar"
                     android:numStars="5"
                     android:stepSize="1" />
             </LinearLayout>

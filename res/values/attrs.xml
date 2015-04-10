@@ -15,4 +15,8 @@
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
     
+    <declare-styleable name="AssessStarView"> 
+    	<attr name="starNumber" format="integer"/>
+    </declare-styleable>
+    
 </resources>

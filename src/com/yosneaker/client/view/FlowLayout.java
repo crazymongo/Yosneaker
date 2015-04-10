@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * 热门品牌 云标签
- * @author mac
+ * 流布局（子控件自适应摆放）
+ * @author chendd
  *
  */
 public class FlowLayout extends ViewGroup

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myspace="http://schemas.android.com/apk/res/com.yosneaker.client"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/list_comment_tb_padding"
     android:paddingLeft="@dimen/list_comment_lr_padding"
     android:paddingRight="@dimen/list_comment_lr_padding"
-    android:paddingTop="@dimen/list_comment_tb_padding"
-    android:paddingBottom="@dimen/list_comment_tb_padding"
-    android:orientation="vertical" >
+    android:paddingTop="@dimen/list_comment_tb_padding" >
 
     <ImageView
         android:id="@+id/comment_bg"
@@ -80,30 +81,14 @@
                 android:textColor="@color/white"
                 android:text="1000"
                 android:textSize="12sp" />
+
+            <com.yosneaker.client.view.AssessStarView
+                android:id="@+id/comment_star"
+                myspace:starNumber="5"
+            	android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            	/>
             
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/list_star" />
-            
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="3dp"
-                android:src="@drawable/list_star" />
-            
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="3dp"
-                android:src="@drawable/list_star" />
-            
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="3dp"
-                android:src="@drawable/list_star" />
             
         </LinearLayout>
 

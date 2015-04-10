@@ -5,9 +5,6 @@ import java.util.Date;
 
 import com.yosneaker.client.model.CommentDraft;
 
-import android.R.integer;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
