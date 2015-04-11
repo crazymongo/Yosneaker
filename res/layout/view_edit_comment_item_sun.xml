@@ -48,6 +48,15 @@
                 	myspace:starNumber="2"
                     android:layout_below="@id/tv_item_name"
                     android:layout_toRightOf="@id/imageView5"/>
+                
+                <ImageView
+                    android:id="@+id/iv_remove_item"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/act_delpic_pressed" />
+                
             </RelativeLayout>
         </LinearLayout>
 

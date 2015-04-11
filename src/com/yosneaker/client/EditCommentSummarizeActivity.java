@@ -118,8 +118,12 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 	
 	@Override  
     public boolean onKeyDown(int keyCode, KeyEvent event)   {  
-		customBackPressed();
-        return false;           
+		if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+			customBackPressed();
+			return false;   
+		}
+        return super.onKeyDown(keyCode, event);          
     }  
 	
 	

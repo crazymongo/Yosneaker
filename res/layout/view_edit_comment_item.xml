@@ -30,7 +30,7 @@
                 android:textSize="13sp"
                 android:textColor="@color/gray"
                 android:text="@string/comment_edit_necessarily" />
-        
+
     </LinearLayout>
 
    <LinearLayout
@@ -38,12 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-    <!-- -->
-    <include
-                android:id="@+id/ll_item_sun0"
-                android:visibility="gone"
-                layout="@layout/view_edit_comment_item_sun" />
-    
+  
     </LinearLayout>
     
     <LinearLayout

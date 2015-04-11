@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,8 +22,11 @@ public class CommentItemView extends LinearLayout {
 	private TextView tv_item_order;
 	private TextView tv_item_name;
 	private TextView tv_item_content;
+	private ImageView iv_remove_item;
 	private AssessStarView asv_item_assess;
 	private LinearLayout fl_item_image;
+	
+	private Callbacks callbacks;
 	
 	public CommentItemView(Context context) {
 		super(context);
@@ -42,6 +46,17 @@ public class CommentItemView extends LinearLayout {
 		tv_item_order = (TextView) findViewById(R.id.tv_item_order);
 		tv_item_name = (TextView) findViewById(R.id.tv_item_name);
 		tv_item_content = (TextView) findViewById(R.id.tv_item_content);
+		iv_remove_item = (ImageView) findViewById(R.id.iv_remove_item);
+		iv_remove_item.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+//				CommentItemView.this.removeAllViews();
+				if (callbacks != null) {
+					callbacks.setItemRemove(Integer.parseInt((String) tv_item_order.getText()));
+				}				
+			}
+		});
 		asv_item_assess = (AssessStarView) findViewById(R.id.asv_item_assess);
 		fl_item_image = (LinearLayout) findViewById(R.id.fl_item_image);
 	}
@@ -76,5 +91,14 @@ public class CommentItemView extends LinearLayout {
 		}
 		
 	}
+	
+	public void setCallbacks(Callbacks callbacks) {
+		this.callbacks = callbacks;
+	}
+	
+	public interface Callbacks {
+        public void setItemRemove(int item_order);// 点击删除测评项的回调
+	}
+	
 	
 }

@@ -3,6 +3,7 @@ package com.yosneaker.client;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import android.R.integer;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,12 +26,11 @@ import com.yosneaker.client.view.RoundImageView;
  * @author chendd
  *
  */
-public class EditCommentActivity extends BaseActivity{
+public class EditCommentActivity extends BaseActivity implements CommentItemView.Callbacks{
 	
 	private LinearLayout ll_edit_intro;
 	private LinearLayout ll_edit_item;
 	private LinearLayout ll_edit_summarize;
-	private LinearLayout ll_item_sun0;
 	private LinearLayout ll_edit_item_detail;
 	
 	
@@ -74,7 +74,6 @@ public class EditCommentActivity extends BaseActivity{
 		ll_edit_intro = (LinearLayout) findViewById(R.id.ll_edit_intro);
 		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
-		ll_item_sun0 = (LinearLayout)findViewById(R.id.ll_item_sun0);
 		ll_edit_item_detail = (LinearLayout)findViewById(R.id.ll_edit_item_detail);
 		
 		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
@@ -176,6 +175,7 @@ public class EditCommentActivity extends BaseActivity{
 				String itemTitleText = commentItem.getComment_item_title();
 				String itemContentText = commentItem.getComment_item_content();
 				CommentItemView cItemView = new CommentItemView(this);
+				cItemView.setCallbacks(EditCommentActivity.this);
 				cItemView.setItemOrder(++itemsize);
 				cItemView.setItemName(itemTitleText);
 				cItemView.setItemContent(itemContentText);
@@ -186,6 +186,7 @@ public class EditCommentActivity extends BaseActivity{
 				}
 				
 				ll_edit_item_detail.addView(cItemView);
+//				ll_edit_item_detail.removeViewAt(0);
 				break;
 			case Constants.COMMENT_SUMMARIZE_REQUEST:
 				commentDraft = (CommentDraft) data
@@ -229,6 +230,25 @@ public class EditCommentActivity extends BaseActivity{
 		.append(getResources().getString(R.string.comment_edit_summarize_inpute)).append(":")
 		.append(sumText).append(";");
 		return sb.toString();
+	}
+
+
+	@Override
+	public void setItemRemove(int item_order) {
+//		showToast(""+item_order);
+		ll_edit_item_detail.removeViewAt(item_order-1);
+		itemsize--;
+		resetItemOrder(item_order);
+	}
+	
+	public void resetItemOrder(int item_order) {
+		int size = ll_edit_item_detail.getChildCount();
+		for (int i = 0; i < size; i++) {
+			if (i>=item_order-1) {
+				CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
+				commentItemView.setItemOrder(i+1);
+			}
+		}
 	}
 	
 }

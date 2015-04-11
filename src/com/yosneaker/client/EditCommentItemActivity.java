@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -134,7 +135,7 @@ public class EditCommentItemActivity extends BaseActivity{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
-			onBackPressed();
+			customBackPressed();
 		}else if (v == getTextViewRight1()) {
 			itemTitleText = et_item_title.getText().toString();
 			itemIntroText = et_item_intro.getText().toString();
@@ -168,7 +169,7 @@ public class EditCommentItemActivity extends BaseActivity{
 		itemTitleText = et_item_title.getText().toString();
 		itemIntroText = et_item_intro.getText().toString();
 		itemStar = (int) (rb_item_star.getRating());
-		if (itemStar != 0||TextUtils.isEmpty(itemTitleText)||TextUtils.isEmpty(itemIntroText)) {
+		if (itemStar != 0||!TextUtils.isEmpty(itemTitleText)||!TextUtils.isEmpty(itemIntroText)) {
 			if (itemStar != 0) {
 				commentItem.setComment_item_star(itemStar);
 			}
@@ -381,34 +382,39 @@ public class EditCommentItemActivity extends BaseActivity{
 	
 	@Override  
     public boolean onKeyDown(int keyCode, KeyEvent event)   {  
-		customBackPressed();
-        return false;           
+		if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+			customBackPressed();
+			return false;   
+		}
+        return super.onKeyDown(keyCode, event);          
     }  
 	
 	
 	public void customBackPressed() {
-//		sumText = edit_text.getText().toString();
-//		sumStar = (int) (rating_bar.getRating()*2);
-//		if ((!TextUtils.isEmpty(sumText))) {
-//			Builder builder = new Builder(EditCommentSummarizeActivity.this);
-//            final String[] items = {getResources().getString(R.string.dialog_comment_save_sum),getResources().getString(R.string.dialog_comment_drop_sum) };
-//            builder.setItems(items, new DialogInterface.OnClickListener() {
-//
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    
-//                	if (which == 0) {
-//                		gotoEditComment(sumStar, sumText);
-//					} else if(which == 1){
-//						setResult(RESULT_CANCELED, new Intent());
-//						EditCommentSummarizeActivity.this.finish();
-//					}
-//                }
-//
-//            }).show();
-//		}else {
-//			super.onBackPressed();
-//		}
+		itemTitleText = et_item_title.getText().toString();
+		itemIntroText = et_item_intro.getText().toString();
+		itemStar = (int) (rb_item_star.getRating());
+		if (!TextUtils.isEmpty(itemTitleText)||!TextUtils.isEmpty(itemIntroText)) {
+			Builder builder = new Builder(EditCommentItemActivity.this);
+            final String[] items = {getResources().getString(R.string.dialog_comment_save_item),getResources().getString(R.string.dialog_comment_drop_item) };
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    
+                	if (which == 0) {
+                		gotoEditComment(itemStar, itemTitleText, itemIntroText, imageUris);
+					} else if(which == 1){
+						setResult(RESULT_CANCELED, new Intent());
+						EditCommentItemActivity.this.finish();
+					}
+                }
+
+            }).show();
+		}else {
+			super.onBackPressed();
+		}
 	}
 	
 }
