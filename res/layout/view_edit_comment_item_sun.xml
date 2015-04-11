@@ -61,8 +61,10 @@
             android:text="谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点"
             android:textSize="12sp" />
 
-        <com.yosneaker.client.view.FlowLayout 
+        <LinearLayout
             android:id="@+id/fl_item_image"
+            android:padding="10dp"
+            android:orientation="horizontal"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content">
 <!-- 
@@ -84,7 +86,7 @@
                 android:padding="5dp"
                 android:src="@drawable/list_bg" />
  -->            
-        </com.yosneaker.client.view.FlowLayout>
+        </LinearLayout>
 
         <!-- 测评项end -->
 

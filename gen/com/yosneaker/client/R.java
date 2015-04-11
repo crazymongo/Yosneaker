@@ -323,7 +323,7 @@ containing a value of this type.
         public static final int ll_detail_comment_item=0x7f090047;
         public static final int ll_edit_intro=0x7f090055;
         public static final int ll_edit_item=0x7f09005b;
-        public static final int ll_edit_item_images=0x7f090059;
+        public static final int ll_edit_item_detail=0x7f090059;
         public static final int ll_edit_summarize=0x7f09006b;
         public static final int ll_item_sun0=0x7f09005a;
         public static final int ll_offline_write=0x7f090002;

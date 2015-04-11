@@ -31,6 +31,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.model.CommentDraft;
+import com.yosneaker.client.model.CommentItem;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**
@@ -68,6 +70,8 @@ public class EditCommentItemActivity extends BaseActivity{
 	private int itemStar;
 	
 	private Uri imageUri;
+	private ArrayList<String> imageUris;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -97,7 +101,9 @@ public class EditCommentItemActivity extends BaseActivity{
 		
 		gv = (GridView) this.findViewById(R.id.gridView);
 		viewList = new ArrayList<Bitmap>();
+		imageUris = new ArrayList<String>();
 		viewList.add(null);
+//		imageUris.add(null);
 		adapter = new AddPicGridViewAdapter();
 		gv.setAdapter(adapter);
 		
@@ -143,7 +149,7 @@ public class EditCommentItemActivity extends BaseActivity{
 				et_item_intro.setError(getResources().getString(
 						R.string.error_comment_item_intro_no_null));
 			}else {
-				gotoEditComment(itemStar, itemTitleText, itemIntroText);
+				gotoEditComment(itemStar, itemTitleText, itemIntroText,imageUris);
 			}
 		}else if (v == sendCamera) {
 			mPickerImageUtil.OpenCamera();
@@ -155,9 +161,30 @@ public class EditCommentItemActivity extends BaseActivity{
 	}
 
 	private void gotoEditComment(int itemStar, String itemTitleText,
-			String itemIntroText) {
+			String itemIntroText,ArrayList<String> images) {
 		Intent intent = new Intent();
-		setResult(RESULT_OK, intent);
+		CommentDraft commentDraft = new CommentDraft();
+		CommentItem commentItem = new CommentItem();
+		itemTitleText = et_item_title.getText().toString();
+		itemIntroText = et_item_intro.getText().toString();
+		itemStar = (int) (rb_item_star.getRating());
+		if (itemStar != 0||TextUtils.isEmpty(itemTitleText)||TextUtils.isEmpty(itemIntroText)) {
+			if (itemStar != 0) {
+				commentItem.setComment_item_star(itemStar);
+			}
+			if (!TextUtils.isEmpty(itemTitleText)) {
+				commentItem.setComment_item_title(itemTitleText);
+			}
+			if (!TextUtils.isEmpty(itemIntroText)) {
+				commentItem.setComment_item_content(itemIntroText);
+			}
+			commentItem.setImageUris(imageUris);
+			commentDraft.addComment_item(commentItem);
+			intent.putExtra("CommentDraft",commentDraft);
+			setResult(RESULT_OK, intent);
+		}else {
+			setResult(RESULT_CANCELED, intent);
+		}
 		EditCommentItemActivity.this.finish();
 	}
 
@@ -186,6 +213,7 @@ public class EditCommentItemActivity extends BaseActivity{
 					bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
 					if (bmp != null) {
 						viewList.add(0, bmp);
+						imageUris.add(0,imageUri.toString());
 						adapter.notifyDataSetChanged();
 					}
 				} catch (FileNotFoundException e) {
@@ -314,6 +342,7 @@ public class EditCommentItemActivity extends BaseActivity{
 							@Override
 							public void onClick(View v) {
 								viewList.remove(position);
+								imageUris.remove(position);
 								adapter.notifyDataSetChanged();
 							}
 						});

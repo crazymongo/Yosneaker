@@ -1,6 +1,7 @@
 package com.yosneaker.client.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 测评草稿
@@ -18,6 +19,8 @@ public class CommentDraft implements Serializable{
 	private int comment_status;// 测评状态 0-未保存草稿，1-已保存草稿，2-已发布，3-已删除
 	private int comment_date;// 测评日期 yyyymmdd
 	
+	private ArrayList<CommentItem> comment_items;// 测评项
+
 	public CommentDraft() {
 		super();
 		this.comment_title = "";
@@ -28,6 +31,7 @@ public class CommentDraft implements Serializable{
 		this.comment_sum_content = "";
 		this.comment_status = 0;
 		this.comment_date = 0;
+		this.comment_items = new ArrayList<CommentItem>();
 	}
 	
 	public String getComment_title() {
@@ -77,6 +81,18 @@ public class CommentDraft implements Serializable{
 	}
 	public void setComment_date(int comment_date) {
 		this.comment_date = comment_date;
+	}
+		
+	public ArrayList<CommentItem> getComment_items() {
+		return comment_items;
+	}
+
+	public void setComment_items(ArrayList<CommentItem> comment_items) {
+		this.comment_items = comment_items;
+	}
+	
+	public void addComment_item(CommentItem comment_item) {
+		this.comment_items.add(comment_item);
 	}
 	
 }

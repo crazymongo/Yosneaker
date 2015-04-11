@@ -1,6 +1,10 @@
 package com.yosneaker.client;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +15,8 @@ import android.widget.TextView;
 
 import com.yosneaker.client.define.Constants;
 import com.yosneaker.client.model.CommentDraft;
+import com.yosneaker.client.model.CommentItem;
+import com.yosneaker.client.view.CommentItemView;
 import com.yosneaker.client.view.RoundImageView;
 
 /**
@@ -25,6 +31,8 @@ public class EditCommentActivity extends BaseActivity{
 	private LinearLayout ll_edit_item;
 	private LinearLayout ll_edit_summarize;
 	private LinearLayout ll_item_sun0;
+	private LinearLayout ll_edit_item_detail;
+	
 	
 	// in_edit_main_img部分控件
 	private ImageView iv_comment_bg;
@@ -41,6 +49,10 @@ public class EditCommentActivity extends BaseActivity{
 	private TextView tv_add_summarize;
 	private TextView tv_summarize_detail;
 	
+	// ll_edit_item_detail部分控件
+	
+	private int itemsize;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
@@ -54,6 +66,8 @@ public class EditCommentActivity extends BaseActivity{
 	@Override
 	public void initViews() {
 		
+		itemsize = 0;
+		
 		setTitleBarText(null);
 		showTextViewLeft(true);
 
@@ -61,6 +75,7 @@ public class EditCommentActivity extends BaseActivity{
 		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
 		ll_item_sun0 = (LinearLayout)findViewById(R.id.ll_item_sun0);
+		ll_edit_item_detail = (LinearLayout)findViewById(R.id.ll_edit_item_detail);
 		
 		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
 		riv_comment_user_icon = (RoundImageView) findViewById(R.id.riv_comment_user_icon);
@@ -151,7 +166,26 @@ public class EditCommentActivity extends BaseActivity{
 
 				break;
 			case Constants.COMMENT_ITEM_REQUEST:
-				ll_item_sun0.setVisibility(View.VISIBLE);
+//				ll_item_sun0.setVisibility(View.VISIBLE);
+				commentDraft = (CommentDraft) data
+						.getSerializableExtra("CommentDraft");
+				ArrayList<CommentItem> commentItems = commentDraft.getComment_items();
+				CommentItem commentItem = commentItems.get(0);
+				ArrayList<String> imageUris = commentItem.getImageUris();
+				int itemStar = commentItem.getComment_item_star();
+				String itemTitleText = commentItem.getComment_item_title();
+				String itemContentText = commentItem.getComment_item_content();
+				CommentItemView cItemView = new CommentItemView(this);
+				cItemView.setItemOrder(++itemsize);
+				cItemView.setItemName(itemTitleText);
+				cItemView.setItemContent(itemContentText);
+				cItemView.setItemAssess(itemStar);
+				
+				for (String uri : imageUris) {
+					cItemView.addItemImage(uri);
+				}
+				
+				ll_edit_item_detail.addView(cItemView);
 				break;
 			case Constants.COMMENT_SUMMARIZE_REQUEST:
 				commentDraft = (CommentDraft) data

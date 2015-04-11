@@ -13,6 +13,9 @@ import com.yosneaker.client.R;
 
 public class AssessStarView extends LinearLayout {
 
+	private Context context;
+	private AttributeSet attrs;
+	
 	private ImageView iv1;
 	private ImageView iv2;
 	private ImageView iv3;
@@ -21,11 +24,18 @@ public class AssessStarView extends LinearLayout {
 	
 	public AssessStarView(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		this.context = context;
+		init();
 	}
 
 	public AssessStarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
+		this.attrs = attrs;
+		init();
+	}
+
+	private void init() {
 		LayoutInflater.from(context).inflate(R.layout.assess_star_view, this, true);
 		iv1 = (ImageView) findViewById(R.id.ImageView01);
 		iv2 = (ImageView) findViewById(R.id.ImageView02);
@@ -37,7 +47,7 @@ public class AssessStarView extends LinearLayout {
 		int num = a.getInt(R.styleable.AssessStarView_starNumber, 5);
 		setStarNumber(num);
 	}
-
+	
 	/**
 	 * 设置星星显示数目
 	 * @param num 1,2,3,4,5
