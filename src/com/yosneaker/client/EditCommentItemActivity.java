@@ -201,6 +201,8 @@ public class EditCommentItemActivity extends BaseActivity{
 				Intent intent = new Intent("com.android.camera.action.CROP");
 				intent.setDataAndType(imageUri, "image/*");
 				intent.putExtra("scale", true);
+				intent.putExtra("aspectX", 2);//裁剪框比例  
+		        intent.putExtra("aspectY", 1);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 				startActivityForResult(intent, Constants.PHOTO_CROP_REQUEST);
 				break;
@@ -230,7 +232,7 @@ public class EditCommentItemActivity extends BaseActivity{
 		
 		
 		// 测试get json请求
-//		AsyncHttpClientUtil.get("resources/json", null, new AsyncHttpResponseHandler() {
+//		AsyncHttpClientUtil.get("upload/resources/json", null, new AsyncHttpResponseHandler() {
 //							
 //				@Override
 //				public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
@@ -250,7 +252,7 @@ public class EditCommentItemActivity extends BaseActivity{
 		// 测试post图片到服务器
 //		RequestParams params = new RequestParams();  
 //        params.put("image", BitmapUtil.bitmap2Base64Str(getApplicationContext(), bmp));
-//		AsyncHttpClientUtil.post("resources/picture.json", params, new AsyncHttpResponseHandler() {
+//		AsyncHttpClientUtil.post("upload/resources/picture.json", params, new AsyncHttpResponseHandler() {
 //			
 //			@Override
 //			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {

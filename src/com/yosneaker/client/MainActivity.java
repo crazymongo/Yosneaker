@@ -4,10 +4,13 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.yosneaker.client.fragment.CommentFragment;
 import com.yosneaker.client.fragment.MineFragment;
 
@@ -79,6 +82,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 	private ColorStateList tabTextSelectedColor;
 	private ColorStateList tabTextNormalColor;
+	
+	private long firstTime = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -278,6 +283,25 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		if (mMineFragment != null) {
 			transaction.hide(mMineFragment);
 		}
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+			long secondTime = System.currentTimeMillis();
+			if (secondTime - firstTime > 2000) { // 如果两次按键时间间隔大于2秒，则不退出
+				showToast(getResources().getString(
+						R.string.toast_twice_press_exict));
+				firstTime = secondTime;// 更新firstTime
+				return true;
+			} else { // 两次按键小于2秒时，退出应用
+				System.exit(0);
+			}
+			break;
+		}
+		return super.onKeyUp(keyCode, event);
 	}
 
 }

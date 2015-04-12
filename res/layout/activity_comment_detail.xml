@@ -40,7 +40,11 @@
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_comment_detail_item" />
-
+				
+				<include
+                    android:id="@+id/sum"
+                    layout="@layout/view_comment_detail_sum" />
+				
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_comment_detail_buy_img" />

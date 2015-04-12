@@ -106,5 +106,17 @@
     <string name="dialog_comment_drop_item">舍弃测评项</string>
     <string name="dialog_comment_save_sum">保存总评</string>
     <string name="dialog_comment_drop_sum">舍弃总评</string>
+    <string name="dialog_comment_save_draft">保存测评草稿</string>
+    <string name="dialog_comment_drop_draft">舍弃测评草稿</string>
+    <string name="dialog_comment_delete_item">删除该测评项</string>
+    <string name="dialog_comment_back_item">返回继续编辑</string>
+    
+    <string name="toast_twice_press_exict">再按一次退出程序</string>
+    <string name="toast_draft_save_success">测评草稿保存成功！</string>
+    <string name="toast_draft_publish_success">测评发布成功！</string>
+    <string name="toast_draft_delete_success">删除该测评成功！</string>
+    <string name="toast_draft_save_failure">测评草稿保存失败！</string>
+    <string name="toast_draft_publish_failure">测评发布失败！</string>
+    <string name="toast_draft_delete_failure">删除该测评失败！</string>
     
 </resources>

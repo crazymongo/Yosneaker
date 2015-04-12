@@ -1,15 +1,22 @@
 package com.yosneaker.client;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.R.integer;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +40,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	private LinearLayout ll_edit_summarize;
 	private LinearLayout ll_edit_item_detail;
 	
+	private Button btn_save_draft;
+	private Button btn_publish_draft;
+	private Button btn_delete_draft;
 	
 	// in_edit_main_img部分控件
 	private ImageView iv_comment_bg;
@@ -76,6 +86,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
 		ll_edit_item_detail = (LinearLayout)findViewById(R.id.ll_edit_item_detail);
 		
+		btn_save_draft = (Button) findViewById(R.id.btn_save_draft);
+		btn_publish_draft = (Button) findViewById(R.id.btn_publish_draft);
+		btn_delete_draft = (Button) findViewById(R.id.btn_delete_draft);
+		
 		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
 		riv_comment_user_icon = (RoundImageView) findViewById(R.id.riv_comment_user_icon);
 		tv_comment_date = (TextView) findViewById(R.id.tv_comment_date);
@@ -97,6 +111,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		ll_edit_intro.setOnClickListener(this);
 		ll_edit_item.setOnClickListener(this);
 		ll_edit_summarize.setOnClickListener(this);
+		btn_save_draft.setOnClickListener(this);
+		btn_publish_draft.setOnClickListener(this);
+		btn_delete_draft.setOnClickListener(this);
 		iv_comment_edit.setOnClickListener(this);
 	}
 
@@ -117,7 +134,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
-			onBackPressed();
+			customBackPressed();
 		}else if (v == ll_edit_intro) {
 			gotoExistActivityForResult(EditCommentIntroActivity.class, new Bundle(),Constants.COMMENT_INTRO_REQUEST);
 		}else if (v == ll_edit_item) {
@@ -126,11 +143,69 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 			gotoExistActivityForResult(EditCommentSummarizeActivity.class, new Bundle(),Constants.COMMENT_SUMMARIZE_REQUEST);
 		}else if (v == iv_comment_edit) {
 			gotoExistActivityForResult(AddCommentTitleActivity.class, new Bundle(),Constants.COMMENT_TITLE_REQUEST);
+		}else if (v == btn_save_draft) {
+			saveDraft();
+		}else if (v == btn_publish_draft) {
+			publishDraft();
+		}else if (v == btn_delete_draft) {
+			deleteDraft();
+			showToast(getResources().getString(R.string.toast_draft_delete_success));
 		}
 	}
 
+	/**
+	 * 删除测评草稿
+	 */
+	private void deleteDraft() {
+		
+		EditCommentActivity.this.finish();
+	}
+
+	/**
+	 * 发布测评草稿
+	 */
+	private void publishDraft() {
+		showToast(getResources().getString(R.string.toast_draft_publish_success));
+	}
+
+
+	/**
+	 * 保存草稿
+	 */
+	private void saveDraft() {
+		showToast(getResources().getString(R.string.toast_draft_save_success));
+	}
+
+
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event)   {  
+		if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+			customBackPressed();
+			return false;   
+		}
+        return super.onKeyDown(keyCode, event);        
+    }  
 	
-	
+	private void customBackPressed() {
+		Builder builder = new Builder(EditCommentActivity.this);
+        final String[] items = {getResources().getString(R.string.dialog_comment_save_draft),getResources().getString(R.string.dialog_comment_drop_draft) };
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                
+            	if (which == 0) {
+					saveDraft();
+				} else if(which == 1){
+					deleteDraft();
+				}
+            }
+
+        }).show();
+	}
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
@@ -181,10 +256,13 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				cItemView.setItemContent(itemContentText);
 				cItemView.setItemAssess(itemStar);
 				
-				for (String uri : imageUris) {
-					cItemView.addItemImage(uri);
+				for (int i = 0; i < imageUris.size(); i++) {
+					cItemView.addItemImage(imageUris.get(i));
+					if (itemsize == 1 && i == 0) {
+						setDefaultBg(imageUris.get(i));
+					}
 				}
-				
+			
 				ll_edit_item_detail.addView(cItemView);
 //				ll_edit_item_detail.removeViewAt(0);
 				break;
@@ -234,11 +312,38 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 
 
 	@Override
-	public void setItemRemove(int item_order) {
+	public void setItemRemove(final int item_order) {
 //		showToast(""+item_order);
-		ll_edit_item_detail.removeViewAt(item_order-1);
-		itemsize--;
-		resetItemOrder(item_order);
+		Builder builder = new Builder(EditCommentActivity.this);
+        final String[] items = {getResources().getString(R.string.dialog_comment_delete_item),getResources().getString(R.string.dialog_comment_back_item) };
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                
+            	if (which == 0) {
+            		ll_edit_item_detail.removeViewAt(item_order-1);
+            		itemsize--;
+            		resetItemOrder(item_order);
+				} else if(which == 1){
+					
+				}
+            }
+
+        }).show();
+		
+	}
+	
+	public void setDefaultBg(String imageUri) {
+		Bitmap bmp;
+		try {
+			bmp = BitmapFactory.decodeStream(EditCommentActivity.this.getContentResolver().openInputStream(Uri.parse(imageUri)));
+			if (bmp != null) {
+				iv_comment_bg.setImageBitmap(bmp);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void resetItemOrder(int item_order) {
