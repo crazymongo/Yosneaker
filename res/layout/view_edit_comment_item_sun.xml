@@ -45,7 +45,7 @@
                     android:id="@+id/asv_item_assess"
                     android:layout_width="wrap_content"
                 	android:layout_height="wrap_content"
-                	myspace:starNumber="2"
+                	myspace:starNumber="5"
                     android:layout_below="@id/tv_item_name"
                     android:layout_toRightOf="@id/imageView5"/>
                 
@@ -53,8 +53,9 @@
                     android:id="@+id/iv_remove_item"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="8dp"
                     android:layout_alignParentRight="true"
+                    android:visibility="gone"
                     android:src="@drawable/act_delpic_pressed" />
                 
             </RelativeLayout>
@@ -72,7 +73,7 @@
 
         <LinearLayout
             android:id="@+id/fl_item_image"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
             android:orientation="horizontal"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content">

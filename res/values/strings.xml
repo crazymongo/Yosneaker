@@ -33,7 +33,9 @@
     <string name="comment_detail_want_buy">想入</string>
     <string name="comment_detail_yet_buy">已入</string>
     <string name="comment_detail_hot_discussion">热门评论</string>
-    
+     <string name="comment_detail_brand">品牌：</string>
+    <string name="comment_detail_model">型号：</string>
+     
     <string name="comment_edit_add_intro">添加简介</string>
     <string name="comment_edit_alter_intro">修改简介</string>
     <string name="comment_edit_add_item">添加测评项</string>

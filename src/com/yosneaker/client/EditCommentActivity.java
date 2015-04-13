@@ -2,9 +2,7 @@ package com.yosneaker.client;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import android.R.integer;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +22,7 @@ import android.widget.TextView;
 import com.yosneaker.client.define.Constants;
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
+import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.CommentItemView;
 import com.yosneaker.client.view.RoundImageView;
 
@@ -44,6 +43,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	private Button btn_publish_draft;
 	private Button btn_delete_draft;
 	
+	private ImageView iv_item_edit;
+	
 	// in_edit_main_img部分控件
 	private ImageView iv_comment_bg;
 	private RoundImageView riv_comment_user_icon;
@@ -54,14 +55,19 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	// in_edit_intro部分控件
 	private TextView tv_add_intro;
 	private TextView tv_intro_detail;
+	private TextView tv_intro_brand;
+	private TextView tv_intro_model;
+	private LinearLayout ll_intro_detail;
 	
 	// in_edit_summarize部分控件
 	private TextView tv_add_summarize;
 	private TextView tv_summarize_detail;
+	private AssessStarView asv_sum_assess;
 	
 	// ll_edit_item_detail部分控件
 	
 	private int itemsize;
+	private boolean isEdit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -77,6 +83,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	public void initViews() {
 		
 		itemsize = 0;
+		isEdit = true;
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -90,6 +97,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		btn_publish_draft = (Button) findViewById(R.id.btn_publish_draft);
 		btn_delete_draft = (Button) findViewById(R.id.btn_delete_draft);
 		
+		iv_item_edit = (ImageView) findViewById(R.id.iv_item_edit);
+		iv_item_edit.setBackgroundResource(R.drawable.item_edit);
+		
 		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
 		riv_comment_user_icon = (RoundImageView) findViewById(R.id.riv_comment_user_icon);
 		tv_comment_date = (TextView) findViewById(R.id.tv_comment_date);
@@ -98,10 +108,13 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 		tv_add_intro = (TextView) findViewById(R.id.tv_add_intro);
 		tv_intro_detail = (TextView) findViewById(R.id.tv_intro_detail);
+		tv_intro_brand = (TextView) findViewById(R.id.tv_intro_brand);
+		tv_intro_model = (TextView) findViewById(R.id.tv_intro_model);
+		ll_intro_detail = (LinearLayout) findViewById(R.id.ll_intro_detail);
 		
 		tv_add_summarize = (TextView) findViewById(R.id.tv_add_summarize);
 		tv_summarize_detail = (TextView) findViewById(R.id.tv_summarize_detail);
-		
+		asv_sum_assess = (AssessStarView) findViewById(R.id.asv_sum_assess);
 	}
 
 	@Override
@@ -115,6 +128,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		btn_publish_draft.setOnClickListener(this);
 		btn_delete_draft.setOnClickListener(this);
 		iv_comment_edit.setOnClickListener(this);
+		iv_item_edit.setOnClickListener(this);
 	}
 
 	@Override
@@ -150,6 +164,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}else if (v == btn_delete_draft) {
 			deleteDraft();
 			showToast(getResources().getString(R.string.toast_draft_delete_success));
+		}else if (v == iv_item_edit) {
+			toogleDeleteTip();
 		}
 	}
 
@@ -230,12 +246,15 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 					tv_add_intro.setText(getResources().getString(
 							R.string.comment_edit_add_intro));
 					tv_intro_detail.setVisibility(View.GONE);
+					ll_intro_detail.setVisibility(View.GONE);
 				} else {
 					tv_add_intro.setText(getResources().getString(
 							R.string.comment_edit_alter_intro));
 					tv_intro_detail.setVisibility(View.VISIBLE);
-					tv_intro_detail.setText(buildIntroStr(brand, modelText,
-							introText));
+					tv_intro_detail.setText(introText);
+					ll_intro_detail.setVisibility(View.VISIBLE);
+					tv_intro_brand.setText(brand);
+					tv_intro_model.setText(modelText);
 				}
 
 				break;
@@ -255,7 +274,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				cItemView.setItemName(itemTitleText);
 				cItemView.setItemContent(itemContentText);
 				cItemView.setItemAssess(itemStar);
-				
+				cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);
 				for (int i = 0; i < imageUris.size(); i++) {
 					cItemView.addItemImage(imageUris.get(i));
 					if (itemsize == 1 && i == 0) {
@@ -275,11 +294,14 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 					tv_add_summarize.setText(getResources().getString(
 							R.string.comment_edit_add_summarize));
 					tv_summarize_detail.setVisibility(View.GONE);
+					asv_sum_assess.setVisibility(View.GONE);
 				} else {
 					tv_add_summarize.setText(getResources().getString(
 							R.string.comment_edit_alter_summarize));
 					tv_summarize_detail.setVisibility(View.VISIBLE);
 					tv_summarize_detail.setText(buildSumStr(sumStar, sumText));
+					asv_sum_assess.setVisibility(View.VISIBLE);
+					asv_sum_assess.setStarNumber(sumStar);
 				}
 				
 				break;
@@ -290,16 +312,16 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	}
 
 
-	public String buildIntroStr(String brand,String modelText,String introText) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getResources().getString(R.string.select_brand)).append(":")
-		.append(brand).append(";")
-		.append(getResources().getString(R.string.select_model)).append(":")
-		.append(modelText).append(";")
-		.append(getResources().getString(R.string.comment_edit_summarize_evaluate)).append(":")
-		.append(introText).append(";");
-		return sb.toString();
-	}
+//	public String buildIntroStr(String brand,String modelText,String introText) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(getResources().getString(R.string.select_brand)).append(":")
+//		.append(brand).append(";")
+//		.append(getResources().getString(R.string.select_model)).append(":")
+//		.append(modelText).append(";")
+//		.append(getResources().getString(R.string.comment_edit_summarize_evaluate)).append(":")
+//		.append(introText).append(";");
+//		return sb.toString();
+//	}
 	
 	public String buildSumStr(int sumStar,String sumText) {
 		StringBuilder sb = new StringBuilder();
@@ -354,6 +376,17 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				commentItemView.setItemOrder(i+1);
 			}
 		}
+	}
+	
+	public void toogleDeleteTip() {
+		int visible = isEdit?View.VISIBLE:View.GONE;
+		iv_item_edit.setBackgroundResource(isEdit?R.drawable.item_ok:R.drawable.item_edit);
+		int size = ll_edit_item_detail.getChildCount();
+		for (int i = 0; i < size; i++) {
+			CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
+			commentItemView.setDeleteVisible(visible);
+		}
+		isEdit = !isEdit;
 	}
 	
 }

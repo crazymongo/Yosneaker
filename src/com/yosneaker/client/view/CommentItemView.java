@@ -84,6 +84,10 @@ public class CommentItemView extends LinearLayout {
 		asv_item_assess.setStarNumber(assessStarNum);
 	}
 	
+	public void setDeleteVisible(int visible) {
+		iv_remove_item.setVisibility(visible);
+	}
+	
 	public void addItemImage(String imageUri) {
 		final View picView = inflater.inflate(
 				R.layout.view_edit_comment_gv_item_pic, null);

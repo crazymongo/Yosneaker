@@ -6,32 +6,45 @@
 
     <!-- 测评项start -->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:orientation="horizontal"
         android:paddingBottom="2dp" >
 
         <ImageView
+            android:id="@+id/iv_item_spilt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:src="@drawable/item_spilt" />
 
         <TextView
+            android:id="@+id/tv_item_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_item_spilt"
             android:text="@string/comment_detail_class" />
         <TextView
                 android:id="@+id/tv_necessarily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:textSize="13sp"
                 android:textColor="@color/gray"
+                android:layout_toRightOf="@id/tv_item_class"
                 android:text="@string/comment_edit_necessarily" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_item_edit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"/>
+        
+    </RelativeLayout>
 
    <LinearLayout
         android:id="@+id/ll_edit_item_detail"
