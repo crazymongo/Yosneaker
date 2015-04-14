@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,9 +20,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yosneaker.client.define.Constants;
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
+import com.yosneaker.client.util.BitmapUtil;
+import com.yosneaker.client.util.Constants;
 import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.CommentItemView;
 import com.yosneaker.client.view.RoundImageView;
@@ -33,6 +35,8 @@ import com.yosneaker.client.view.RoundImageView;
  *
  */
 public class EditCommentActivity extends BaseActivity implements CommentItemView.Callbacks{
+	
+	private CommentDraft commentDraft;
 	
 	private LinearLayout ll_edit_intro;
 	private LinearLayout ll_edit_item;
@@ -74,7 +78,6 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_edit_comment);
-		
 		super.onCreate(savedInstanceState);
 	}
 
@@ -84,6 +87,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 		itemsize = 0;
 		isEdit = true;
+		commentDraft = new CommentDraft();
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -134,10 +138,12 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	@Override
 	public void fillDatas() {
 		Intent intent = getIntent();
-		CommentDraft commentDraft = (CommentDraft) intent.getSerializableExtra("CommentDraft");
-		tv_comment_title.setText(commentDraft.getComment_title());
-		int date = commentDraft.getComment_date();
+		CommentDraft tmpCommentDraft = (CommentDraft) intent.getSerializableExtra("CommentDraft");
+		tv_comment_title.setText(tmpCommentDraft.getComment_title());
+		int date = tmpCommentDraft.getComment_date();
 		tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
+		commentDraft.setComment_title(tmpCommentDraft.getComment_title());
+		commentDraft.setComment_date(tmpCommentDraft.getComment_date());
 		//Todo  设置iv_comment_bgr,iv_comment_user_icon
 		
 		
@@ -224,22 +230,25 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		CommentDraft tmpCommentDraft;
 		if (resultCode == RESULT_OK) {
-			CommentDraft commentDraft;
 			switch (requestCode) {
 			case Constants.COMMENT_TITLE_REQUEST:
-				commentDraft = (CommentDraft) data
+				tmpCommentDraft = (CommentDraft) data
 				.getSerializableExtra("CommentDraft");
-				tv_comment_title.setText(commentDraft.getComment_title());
-				int date = commentDraft.getComment_date();
+				tv_comment_title.setText(tmpCommentDraft.getComment_title());
+				int date = tmpCommentDraft.getComment_date();
 				tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
+				// 保存数据到内存
+				commentDraft.setComment_title(tmpCommentDraft.getComment_title());
+				commentDraft.setComment_date(tmpCommentDraft.getComment_date());
 				break;
 			case Constants.COMMENT_INTRO_REQUEST:
-				commentDraft = (CommentDraft) data
+				tmpCommentDraft = (CommentDraft) data
 						.getSerializableExtra("CommentDraft");
-				String brand = commentDraft.getComment_intro_brands();
-				String modelText = commentDraft.getComment_intro_model();
-				String introText = commentDraft.getComment_intro_assess();
+				String brand = tmpCommentDraft.getComment_intro_brands();
+				String modelText = tmpCommentDraft.getComment_intro_model();
+				String introText = tmpCommentDraft.getComment_intro_assess();
 
 				if (TextUtils.isEmpty(brand) && TextUtils.isEmpty(modelText)
 						&& TextUtils.isEmpty(introText)) {
@@ -256,13 +265,16 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 					tv_intro_brand.setText(brand);
 					tv_intro_model.setText(modelText);
 				}
-
+				// 保存数据到内存
+				commentDraft.setComment_intro_brands(brand);
+				commentDraft.setComment_intro_model(modelText);
+				commentDraft.setComment_intro_assess(introText);
 				break;
 			case Constants.COMMENT_ITEM_REQUEST:
 //				ll_item_sun0.setVisibility(View.VISIBLE);
-				commentDraft = (CommentDraft) data
+				tmpCommentDraft = (CommentDraft) data
 						.getSerializableExtra("CommentDraft");
-				ArrayList<CommentItem> commentItems = commentDraft.getComment_items();
+				ArrayList<CommentItem> commentItems = tmpCommentDraft.getComment_items();
 				CommentItem commentItem = commentItems.get(0);
 				ArrayList<String> imageUris = commentItem.getImageUris();
 				int itemStar = commentItem.getComment_item_star();
@@ -280,16 +292,17 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 					if (itemsize == 1 && i == 0) {
 						setDefaultBg(imageUris.get(i));
 					}
-				}
-			
+				}			
 				ll_edit_item_detail.addView(cItemView);
-//				ll_edit_item_detail.removeViewAt(0);
+				toogleEditTip();
+				// 保存数据到内存
+				commentDraft.addComment_item(commentItem);
 				break;
 			case Constants.COMMENT_SUMMARIZE_REQUEST:
-				commentDraft = (CommentDraft) data
+				tmpCommentDraft = (CommentDraft) data
 				.getSerializableExtra("CommentDraft");
-				int sumStar = commentDraft.getComment_sum_star();
-				String sumText = commentDraft.getComment_sum_content();
+				int sumStar = tmpCommentDraft.getComment_sum_star();
+				String sumText = tmpCommentDraft.getComment_sum_content();
 				if (TextUtils.isEmpty(sumText) && sumStar==0) {
 					tv_add_summarize.setText(getResources().getString(
 							R.string.comment_edit_add_summarize));
@@ -299,37 +312,18 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 					tv_add_summarize.setText(getResources().getString(
 							R.string.comment_edit_alter_summarize));
 					tv_summarize_detail.setVisibility(View.VISIBLE);
-					tv_summarize_detail.setText(buildSumStr(sumStar, sumText));
+					tv_summarize_detail.setText(sumText);
 					asv_sum_assess.setVisibility(View.VISIBLE);
 					asv_sum_assess.setStarNumber(sumStar);
 				}
-				
+				// 保存数据到内存
+				commentDraft.setComment_sum_star(sumStar);
+				commentDraft.setComment_sum_content(sumText);
 				break;
 			default:
 				break;
 			}
 		}
-	}
-
-
-//	public String buildIntroStr(String brand,String modelText,String introText) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(getResources().getString(R.string.select_brand)).append(":")
-//		.append(brand).append(";")
-//		.append(getResources().getString(R.string.select_model)).append(":")
-//		.append(modelText).append(";")
-//		.append(getResources().getString(R.string.comment_edit_summarize_evaluate)).append(":")
-//		.append(introText).append(";");
-//		return sb.toString();
-//	}
-	
-	public String buildSumStr(int sumStar,String sumText) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getResources().getString(R.string.comment_edit_summarize_evaluate)).append(":")
-		.append(sumStar).append("星;")
-		.append(getResources().getString(R.string.comment_edit_summarize_inpute)).append(":")
-		.append(sumText).append(";");
-		return sb.toString();
 	}
 
 
@@ -347,6 +341,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
             		ll_edit_item_detail.removeViewAt(item_order-1);
             		itemsize--;
             		resetItemOrder(item_order);
+            		toogleEditTip();
 				} else if(which == 1){
 					
 				}
@@ -357,11 +352,13 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	}
 	
 	public void setDefaultBg(String imageUri) {
-		Bitmap bmp;
+		Bitmap bitmap;
+		int width = 16*20;
+		int height = 9*20;
 		try {
-			bmp = BitmapFactory.decodeStream(EditCommentActivity.this.getContentResolver().openInputStream(Uri.parse(imageUri)));
-			if (bmp != null) {
-				iv_comment_bg.setImageBitmap(bmp);
+			bitmap = BitmapUtil.getImageThumbnails(this, imageUri, width, height);		
+			if (bitmap != null) {
+				iv_comment_bg.setImageBitmap(bitmap);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -378,6 +375,14 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 	
+	public void toogleEditTip() {
+		if (itemsize == 0) {
+			iv_item_edit.setVisibility(View.GONE);
+		}else{
+			iv_item_edit.setVisibility(View.VISIBLE);
+		}
+	}
+	
 	public void toogleDeleteTip() {
 		int visible = isEdit?View.VISIBLE:View.GONE;
 		iv_item_edit.setBackgroundResource(isEdit?R.drawable.item_ok:R.drawable.item_edit);
@@ -385,6 +390,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		for (int i = 0; i < size; i++) {
 			CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
 			commentItemView.setDeleteVisible(visible);
+			commentItemView.setImageDeleteVisible(visible);
 		}
 		isEdit = !isEdit;
 	}

@@ -57,7 +57,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/imageView5"
                     android:text="外观"
-                    android:textSize="8dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/textView6"

@@ -17,8 +17,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.yosneaker.client.define.Constants;
 import com.yosneaker.client.model.CommentDraft;
+import com.yosneaker.client.util.Constants;
 import com.yosneaker.client.view.RadioGroup;
 import com.yosneaker.client.view.RadioGroup.OnCheckedChangeListener;
 

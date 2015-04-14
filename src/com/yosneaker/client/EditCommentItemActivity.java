@@ -31,9 +31,9 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.yosneaker.client.define.Constants;
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
+import com.yosneaker.client.util.Constants;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**
@@ -201,8 +201,8 @@ public class EditCommentItemActivity extends BaseActivity{
 				Intent intent = new Intent("com.android.camera.action.CROP");
 				intent.setDataAndType(imageUri, "image/*");
 				intent.putExtra("scale", true);
-				intent.putExtra("aspectX", 2);//裁剪框比例  
-		        intent.putExtra("aspectY", 1);
+				intent.putExtra("aspectX", 16);//裁剪框比例  
+		        intent.putExtra("aspectY", 9);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 				startActivityForResult(intent, Constants.PHOTO_CROP_REQUEST);
 				break;

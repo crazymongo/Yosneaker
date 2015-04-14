@@ -1,7 +1,7 @@
 package com.yosneaker.client.app;
 
 import com.yosneaker.client.db.DatabaseHelper;
-import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.util.Constants;
 
 import android.content.Context;
 import android.util.Log;

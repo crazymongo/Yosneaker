@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.yosneaker.client.fragment.CommentFragment;
 import com.yosneaker.client.fragment.MineFragment;
 

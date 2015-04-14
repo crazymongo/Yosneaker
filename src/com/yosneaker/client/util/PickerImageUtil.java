@@ -3,8 +3,6 @@ package com.yosneaker.client.util;
 import java.io.File;
 import java.io.IOException;
 
-import com.yosneaker.client.define.Constants;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

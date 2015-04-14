@@ -3,8 +3,6 @@ package com.yosneaker.client.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import android.net.Uri;
-
 /**
  * 测评草稿
  * @author lenovo

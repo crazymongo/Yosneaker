@@ -30,7 +30,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/imageView5"
                     android:text="外观"
-                    android:textSize="8dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/tv_item_order"
@@ -65,15 +65,15 @@
             android:id="@+id/tv_item_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:padding="5dp"
+            android:layout_marginLeft="15dp"
             android:text="谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点"
-            android:textSize="12sp" />
+		/>
 
         <LinearLayout
             android:id="@+id/fl_item_image"
             android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
             android:orientation="horizontal"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content">
@@ -97,12 +97,5 @@
                 android:src="@drawable/list_bg" />
  -->            
         </LinearLayout>
-
-        <!-- 测评项end -->
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2px"
-            android:background="?android:attr/listDivider" />
 
 </LinearLayout>

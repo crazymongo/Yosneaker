@@ -1,13 +1,17 @@
 package com.yosneaker.client.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.util.Log;
 
 import com.loopj.android.http.Base64;
-import com.yosneaker.client.define.Constants;
+import com.yosneaker.client.EditCommentActivity;
 
 public class BitmapUtil {
 
@@ -29,6 +33,38 @@ public class BitmapUtil {
         }
 		return "";
 
+	}
+
+	/**
+	 * 加载缩略图，防止内存溢出
+	 * @param uri
+	 * @param width
+	 * @param height
+	 * @return
+	 * @throws FileNotFoundException 
+	 */
+	public static Bitmap getImageThumbnails(Context context,String uri, int width, int height) throws FileNotFoundException {
+		Bitmap bitmap = null;
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(uri)),null,options);
+		options.inJustDecodeBounds = false;
+		int beWidth = options.outWidth / width;
+		int beHeight = options.outHeight / height;
+		int be = 1;
+		if (beWidth < beHeight) {
+			be = beWidth;
+		} else {
+			be = beHeight;
+		}
+		if (be <= 0) {
+			be = 1;
+		}
+		options.inSampleSize = be;
+		bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(uri)),null,options);
+		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+				ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+		return bitmap;
 	}
 	
 }

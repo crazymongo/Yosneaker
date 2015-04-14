@@ -1,6 +1,8 @@
 package com.yosneaker.client.view;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -11,13 +13,11 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yosneaker.client.EditCommentItemActivity;
 import com.yosneaker.client.R;
 
 public class CommentItemView extends LinearLayout {
@@ -29,6 +29,8 @@ public class CommentItemView extends LinearLayout {
 	private TextView tv_item_name;
 	private TextView tv_item_content;
 	private ImageView iv_remove_item;
+	private ImageView iv_delete;
+	private List<ImageView> iv_deletes;
 	private AssessStarView asv_item_assess;
 	private LinearLayout fl_item_image;
 	
@@ -48,6 +50,7 @@ public class CommentItemView extends LinearLayout {
 	}
 
 	private void init() {		
+		iv_deletes = new ArrayList<ImageView>();
 		inflater = LayoutInflater.from(context);
 		inflater.inflate(R.layout.view_edit_comment_item_sun, this, true);
 		tv_item_order = (TextView) findViewById(R.id.tv_item_order);
@@ -88,6 +91,13 @@ public class CommentItemView extends LinearLayout {
 		iv_remove_item.setVisibility(visible);
 	}
 	
+	public void setImageDeleteVisible(int visible) {
+		for (ImageView iv : iv_deletes) {
+			iv.setVisibility(visible);
+		}
+		
+	}
+	
 	public void addItemImage(String imageUri) {
 		final View picView = inflater.inflate(
 				R.layout.view_edit_comment_gv_item_pic, null);
@@ -114,12 +124,16 @@ public class CommentItemView extends LinearLayout {
 						builder.show();
 					}
 				});
-				picView.findViewById(R.id.delete).setOnClickListener(
+				iv_delete = (ImageView) picView.findViewById(R.id.delete);
+				iv_delete.setVisibility(View.GONE);
+				iv_deletes.add(iv_delete);
+				iv_delete.setOnClickListener(
 						new OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
 								fl_item_image.removeView(picView);
+								iv_deletes.remove(iv_delete);
 							}
 						});
 				fl_item_image.addView(picView);
