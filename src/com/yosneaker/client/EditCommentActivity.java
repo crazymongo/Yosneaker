@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.yosneaker.client.app.YosneakerAppState;
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
 import com.yosneaker.client.util.BitmapUtil;
@@ -70,6 +72,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	
 	// ll_edit_item_detail部分控件
 	
+	private ArrayList<Bitmap> bgBitmaps;
 	private int itemsize;
 	private boolean isEdit;
 	
@@ -88,6 +91,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		itemsize = 0;
 		isEdit = true;
 		commentDraft = new CommentDraft();
+		bgBitmaps = new ArrayList<Bitmap>();
+		bgBitmaps.add(BitmapFactory.decodeResource(this.getResources(), R.drawable.default_comment_bg));
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -286,15 +291,17 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				cItemView.setItemName(itemTitleText);
 				cItemView.setItemContent(itemContentText);
 				cItemView.setItemAssess(itemStar);
-				cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);
+				cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);	
 				for (int i = 0; i < imageUris.size(); i++) {
 					cItemView.addItemImage(imageUris.get(i));
-					if (itemsize == 1 && i == 0) {
-						setDefaultBg(imageUris.get(i));
-					}
-				}			
+					if (i==0) {
+						bgBitmaps.add(BitmapUtil.getBitmapFromUri(EditCommentActivity.this, imageUris.get(i)));
+					}					
+				}
 				ll_edit_item_detail.addView(cItemView);
 				toogleEditTip();
+				toogleDeleteTip();
+				setDefaultBg();
 				// 保存数据到内存
 				commentDraft.addComment_item(commentItem);
 				break;
@@ -339,9 +346,13 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
                 
             	if (which == 0) {
             		ll_edit_item_detail.removeViewAt(item_order-1);
+            		CommentItem commentItem = commentDraft.getComment_items().get(item_order-1);
+            		bgBitmaps.remove(item_order);
+            		commentDraft.removeComment_item(item_order-1);            		
             		itemsize--;
             		resetItemOrder(item_order);
             		toogleEditTip();
+            		setDefaultBg();
 				} else if(which == 1){
 					
 				}
@@ -351,12 +362,11 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 	}
 	
-	public void setDefaultBg(String imageUri) {
-		Bitmap bitmap;
-		int width = 16*20;
-		int height = 9*20;
+	public void setDefaultBg() {
+		Bitmap bitmap = bgBitmaps.size() > 1?bgBitmaps.get(1):bgBitmaps.get(0);
+		int width = YosneakerAppState.getInstance().mWidth;
 		try {
-			bitmap = BitmapUtil.getImageThumbnails(this, imageUri, width, height);		
+			bitmap = BitmapUtil.getScaleBitmap(bitmap, width,0.5625f);
 			if (bitmap != null) {
 				iv_comment_bg.setImageBitmap(bitmap);
 			}
@@ -365,6 +375,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 	
+	/**
+	 * 当删除测评项时 重置序号
+	 * @param item_order
+	 */
 	public void resetItemOrder(int item_order) {
 		int size = ll_edit_item_detail.getChildCount();
 		for (int i = 0; i < size; i++) {
@@ -375,6 +389,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 	
+	/**
+	 * 测评项编辑图标显示开关
+	 */
 	public void toogleEditTip() {
 		if (itemsize == 0) {
 			iv_item_edit.setVisibility(View.GONE);
@@ -383,6 +400,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 	
+	/**
+	 * 测评项图片删除图标显示开关
+	 */
 	public void toogleDeleteTip() {
 		int visible = isEdit?View.VISIBLE:View.GONE;
 		iv_item_edit.setBackgroundResource(isEdit?R.drawable.item_ok:R.drawable.item_edit);

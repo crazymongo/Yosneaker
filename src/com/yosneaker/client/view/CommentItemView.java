@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,8 +19,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ImageView.ScaleType;
 
+import com.yosneaker.client.EditCommentItemActivity;
 import com.yosneaker.client.R;
+import com.yosneaker.client.ImageDetailActivity;
 
 public class CommentItemView extends LinearLayout {
 
@@ -98,30 +103,33 @@ public class CommentItemView extends LinearLayout {
 		
 	}
 	
-	public void addItemImage(String imageUri) {
+	public void addItemImage(final String imageUri) {
 		final View picView = inflater.inflate(
 				R.layout.view_edit_comment_gv_item_pic, null);
-		ImageButton picIBtn = (ImageButton) picView
+		final ImageButton picIBtn = (ImageButton) picView
 				.findViewById(R.id.pic);
 		final Bitmap bmp;
 		try {
 			bmp = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(imageUri)));
 			if (bmp != null) {
 				picIBtn.setImageBitmap(bmp);
+				picIBtn.setScaleType(ScaleType.CENTER_CROP);
 				picIBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						AlertDialog.Builder builder = new Builder(
-								context);
-						builder.setTitle(getResources().getString(R.string.picker_image_see_detail));
-						View view = inflater.inflate(
-								R.layout.view_edit_comment_showmax_dialog,
-								null);
-						((ImageView) view.findViewById(R.id.bigPic))
-								.setImageBitmap(bmp);
-						builder.setView(view);
-						builder.setNegativeButton(getResources().getString(R.string.picker_image_back), null);
-						builder.show();
+						Intent intent = new Intent(context, ImageDetailActivity.class);
+						ArrayList<String> imageUris = new ArrayList<String>();
+						imageUris.add(imageUri);
+						intent.putExtra("images", (ArrayList<String>) imageUris);//非必须
+						intent.putExtra("position", 0);
+						int[] location = new int[2];
+						picIBtn.getLocationOnScreen(location);
+						intent.putExtra("locationX", location[0]);//必须
+						intent.putExtra("locationY", location[1]);//必须
+						intent.putExtra("width", picIBtn.getWidth());//必须
+						intent.putExtra("height", picIBtn.getHeight());//必须
+						context.startActivity(intent);
+						((Activity) context).overridePendingTransition(0, 0);
 					}
 				});
 				iv_delete = (ImageView) picView.findViewById(R.id.delete);

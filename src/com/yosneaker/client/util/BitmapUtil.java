@@ -5,13 +5,17 @@ import java.io.FileNotFoundException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Rect;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.util.Log;
 
 import com.loopj.android.http.Base64;
-import com.yosneaker.client.EditCommentActivity;
 
 public class BitmapUtil {
 
@@ -36,35 +40,57 @@ public class BitmapUtil {
 	}
 
 	/**
-	 * 加载缩略图，防止内存溢出
+	 * 从uri获取bitmap
+	 * @param context
 	 * @param uri
-	 * @param width
-	 * @param height
 	 * @return
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
-	public static Bitmap getImageThumbnails(Context context,String uri, int width, int height) throws FileNotFoundException {
+	public static Bitmap getBitmapFromUri(Context context,String uri){
 		Bitmap bitmap = null;
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(uri)),null,options);
-		options.inJustDecodeBounds = false;
-		int beWidth = options.outWidth / width;
-		int beHeight = options.outHeight / height;
-		int be = 1;
-		if (beWidth < beHeight) {
-			be = beWidth;
-		} else {
-			be = beHeight;
+		try {
+			bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(uri)));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (be <= 0) {
-			be = 1;
-		}
-		options.inSampleSize = be;
-		bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(uri)),null,options);
-		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
-				ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 		return bitmap;
+	}
+
+	/**
+	 * 获取缩放后的图片
+	 * @param context
+	 * @param uri
+	 * @param edgeLength 宽
+	 * @param scale 高/宽 比例
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static Bitmap getScaleBitmap(Bitmap bitmap, int edgeLength,float scale) throws FileNotFoundException {
+
+		if (null == bitmap || edgeLength <= 0 || scale == 0) {
+			return null;
+		}
+		Bitmap result = bitmap;
+		int widthOrg = bitmap.getWidth();
+		int heightOrg = bitmap.getHeight();
+
+		if (widthOrg > edgeLength && heightOrg > edgeLength*scale) {
+			int scaledWidth = edgeLength;
+			int scaledHeight = (int) (edgeLength*scale);
+			int x = (widthOrg-scaledWidth)/2;
+			int y = (heightOrg-scaledHeight)/2;
+			if (Math.abs(x-y) > 10) {
+				bitmap = Bitmap.createBitmap(bitmap, x, y, scaledWidth, scaledHeight); 
+			}			
+			try {
+				result = Bitmap.createScaledBitmap(bitmap, scaledWidth,scaledHeight, true);
+			} catch (Exception e) {
+				return null;
+			}
+		}
+
+		return result;
 	}
 	
 }

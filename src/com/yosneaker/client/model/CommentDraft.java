@@ -3,6 +3,8 @@ package com.yosneaker.client.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.R.integer;
+
 /**
  * 测评草稿
  * @author lenovo
@@ -93,6 +95,10 @@ public class CommentDraft implements Serializable{
 	
 	public void addComment_item(CommentItem comment_item) {
 		this.comment_items.add(comment_item);
+	}
+	
+	public void removeComment_item(int i) {
+		this.comment_items.remove(i);
 	}
 	
 }

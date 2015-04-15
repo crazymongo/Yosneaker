@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ImageView.ScaleType;
 
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
@@ -320,23 +321,35 @@ public class EditCommentItemActivity extends BaseActivity{
 			} else {
 				View picView = inflater.inflate(
 						R.layout.view_edit_comment_gv_item_pic, null);
-				ImageButton picIBtn = (ImageButton) picView
+				final ImageButton picIBtn = (ImageButton) picView
 						.findViewById(R.id.pic);
+				picIBtn.setScaleType(ScaleType.CENTER_CROP);
 				picIBtn.setImageBitmap(viewList.get(position));
 				picIBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						AlertDialog.Builder builder = new Builder(
-								EditCommentItemActivity.this);
-						builder.setTitle(getResources().getString(R.string.picker_image_see_detail));
-						View view = inflater.inflate(
-								R.layout.view_edit_comment_showmax_dialog,
-								null);
-						((ImageView) view.findViewById(R.id.bigPic))
-								.setImageBitmap(viewList.get(position));
-						builder.setView(view);
-						builder.setNegativeButton(getResources().getString(R.string.picker_image_back), null);
-						builder.show();
+//						AlertDialog.Builder builder = new Builder(
+//								EditCommentItemActivity.this);
+//						builder.setTitle(getResources().getString(R.string.picker_image_see_detail));
+//						View view = inflater.inflate(
+//								R.layout.view_edit_comment_showmax_dialog,
+//								null);
+//						((ImageView) view.findViewById(R.id.bigPic))
+//								.setImageBitmap(viewList.get(position));
+//						builder.setView(view);
+//						builder.setNegativeButton(getResources().getString(R.string.picker_image_back), null);
+//						builder.show();						
+						Intent intent = new Intent(EditCommentItemActivity.this, ImageDetailActivity.class);
+						intent.putExtra("images", (ArrayList<String>) imageUris);//非必须
+						intent.putExtra("position", position);
+						int[] location = new int[2];
+						picIBtn.getLocationOnScreen(location);
+						intent.putExtra("locationX", location[0]);//必须
+						intent.putExtra("locationY", location[1]);//必须
+						intent.putExtra("width", picIBtn.getWidth());//必须
+						intent.putExtra("height", picIBtn.getHeight());//必须
+						startActivity(intent);
+						overridePendingTransition(0, 0);						
 					}
 				});
 				picView.findViewById(R.id.delete).setOnClickListener(
