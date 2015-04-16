@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,6 +25,7 @@ import android.widget.ImageView.ScaleType;
 import com.yosneaker.client.EditCommentItemActivity;
 import com.yosneaker.client.R;
 import com.yosneaker.client.ImageDetailActivity;
+import com.yosneaker.client.util.Constants;
 
 public class CommentItemView extends LinearLayout {
 
@@ -35,7 +37,7 @@ public class CommentItemView extends LinearLayout {
 	private TextView tv_item_content;
 	private ImageView iv_remove_item;
 	private ImageView iv_delete;
-	private List<ImageView> iv_deletes;
+//	private List<ImageView> iv_deletes;
 	private AssessStarView asv_item_assess;
 	private LinearLayout fl_item_image;
 	
@@ -55,7 +57,7 @@ public class CommentItemView extends LinearLayout {
 	}
 
 	private void init() {		
-		iv_deletes = new ArrayList<ImageView>();
+//		iv_deletes = new ArrayList<ImageView>();
 		inflater = LayoutInflater.from(context);
 		inflater.inflate(R.layout.view_edit_comment_item_sun, this, true);
 		tv_item_order = (TextView) findViewById(R.id.tv_item_order);
@@ -96,12 +98,11 @@ public class CommentItemView extends LinearLayout {
 		iv_remove_item.setVisibility(visible);
 	}
 	
-	public void setImageDeleteVisible(int visible) {
-		for (ImageView iv : iv_deletes) {
-			iv.setVisibility(visible);
-		}
-		
-	}
+//	public void setImageDeleteVisible(int visible) {
+//		for (ImageView iv : iv_deletes) {
+//			iv.setVisibility(visible);
+//		}		
+//	}
 	
 	public void addItemImage(final String imageUri) {
 		final View picView = inflater.inflate(
@@ -134,16 +135,17 @@ public class CommentItemView extends LinearLayout {
 				});
 				iv_delete = (ImageView) picView.findViewById(R.id.delete);
 				iv_delete.setVisibility(View.GONE);
-				iv_deletes.add(iv_delete);
-				iv_delete.setOnClickListener(
-						new OnClickListener() {
-
-							@Override
-							public void onClick(View v) {
-								fl_item_image.removeView(picView);
-								iv_deletes.remove(iv_delete);
-							}
-						});
+//				iv_deletes.add(iv_delete);
+//				iv_delete.setOnClickListener(
+//						new OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								fl_item_image.removeView(picView);
+//								callbacks.setItemImageRemove(Integer.parseInt((String) tv_item_order.getText()),iv_deletes.indexOf(v));
+//								iv_deletes.remove(v);
+//							}
+//						});
 				fl_item_image.addView(picView);
 			}
 		} catch (FileNotFoundException e) {
@@ -158,6 +160,7 @@ public class CommentItemView extends LinearLayout {
 	
 	public interface Callbacks {
         public void setItemRemove(int item_order);// 点击删除测评项的回调
+//        public void setItemImageRemove(int item_order,int item_image_order);// 点击删除测评项图片的回调
 	}
 	
 	

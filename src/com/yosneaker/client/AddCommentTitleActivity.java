@@ -57,7 +57,13 @@ public class AddCommentTitleActivity extends BaseActivity{
 
 	@Override
 	public void fillDatas() {
-		action = getIntent().getIntExtra("action", 0);
+		Intent intent = getIntent();
+		action = intent.getIntExtra("action", 0);
+		if (action == 0) {
+			CommentDraft commentDraft = (CommentDraft) intent.getExtras().getSerializable("CommentDraft");
+			et_comment_title.setText(commentDraft.getComment_title());
+		}
+
 	}
 
 	

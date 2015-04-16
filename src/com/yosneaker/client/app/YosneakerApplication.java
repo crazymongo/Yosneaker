@@ -4,6 +4,7 @@ import android.app.Application;
 
 /**
  * 应用启动会先执行Application类,主要做YosneakerAppState初始化
+ * @author chendd
  */
 public class YosneakerApplication extends Application {
 

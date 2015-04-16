@@ -72,9 +72,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	
 	// ll_edit_item_detail部分控件
 	
-	private ArrayList<Bitmap> bgBitmaps;
-	private int itemsize;
-	private boolean isEdit;
+	private ArrayList<Bitmap> bgBitmaps;//上面的背景
+	private Bitmap defaultBitmap;
+	private int itemsize;//测评项数目
+	private boolean isEdit;//测评项是否处于编辑状态
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -92,7 +93,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		isEdit = true;
 		commentDraft = new CommentDraft();
 		bgBitmaps = new ArrayList<Bitmap>();
-		bgBitmaps.add(BitmapFactory.decodeResource(this.getResources(), R.drawable.default_comment_bg));
+		defaultBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.default_comment_bg);
+		bgBitmaps.add(defaultBitmap);
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -124,6 +126,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		tv_add_summarize = (TextView) findViewById(R.id.tv_add_summarize);
 		tv_summarize_detail = (TextView) findViewById(R.id.tv_summarize_detail);
 		asv_sum_assess = (AssessStarView) findViewById(R.id.asv_sum_assess);
+		
+		setDefaultBg();
 	}
 
 	@Override
@@ -161,13 +165,19 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		if (v == getTextViewLeft()) {
 			customBackPressed();
 		}else if (v == ll_edit_intro) {
-			gotoExistActivityForResult(EditCommentIntroActivity.class, new Bundle(),Constants.COMMENT_INTRO_REQUEST);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("CommentDraft",commentDraft);
+			gotoExistActivityForResult(EditCommentIntroActivity.class, bundle,Constants.COMMENT_INTRO_REQUEST);
 		}else if (v == ll_edit_item) {
 			gotoExistActivityForResult(EditCommentItemActivity.class, new Bundle(),Constants.COMMENT_ITEM_REQUEST);
 		}else if (v == ll_edit_summarize) {
-			gotoExistActivityForResult(EditCommentSummarizeActivity.class, new Bundle(),Constants.COMMENT_SUMMARIZE_REQUEST);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("CommentDraft",commentDraft);
+			gotoExistActivityForResult(EditCommentSummarizeActivity.class, bundle,Constants.COMMENT_SUMMARIZE_REQUEST);
 		}else if (v == iv_comment_edit) {
-			gotoExistActivityForResult(AddCommentTitleActivity.class, new Bundle(),Constants.COMMENT_TITLE_REQUEST);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("CommentDraft",commentDraft);
+			gotoExistActivityForResult(AddCommentTitleActivity.class, bundle,Constants.COMMENT_TITLE_REQUEST);
 		}else if (v == btn_save_draft) {
 			saveDraft();
 		}else if (v == btn_publish_draft) {
@@ -280,30 +290,14 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				tmpCommentDraft = (CommentDraft) data
 						.getSerializableExtra("CommentDraft");
 				ArrayList<CommentItem> commentItems = tmpCommentDraft.getComment_items();
-				CommentItem commentItem = commentItems.get(0);
-				ArrayList<String> imageUris = commentItem.getImageUris();
-				int itemStar = commentItem.getComment_item_star();
-				String itemTitleText = commentItem.getComment_item_title();
-				String itemContentText = commentItem.getComment_item_content();
-				CommentItemView cItemView = new CommentItemView(this);
-				cItemView.setCallbacks(EditCommentActivity.this);
-				cItemView.setItemOrder(++itemsize);
-				cItemView.setItemName(itemTitleText);
-				cItemView.setItemContent(itemContentText);
-				cItemView.setItemAssess(itemStar);
-				cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);	
-				for (int i = 0; i < imageUris.size(); i++) {
-					cItemView.addItemImage(imageUris.get(i));
-					if (i==0) {
-						bgBitmaps.add(BitmapUtil.getBitmapFromUri(EditCommentActivity.this, imageUris.get(i)));
-					}					
+				for (CommentItem commentItem : commentItems) {
+					addCommentItem(commentItem);
 				}
-				ll_edit_item_detail.addView(cItemView);
+				isEdit = false;
 				toogleEditTip();
 				toogleDeleteTip();
 				setDefaultBg();
-				// 保存数据到内存
-				commentDraft.addComment_item(commentItem);
+				
 				break;
 			case Constants.COMMENT_SUMMARIZE_REQUEST:
 				tmpCommentDraft = (CommentDraft) data
@@ -333,7 +327,32 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 
-
+	public void addCommentItem(CommentItem commentItem) {
+		ArrayList<String> imageUris = commentItem.getImageUris();
+		int itemStar = commentItem.getComment_item_star();
+		String itemTitleText = commentItem.getComment_item_title();
+		String itemContentText = commentItem.getComment_item_content();
+		CommentItemView cItemView = new CommentItemView(this);
+		cItemView.setCallbacks(EditCommentActivity.this);
+		cItemView.setItemOrder(++itemsize);
+		cItemView.setItemName(itemTitleText);
+		cItemView.setItemContent(itemContentText);
+		cItemView.setItemAssess(itemStar);
+		cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);	
+		for (int i = 0; i < imageUris.size(); i++) {
+			cItemView.addItemImage(imageUris.get(i));
+			if (i==0) {
+				bgBitmaps.add(BitmapUtil.getBitmapFromUri(EditCommentActivity.this, imageUris.get(i)));
+			}					
+		}
+		if (imageUris.size() == 0) {
+			bgBitmaps.add(defaultBitmap);
+		}
+		// 保存数据到内存
+		commentDraft.addComment_item(commentItem);
+		ll_edit_item_detail.addView(cItemView);
+	}
+	
 	@Override
 	public void setItemRemove(final int item_order) {
 //		showToast(""+item_order);
@@ -346,8 +365,9 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
                 
             	if (which == 0) {
             		ll_edit_item_detail.removeViewAt(item_order-1);
-            		CommentItem commentItem = commentDraft.getComment_items().get(item_order-1);
-            		bgBitmaps.remove(item_order);
+            		if (bgBitmaps.size()>item_order) {
+            			bgBitmaps.remove(item_order);
+					}
             		commentDraft.removeComment_item(item_order-1);            		
             		itemsize--;
             		resetItemOrder(item_order);
@@ -362,11 +382,31 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 	}
 	
+
+//	@Override
+//	public void setItemImageRemove(int item_order,int item_image_order) {
+//		Bitmap bitmap = BitmapUtil.getBitmapFromUri(EditCommentActivity.this,commentDraft.getComment_items().get(item_order-1).getImageUris().get(item_image_order));
+//		bgBitmaps.remove(item_order);
+//		bgBitmaps.add(item_order,bitmap);
+//		setDefaultBg();
+//		commentDraft.getComment_items().get(item_order-1).getImageUris().remove(item_image_order);
+//	}
+	
+	/**
+	 * 设置默认背景
+	 */
 	public void setDefaultBg() {
-		Bitmap bitmap = bgBitmaps.size() > 1?bgBitmaps.get(1):bgBitmaps.get(0);
+		Bitmap bitmap = bgBitmaps.get(0);
+		if (bgBitmaps.size() > 1) {
+			for (int i = 0; i < bgBitmaps.size(); i++) {
+				if (!defaultBitmap.equals(bgBitmaps.get(i))) {
+					bitmap = bgBitmaps.get(i);
+				}
+			}
+		}
 		int width = YosneakerAppState.getInstance().mWidth;
 		try {
-			bitmap = BitmapUtil.getScaleBitmap(bitmap, width,0.5625f);
+			bitmap = BitmapUtil.getScaleBitmap(bitmap, width,Constants.BG_SCALE);
 			if (bitmap != null) {
 				iv_comment_bg.setImageBitmap(bitmap);
 			}
@@ -401,7 +441,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	}
 	
 	/**
-	 * 测评项图片删除图标显示开关
+	 * 测评项删除图标显示开关
 	 */
 	public void toogleDeleteTip() {
 		int visible = isEdit?View.VISIBLE:View.GONE;
@@ -410,7 +450,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		for (int i = 0; i < size; i++) {
 			CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
 			commentItemView.setDeleteVisible(visible);
-			commentItemView.setImageDeleteVisible(visible);
+//			commentItemView.setImageDeleteVisible(visible);
 		}
 		isEdit = !isEdit;
 	}

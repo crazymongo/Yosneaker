@@ -17,6 +17,9 @@ public interface Constants {
 	/** 日志Tag */
 	public static final String TAG = "Yosneaker";
 	
+	/** 编辑测评上方背景高/宽 比例, 9:16 */
+	public static final float BG_SCALE = 0.5625f;
+	
 	//requestCode 10000+
 	public static final int COMMENT_TITLE_REQUEST = 10001;
 	public static final int COMMENT_INTRO_REQUEST = 10002;

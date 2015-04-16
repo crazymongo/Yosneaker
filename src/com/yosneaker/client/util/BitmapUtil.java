@@ -19,6 +19,12 @@ import com.loopj.android.http.Base64;
 
 public class BitmapUtil {
 
+	/**
+	 * bitmap转Base64String
+	 * @param context
+	 * @param bitmap
+	 * @return
+	 */
 	public static String bitmap2Base64Str(final Context context,Bitmap bitmap) {
 		
 		try {  
@@ -72,24 +78,32 @@ public class BitmapUtil {
 			return null;
 		}
 		Bitmap result = bitmap;
+		//图片原始大小
 		int widthOrg = bitmap.getWidth();
 		int heightOrg = bitmap.getHeight();
-
-		if (widthOrg > edgeLength && heightOrg > edgeLength*scale) {
-			int scaledWidth = edgeLength;
-			int scaledHeight = (int) (edgeLength*scale);
-			int x = (widthOrg-scaledWidth)/2;
-			int y = (heightOrg-scaledHeight)/2;
-			if (Math.abs(x-y) > 10) {
-				bitmap = Bitmap.createBitmap(bitmap, x, y, scaledWidth, scaledHeight); 
+		//图片需要裁减的大小
+		int scaledWidth = edgeLength;
+		int scaledHeight = (int) (edgeLength*scale);
+		// 裁减位置
+		int x;
+		int y;
+		if (Math.abs(((float)heightOrg/widthOrg)-scale) > 0.05) { // 图片宽高比例不等于缩放比例(浮点数计算误差0.05)
+			if ((float)(widthOrg/heightOrg)<scale) {
+				bitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth,heightOrg*scaledWidth/widthOrg, true); //先将图片宽按比例缩放到需要的尺寸
+				x = 0;
+				y = (heightOrg*scaledWidth/widthOrg-scaledHeight)/2;
+			}else {
+				bitmap = Bitmap.createScaledBitmap(bitmap, widthOrg*scaledHeight/heightOrg,scaledHeight, true); //先将图片宽按比例缩放到需要的尺寸
+				x = (widthOrg*scaledHeight/heightOrg-scaledWidth)/2;
+				y = 0;
+			}				
+				bitmap = Bitmap.createBitmap(bitmap, x, y, scaledWidth, scaledHeight); // 从中间截取需要的图片
 			}			
 			try {
-				result = Bitmap.createScaledBitmap(bitmap, scaledWidth,scaledHeight, true);
+				result = Bitmap.createScaledBitmap(bitmap, scaledWidth,scaledHeight, true);// 等比例缩放到需要尺寸
 			} catch (Exception e) {
 				return null;
 			}
-		}
-
 		return result;
 	}
 	

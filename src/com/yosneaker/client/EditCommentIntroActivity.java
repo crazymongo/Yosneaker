@@ -45,7 +45,8 @@ public class EditCommentIntroActivity extends BaseActivity implements
 	private String introText;
 
 	private ArrayList<String> brands = new ArrayList<String>();
-
+	private ArrayList<RadioButton> brandsView = new ArrayList<RadioButton>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -96,6 +97,7 @@ public class EditCommentIntroActivity extends BaseActivity implements
 
 	@Override
 	public void fillDatas() {
+		Intent intent = getIntent();
 		brands.add(getResources().getString(R.string.hot_brand_nike));
 		brands.add(getResources().getString(R.string.hot_brand_adidas));
 		brands.add(getResources().getString(R.string.hot_brand_lining));
@@ -105,6 +107,24 @@ public class EditCommentIntroActivity extends BaseActivity implements
 		brands.add(getResources().getString(R.string.hot_brand_anta));
 		brands.add(getResources().getString(R.string.hot_brand_361));
 		brands.add(getResources().getString(R.string.hot_brand_other));
+		brandsView.add(rb_nick);
+		brandsView.add(rb_adidas);
+		brandsView.add(rb_lining);
+		brandsView.add(rb_reebok);
+		brandsView.add(rb_ua);
+		brandsView.add(rb_pick);
+		brandsView.add(rb_anta);
+		brandsView.add(rb_361);
+		brandsView.add(rb_other);
+		
+		CommentDraft commentDraft = (CommentDraft) intent.getExtras().getSerializable("CommentDraft");
+		et_intro.setText(commentDraft.getComment_intro_assess());
+		et_model.setText(commentDraft.getComment_intro_model());
+		int brandId = brands.indexOf(commentDraft.getComment_intro_brands());
+		if (brandId!=-1&&brandId<brands.size()) {
+			brandsView.get(brandId).setChecked(true);
+		}
+		
 	}
 
 	@Override

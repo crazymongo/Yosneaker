@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -58,6 +59,7 @@ public class EditCommentItemActivity extends BaseActivity{
 	/** 发送更多的布局，用于提供相册，照相机的操作选项。 */
 	private LinearLayout sendmoreLyt;
 	
+	private Button btn_add_goon;
 	private ImageButton sendPic;
 	private ImageButton sendCamera;
 	
@@ -73,7 +75,7 @@ public class EditCommentItemActivity extends BaseActivity{
 	
 	private Uri imageUri;
 	private ArrayList<String> imageUris;
-	
+	private CommentDraft commentDraft;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -95,17 +97,16 @@ public class EditCommentItemActivity extends BaseActivity{
 		tv_item_intro = (TextView)findViewById(R.id.tv_item_intro);
 		et_item_title = (EditText)findViewById(R.id.et_item_title);
 		rb_item_star = (RatingBar)findViewById(R.id.rb_item_star);
-
+		btn_add_goon = (Button)findViewById(R.id.btn_add_goon);
+		
 		// 图库照相机BMP业务
 		sendmoreLyt = (LinearLayout) findViewById(R.id.layout_sendmore);
 		sendPic = (ImageButton) findViewById(R.id.sendPic);
 		sendCamera = (ImageButton) findViewById(R.id.sendCamera);
 		
 		gv = (GridView) this.findViewById(R.id.gridView);
-		viewList = new ArrayList<Bitmap>();
-		imageUris = new ArrayList<String>();
-		viewList.add(null);
-//		imageUris.add(null);
+		commentDraft = new CommentDraft();
+		
 		adapter = new AddPicGridViewAdapter();
 		gv.setAdapter(adapter);
 		
@@ -117,18 +118,25 @@ public class EditCommentItemActivity extends BaseActivity{
 	}
 
 	@Override
-	public void addListnners() {
-		
+	public void addListnners() {		
 		getTextViewLeft().setOnClickListener(this);			
 		getTextViewRight1().setOnClickListener(this);	
 		sendPic.setOnClickListener(this);
 		sendCamera.setOnClickListener(this);
+		btn_add_goon.setOnClickListener(this);
 		et_item_intro.addTextChangedListener(new EditTextWatcher());
 	}
 
 	@Override
 	public void fillDatas() {
-		
+		et_item_title.setText(null);
+		rb_item_star.setRating(0);
+		et_item_intro.setText(null);
+		viewList = new ArrayList<Bitmap>();
+		imageUris = new ArrayList<String>();
+		viewList.add(null);
+//		imageUris.add(null);
+		adapter.notifyDataSetChanged();
 	}
 
 	
@@ -137,7 +145,7 @@ public class EditCommentItemActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
 			customBackPressed();
-		}else if (v == getTextViewRight1()) {
+		}else if (v == getTextViewRight1()||v == btn_add_goon) {
 			itemTitleText = et_item_title.getText().toString();
 			itemIntroText = et_item_intro.getText().toString();
 			itemStar = (int) (rb_item_star.getRating());
@@ -151,7 +159,17 @@ public class EditCommentItemActivity extends BaseActivity{
 				et_item_intro.setError(getResources().getString(
 						R.string.error_comment_item_intro_no_null));
 			}else {
-				gotoEditComment(itemStar, itemTitleText, itemIntroText,imageUris);
+				if (v == getTextViewRight1()) {
+					gotoEditComment(itemStar, itemTitleText, itemIntroText,imageUris);
+				}else {
+					CommentItem commentItem = new CommentItem();
+					commentItem.setComment_item_star(itemStar);
+					commentItem.setComment_item_title(itemTitleText);
+					commentItem.setComment_item_content(itemIntroText);
+					commentItem.setImageUris(imageUris);
+					commentDraft.addComment_item(commentItem);
+					fillDatas();//重置数据
+				}				
 			}
 		}else if (v == sendCamera) {
 			mPickerImageUtil.OpenCamera();
@@ -162,10 +180,10 @@ public class EditCommentItemActivity extends BaseActivity{
 		}
 	}
 
+	
 	private void gotoEditComment(int itemStar, String itemTitleText,
 			String itemIntroText,ArrayList<String> images) {
 		Intent intent = new Intent();
-		CommentDraft commentDraft = new CommentDraft();
 		CommentItem commentItem = new CommentItem();
 		itemTitleText = et_item_title.getText().toString();
 		itemIntroText = et_item_intro.getText().toString();
@@ -187,7 +205,7 @@ public class EditCommentItemActivity extends BaseActivity{
 		}else {
 			setResult(RESULT_CANCELED, intent);
 		}
-		EditCommentItemActivity.this.finish();
+		this.finish();
 	}
 
 
@@ -201,7 +219,7 @@ public class EditCommentItemActivity extends BaseActivity{
 				imageUri = data.getData();
 				Intent intent = new Intent("com.android.camera.action.CROP");
 				intent.setDataAndType(imageUri, "image/*");
-				intent.putExtra("scale", true);
+				intent.putExtra("scale", false);
 				intent.putExtra("aspectX", 16);//裁剪框比例  
 		        intent.putExtra("aspectY", 9);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);

@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.yosneaker.client.R;
 import com.yosneaker.client.model.CommentList;
 
+/**
+ * 测评adapter
+ * @author chendd
+ */
 public class CommentAdapter extends ArrayAdapter<CommentList> {
 	
 	private LayoutInflater mInflater;

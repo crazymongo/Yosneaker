@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.yosneaker.client.R;
 import com.yosneaker.client.model.IdentifyList;
 
+/**
+ * 鉴定adapter(暂时不用)
+ * @author chendd
+ */
 public class IdentifyAdapter extends ArrayAdapter<IdentifyList> {
 	
 	private LayoutInflater mInflater;

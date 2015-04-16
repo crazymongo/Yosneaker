@@ -22,6 +22,7 @@ import com.yosneaker.client.util.Constants;
 
 /**
  * 单例模式，主要在启动的时候用，他初始化了一些对象
+ * @author chendd
  */
 public class YosneakerAppState {
 
@@ -72,6 +73,9 @@ public class YosneakerAppState {
 		
 	}
 	
+	/**
+	 * 初始化ImageLoader
+	 */
 	private void initImageLoader(){
 		int memoryCacheSize = (int) (Runtime.getRuntime().maxMemory() / 5);
 		MemoryCacheAware<String, Bitmap> memoryCache;

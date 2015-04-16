@@ -67,7 +67,10 @@ public class EditCommentSummarizeActivity extends BaseActivity{
 
 	@Override
 	public void fillDatas() {
-		
+		Intent intent = getIntent();
+		CommentDraft commentDraft = (CommentDraft) intent.getExtras().getSerializable("CommentDraft");
+		edit_text.setText(commentDraft.getComment_sum_content());
+		rating_bar.setRating(commentDraft.getComment_sum_star());
 	}
 
 	
