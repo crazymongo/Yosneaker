@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/list_comment_tb_padding" >
 
     <ImageView
-        android:id="@+id/comment_bg"
+        android:id="@+id/iv_comment_cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
@@ -28,7 +28,7 @@
             android:gravity="center_vertical">
 
             <TextView
-            	android:id="@+id/comment_title"
+            	android:id="@+id/tv_comment_title"
             	android:layout_width="match_parent"
             	android:layout_height="30dp"
             	android:layout_alignParentTop="true"
@@ -37,16 +37,9 @@
             	android:text="标题就是标题啦"
             	android:textColor="@color/white"
             	 />
-            
-<!--             <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:padding="3dp"
-                android:src="@drawable/list_time" /> -->
 
             <TextView
-                android:id="@+id/comment_date"
+                android:id="@+id/tv_comment_date"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginRight="12dp"
@@ -66,14 +59,13 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/imageView2"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginLeft="12dp"
                 android:src="@drawable/list_see" />
 
             <TextView
-                android:id="@+id/comment_count"
+                android:id="@+id/tv_comment_readers"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
@@ -83,7 +75,7 @@
                 android:textSize="12sp" />
 
             <com.yosneaker.client.view.AssessStarView
-                android:id="@+id/comment_star"
+                android:id="@+id/asv_comment_assess_star"
                 myspace:starNumber="5"
             	android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,10 +87,10 @@
         </LinearLayout>
         
         <com.yosneaker.client.view.RoundImageView
-            android:id="@+id/roundImage_network"
+            android:id="@+id/riv_comment_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignBottom="@id/comment_bg"
+            android:layout_alignBottom="@id/iv_comment_cover"
             android:layout_alignParentLeft="true"
             android:layout_margin="10dp"
             android:src="@drawable/list_user_head" />

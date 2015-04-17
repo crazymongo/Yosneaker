@@ -1,7 +1,8 @@
 package com.yosneaker.client.model;
 
+
 /**
- * 测评列表
+ * 测评列表项
  * 
  * @author chendd
  *
@@ -9,48 +10,87 @@ package com.yosneaker.client.model;
 public class CommentList {
 	
 	/** 测评标题 */
-	private String title;
+	private String commentTitle;
 	
 	/** 测评阅读数 */
-	private int reader;
+	private int commentReaders;
 	
 	/** 测评日期 */
-	private String date;
+	private String commentDate;
 	
-	public CommentList(String title, int reader, String date) {
+	/** 测评星级 */
+	private int commentAssessStar;
+
+	/** 测评者头像地址 */
+	private String commentHeadUrl;
+	
+	/** 测评锋面图片地址 */
+	private String commentCoverUrl;
+	
+	// url 格式
+//	String imageUri = "http://site.com/image.png"; // from Web  
+//	String imageUri = "file:///mnt/sdcard/image.png"; // from SD card  
+//	String imageUri = "content://media/external/audio/albumart/13"; // from content provider  
+//	String imageUri = "assets://image.png"; // from assets  
+//	String imageUri = "drawable://" + R.drawable.image; // from drawables (only images, non-9patch)
+	
+	public CommentList(String commentTitle, int commentReaders, String commentDate,int commentAssessStar,String commentHeadUrl,String commentCoverUrl) {
 		super();
-		this.title = title;
-		this.reader = reader;
-		this.date = date;
+		this.commentTitle = commentTitle;
+		this.commentReaders = commentReaders;
+		this.commentDate = commentDate;
+		this.commentAssessStar = commentAssessStar;
+		this.commentHeadUrl = commentHeadUrl;
+		this.commentCoverUrl = commentCoverUrl;
 	}
 
-	public CommentList(String title, int reader) {
-		super();
-		this.title = title;
-		this.reader = reader;
-	}
-
-	public String getTitle() {
-		return title;
+	public String getCommentTitle() {
+		return commentTitle;
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCommentTitle(String commentTitle) {
+		this.commentTitle = commentTitle;
 	}
 
-	public int getReader() {
-		return reader;
+	public int getCommentReaders() {
+		return commentReaders;
 	}
 
-	public void setReader(int reader) {
-		this.reader = reader;
+	public void setCommentReaders(int commentReaders) {
+		this.commentReaders = commentReaders;
 	}
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
+	public String getCommentDate() {
+		return commentDate;
 	}
 
+	public void setCommentDate(String commentDate) {
+		this.commentDate = commentDate;
+	}
+
+	public int getCommentAssessStar() {
+		return commentAssessStar;
+	}
+
+	public void setCommentAssessStar(int commentAssessStar) {
+		this.commentAssessStar = commentAssessStar;
+	}
+	
+
+	public String getCommentHeadUrl() {
+		return commentHeadUrl;
+	}
+
+	public void setCommentHeadUrl(String commentHeadUrl) {
+		this.commentHeadUrl = commentHeadUrl;
+	}
+
+	public String getCommentCoverUrl() {
+		return commentCoverUrl;
+	}
+
+	public void setCommentCoverUrl(String commentCoverUrl) {
+		this.commentCoverUrl = commentCoverUrl;
+	}
+
+	
 }

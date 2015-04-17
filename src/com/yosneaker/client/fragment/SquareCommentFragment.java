@@ -30,14 +30,24 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	private CommentAdapter mAdapter;
 	private ArrayList<CommentList> items = new ArrayList<CommentList>();
 	private Handler mHandler;
-	private int start = 0;
-	private static int refreshCnt = 0;
+	
+	// 测试数据
+	int start = 1;
+	ArrayList<String> heads = new ArrayList<String>();
+	ArrayList<String> covers = new ArrayList<String>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		viewFragment = inflater.inflate(R.layout.fragment_square_comment,
 				container, false);
+		
+		// 模拟测试数据
+		heads.add("drawable://" + R.drawable.list_user_head);
+		heads.add("drawable://" + R.drawable.list_user_head2);		
+		covers.add("drawable://" + R.drawable.list_bg);
+		covers.add("drawable://" + R.drawable.list_bg2);
+		
 		geneItems();
 		initViews();
 		return viewFragment;
@@ -66,7 +76,6 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				start = ++refreshCnt;
 				items.clear();
 				geneItems();
 				mAdapter = new CommentAdapter(getActivity(),items);
@@ -90,7 +99,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	
 	private void geneItems() {
 		for (int i = 0; i != 5; ++i) {
-			items.add(new CommentList("樱花AJ 测评"+(++start),(++start),"五分钟前"));
+			items.add(new CommentList("樱花AJ 测评"+start,start,start+"分钟前",start%5,heads.get(start%2),covers.get(start++%2)));
 		}
 	}
 

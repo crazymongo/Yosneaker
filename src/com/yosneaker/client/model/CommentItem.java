@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 测评草稿
+ * 测评项
  * @author lenovo
  *
  */
@@ -13,7 +13,7 @@ public class CommentItem implements Serializable{
 	private String comment_item_title;// 测评项标题
 	private int comment_item_star;// 测评项星数（1代表半星，取值0~10）
 	private String comment_item_content;// 测评项内容
-	private ArrayList<String> imageUris;
+	private ArrayList<String> imageUris;// 测评图片Uri
 
 	public CommentItem() {
 		super();

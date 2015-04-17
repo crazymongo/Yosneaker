@@ -5,13 +5,7 @@ import java.io.FileNotFoundException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Rect;
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.util.Log;
 
@@ -88,7 +82,7 @@ public class BitmapUtil {
 		int x;
 		int y;
 		if (Math.abs(((float)heightOrg/widthOrg)-scale) > 0.05) { // 图片宽高比例不等于缩放比例(浮点数计算误差0.05)
-			if ((float)(widthOrg/heightOrg)<scale) {
+			if (widthOrg/heightOrg<scale) {
 				bitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth,heightOrg*scaledWidth/widthOrg, true); //先将图片宽按比例缩放到需要的尺寸
 				x = 0;
 				y = (heightOrg*scaledWidth/widthOrg-scaledHeight)/2;

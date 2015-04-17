@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -358,7 +356,7 @@ public class EditCommentItemActivity extends BaseActivity{
 //						builder.setNegativeButton(getResources().getString(R.string.picker_image_back), null);
 //						builder.show();						
 						Intent intent = new Intent(EditCommentItemActivity.this, ImageDetailActivity.class);
-						intent.putExtra("images", (ArrayList<String>) imageUris);//非必须
+						intent.putExtra("images", imageUris);//非必须
 						intent.putExtra("position", position);
 						int[] location = new int[2];
 						picIBtn.getLocationOnScreen(location);

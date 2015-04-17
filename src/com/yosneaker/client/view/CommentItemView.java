@@ -2,18 +2,13 @@ package com.yosneaker.client.view;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,10 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 
-import com.yosneaker.client.EditCommentItemActivity;
 import com.yosneaker.client.R;
 import com.yosneaker.client.ImageDetailActivity;
-import com.yosneaker.client.util.Constants;
 
 public class CommentItemView extends LinearLayout {
 
@@ -121,7 +114,7 @@ public class CommentItemView extends LinearLayout {
 						Intent intent = new Intent(context, ImageDetailActivity.class);
 						ArrayList<String> imageUris = new ArrayList<String>();
 						imageUris.add(imageUri);
-						intent.putExtra("images", (ArrayList<String>) imageUris);//非必须
+						intent.putExtra("images", imageUris);//非必须
 						intent.putExtra("position", 0);
 						int[] location = new int[2];
 						picIBtn.getLocationOnScreen(location);
