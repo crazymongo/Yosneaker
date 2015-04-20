@@ -11,6 +11,11 @@ import android.widget.LinearLayout;
 
 import com.yosneaker.client.R;
 
+/**
+ * 自定义显示 评价星数
+ * @author chendd
+ *
+ */
 public class AssessStarView extends LinearLayout {
 
 	private Context context;

@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,18 +29,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.yosneaker.client.model.CommentDraft;
 import com.yosneaker.client.model.CommentItem;
+import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**
- * 编辑测评简介
+ * 编辑测评项
  * 
  * @author chendd
  *
@@ -56,6 +62,8 @@ public class EditCommentItemActivity extends BaseActivity{
 	private LayoutInflater inflater;
 	/** 发送更多的布局，用于提供相册，照相机的操作选项。 */
 	private LinearLayout sendmoreLyt;
+	
+	private int itemIndex;
 	
 	private Button btn_add_goon;
 	private ImageButton sendPic;
@@ -127,16 +135,42 @@ public class EditCommentItemActivity extends BaseActivity{
 
 	@Override
 	public void fillDatas() {
+		viewList = new ArrayList<Bitmap>();
+		imageUris = new ArrayList<String>();
+		viewList.add(null);
+//		imageUris.add(null);
+		Intent intent = getIntent();
+		commentDraft = (CommentDraft) intent.getExtras().getSerializable("CommentDraft");
+		itemIndex = commentDraft.getComment_item_index();
+		Log.d(Constants.TAG, "itemIndex:"+itemIndex);
+		if (itemIndex!=-1) {
+			btn_add_goon.setVisibility(View.GONE);
+			CommentItem commentItem = commentDraft.getComment_items().get(itemIndex);
+			et_item_title.setText(commentItem.getComment_item_title());
+			rb_item_star.setRating(commentItem.getComment_item_star());
+			et_item_intro.setText(commentItem.getComment_item_content());
+			imageUris = commentItem.getImageUris();
+			for (String uri : imageUris) {
+				viewList.add(0, BitmapUtil.getBitmapFromUri(EditCommentItemActivity.this, uri));
+			}
+			adapter.notifyDataSetChanged();
+		}else {
+			commentDraft = new CommentDraft();
+		}
+		
+	}
+
+	public void resetDatas() {
 		et_item_title.setText(null);
 		rb_item_star.setRating(0);
 		et_item_intro.setText(null);
 		viewList = new ArrayList<Bitmap>();
 		imageUris = new ArrayList<String>();
 		viewList.add(null);
+		
 //		imageUris.add(null);
 		adapter.notifyDataSetChanged();
 	}
-
 	
 	@Override
 	public void onClick(View v) {
@@ -166,7 +200,7 @@ public class EditCommentItemActivity extends BaseActivity{
 					commentItem.setComment_item_content(itemIntroText);
 					commentItem.setImageUris(imageUris);
 					commentDraft.addComment_item(commentItem);
-					fillDatas();//重置数据
+					resetDatas();//重置数据
 				}				
 			}
 		}else if (v == sendCamera) {
@@ -197,7 +231,12 @@ public class EditCommentItemActivity extends BaseActivity{
 				commentItem.setComment_item_content(itemIntroText);
 			}
 			commentItem.setImageUris(imageUris);
-			commentDraft.addComment_item(commentItem);
+			if (itemIndex == -1) {
+				commentDraft.addComment_item(commentItem);
+			}else {
+				commentDraft.replaceComment_item(itemIndex, commentItem);
+			}
+			
 			intent.putExtra("CommentDraft",commentDraft);
 			setResult(RESULT_OK, intent);
 		}else {
@@ -232,14 +271,31 @@ public class EditCommentItemActivity extends BaseActivity{
 				try {
 					bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
 					if (bmp != null) {
-						viewList.add(0, bmp);
-						imageUris.add(0,imageUri.toString());
+						viewList.add(viewList.size()-1, bmp);
+						imageUris.add(imageUri.toString());
 						adapter.notifyDataSetChanged();
+//						HttpClientUtil.uploadResources(bmp, new AsyncHttpResponseHandler() {
+//							
+//							@Override
+//							public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+//								String responseStr = new String(arg2);
+//								Log.d(Constants.TAG, "post image success:"+responseStr);
+//								showToast("post image success:"+responseStr);
+//							}
+//							
+//							@Override
+//							public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+//								String responseStr = new String(arg2);
+//								Log.d(Constants.TAG, "post image failure:"+responseStr);
+//								showToast("post image failure:"+responseStr);
+//							}
+//						});
 					}
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}				
+				}
+				
 				break;
 			default:
 				break;

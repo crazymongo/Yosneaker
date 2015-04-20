@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -25,6 +26,7 @@ import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
 import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.CommentItemView;
+import com.yosneaker.client.view.ProgressDialog;
 import com.yosneaker.client.view.RoundImageView;
 
 /**
@@ -66,8 +68,11 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	private TextView tv_add_summarize;
 	private TextView tv_summarize_detail;
 	private AssessStarView asv_sum_assess;
+	private LinearLayout ll_summarize_detail;
 	
 	// ll_edit_item_detail部分控件
+	
+	private ArrayList<CommentItemView> commentItemViews;//
 	
 	private ArrayList<Bitmap> bgBitmaps;//上面的背景
 	private Bitmap defaultBitmap;
@@ -96,6 +101,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		setTitleBarText(null);
 		showTextViewLeft(true);
 
+		commentItemViews = new ArrayList<CommentItemView>();
+		
 		ll_edit_intro = (LinearLayout) findViewById(R.id.ll_edit_intro);
 		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
@@ -123,6 +130,7 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		tv_add_summarize = (TextView) findViewById(R.id.tv_add_summarize);
 		tv_summarize_detail = (TextView) findViewById(R.id.tv_summarize_detail);
 		asv_sum_assess = (AssessStarView) findViewById(R.id.asv_sum_assess);
+		ll_summarize_detail = (LinearLayout) findViewById(R.id.ll_summarize_detail);
 		
 		setDefaultBg();
 	}
@@ -132,8 +140,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		
 		getTextViewLeft().setOnClickListener(this);			
 		ll_edit_intro.setOnClickListener(this);
+		ll_intro_detail.setOnClickListener(this);
 		ll_edit_item.setOnClickListener(this);
 		ll_edit_summarize.setOnClickListener(this);
+		ll_summarize_detail.setOnClickListener(this);
 		btn_save_draft.setOnClickListener(this);
 		btn_publish_draft.setOnClickListener(this);
 		btn_delete_draft.setOnClickListener(this);
@@ -161,13 +171,18 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
 			customBackPressed();
-		}else if (v == ll_edit_intro) {
+		}else if (v == ll_edit_intro||v == ll_intro_detail) {
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("CommentDraft",commentDraft);
 			gotoExistActivityForResult(EditCommentIntroActivity.class, bundle,Constants.COMMENT_INTRO_REQUEST);
-		}else if (v == ll_edit_item) {
-			gotoExistActivityForResult(EditCommentItemActivity.class, new Bundle(),Constants.COMMENT_ITEM_REQUEST);
-		}else if (v == ll_edit_summarize) {
+		}else if (v == ll_edit_item||commentItemViews.contains(v)) {
+			Bundle bundle = new Bundle();
+			int index = commentItemViews.indexOf(v);
+			commentDraft.setComment_item_index(index);
+			Log.d(Constants.TAG, "index:"+index);
+			bundle.putSerializable("CommentDraft",commentDraft);
+			gotoExistActivityForResult(EditCommentItemActivity.class, bundle,Constants.COMMENT_ITEM_REQUEST);
+		}else if (v == ll_edit_summarize||v == ll_summarize_detail) {
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("CommentDraft",commentDraft);
 			gotoExistActivityForResult(EditCommentSummarizeActivity.class, bundle,Constants.COMMENT_SUMMARIZE_REQUEST);
@@ -199,7 +214,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	 * 发布测评草稿
 	 */
 	private void publishDraft() {
-		showToast(getResources().getString(R.string.toast_draft_publish_success));
+		ProgressDialog dialog = ProgressDialog.createDialog(this);
+		dialog.setMessage("发布测评中...");
+		dialog.show();
+//		showToast(getResources().getString(R.string.toast_draft_publish_success));
 	}
 
 
@@ -264,16 +282,12 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 
 				if (TextUtils.isEmpty(brand) && TextUtils.isEmpty(modelText)
 						&& TextUtils.isEmpty(introText)) {
-					tv_add_intro.setText(getResources().getString(
-							R.string.comment_edit_add_intro));
-					tv_intro_detail.setVisibility(View.GONE);
+					ll_edit_intro.setVisibility(View.VISIBLE);
 					ll_intro_detail.setVisibility(View.GONE);
 				} else {
-					tv_add_intro.setText(getResources().getString(
-							R.string.comment_edit_alter_intro));
-					tv_intro_detail.setVisibility(View.VISIBLE);
-					tv_intro_detail.setText(introText);
+					ll_edit_intro.setVisibility(View.GONE);
 					ll_intro_detail.setVisibility(View.VISIBLE);
+					tv_intro_detail.setText(introText);
 					tv_intro_brand.setText(brand);
 					tv_intro_model.setText(modelText);
 				}
@@ -283,13 +297,19 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				commentDraft.setComment_intro_assess(introText);
 				break;
 			case Constants.COMMENT_ITEM_REQUEST:
-//				ll_item_sun0.setVisibility(View.VISIBLE);
 				tmpCommentDraft = (CommentDraft) data
 						.getSerializableExtra("CommentDraft");
 				ArrayList<CommentItem> commentItems = tmpCommentDraft.getComment_items();
-				for (CommentItem commentItem : commentItems) {
-					addCommentItem(commentItem);
+				Log.d(Constants.TAG, "tmpCommentDraft.getComment_item_index():"+tmpCommentDraft.getComment_item_index());
+				if (tmpCommentDraft.getComment_item_index() == -1) {
+					for (CommentItem commentItem : commentItems) {
+						addCommentItem(commentItem);
+					}
+				}else {
+					CommentItem commentItem = commentItems.get(tmpCommentDraft.getComment_item_index());
+					replaceCommentItem(commentItem,tmpCommentDraft.getComment_item_index());
 				}
+				
 				isEdit = false;
 				toogleEditTip();
 				toogleDeleteTip();
@@ -302,16 +322,12 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 				int sumStar = tmpCommentDraft.getComment_sum_star();
 				String sumText = tmpCommentDraft.getComment_sum_content();
 				if (TextUtils.isEmpty(sumText) && sumStar==0) {
-					tv_add_summarize.setText(getResources().getString(
-							R.string.comment_edit_add_summarize));
-					tv_summarize_detail.setVisibility(View.GONE);
-					asv_sum_assess.setVisibility(View.GONE);
+					ll_summarize_detail.setVisibility(View.GONE);
+					ll_edit_summarize.setVisibility(View.VISIBLE);
 				} else {
-					tv_add_summarize.setText(getResources().getString(
-							R.string.comment_edit_alter_summarize));
-					tv_summarize_detail.setVisibility(View.VISIBLE);
+					ll_summarize_detail.setVisibility(View.VISIBLE);
+					ll_edit_summarize.setVisibility(View.GONE);
 					tv_summarize_detail.setText(sumText);
-					asv_sum_assess.setVisibility(View.VISIBLE);
 					asv_sum_assess.setStarNumber(sumStar);
 				}
 				// 保存数据到内存
@@ -324,6 +340,10 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		}
 	}
 
+	/**
+	 * 添加测评项
+	 * @param commentItem
+	 */
 	public void addCommentItem(CommentItem commentItem) {
 		ArrayList<String> imageUris = commentItem.getImageUris();
 		int itemStar = commentItem.getComment_item_star();
@@ -345,9 +365,50 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 		if (imageUris.size() == 0) {
 			bgBitmaps.add(defaultBitmap);
 		}
+		Log.d(Constants.TAG, "imageUris.size():"+imageUris.size());
+		cItemView.setOnClickListener(this);
+		commentItemViews.add(cItemView);
 		// 保存数据到内存
 		commentDraft.addComment_item(commentItem);
 		ll_edit_item_detail.addView(cItemView);
+	}
+	
+	/**
+	 * 替换测评项
+	 * @param commentItem
+	 * @param comment_item_index
+	 */
+	private void replaceCommentItem(CommentItem commentItem, int comment_item_index) {
+		ArrayList<String> imageUris = commentItem.getImageUris();
+		int itemStar = commentItem.getComment_item_star();
+		String itemTitleText = commentItem.getComment_item_title();
+		String itemContentText = commentItem.getComment_item_content();
+		CommentItemView cItemView = commentItemViews.get(comment_item_index);
+		cItemView.setCallbacks(EditCommentActivity.this);
+		cItemView.setItemOrder(comment_item_index+1);
+		
+		cItemView.setItemName(itemTitleText);
+		cItemView.setItemContent(itemContentText);
+		cItemView.setItemAssess(itemStar);
+		cItemView.setDeleteVisible(isEdit?View.GONE:View.VISIBLE);	
+		cItemView.removeAllItemImage();
+		for (int i = 0; i < imageUris.size(); i++) {
+			cItemView.addItemImage(imageUris.get(i));
+			if (i==0) {
+				bgBitmaps.remove(comment_item_index+1);
+				bgBitmaps.add(comment_item_index+1,BitmapUtil.getBitmapFromUri(EditCommentActivity.this, imageUris.get(i)));
+			}					
+		}
+		if (imageUris.size() == 0) {
+			bgBitmaps.remove(comment_item_index+1);
+			bgBitmaps.add(comment_item_index+1,defaultBitmap);
+		}
+		cItemView.setOnClickListener(this);
+		commentItemViews.set(comment_item_index, cItemView);
+		// 保存数据到内存
+		commentDraft.replaceComment_item(comment_item_index, commentItem);
+		ll_edit_item_detail.removeViewAt(comment_item_index);
+		ll_edit_item_detail.addView(cItemView, comment_item_index);
 	}
 	
 	@Override
@@ -365,7 +426,8 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
             		if (bgBitmaps.size()>item_order) {
             			bgBitmaps.remove(item_order);
 					}
-            		commentDraft.removeComment_item(item_order-1);            		
+            		commentDraft.removeComment_item(item_order-1);     
+            		commentItemViews.remove(item_order-1);
             		itemsize--;
             		resetItemOrder(item_order);
             		toogleEditTip();
@@ -394,10 +456,11 @@ public class EditCommentActivity extends BaseActivity implements CommentItemView
 	 */
 	public void setDefaultBg() {
 		Bitmap bitmap = bgBitmaps.get(0);
-		if (bgBitmaps.size() > 1) {
+		if (bgBitmaps.size() > 1) {//取第一张非系统默认图片
 			for (int i = 0; i < bgBitmaps.size(); i++) {
 				if (!defaultBitmap.equals(bgBitmaps.get(i))) {
 					bitmap = bgBitmaps.get(i);
+					break;
 				}
 			}
 		}

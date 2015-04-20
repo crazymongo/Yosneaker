@@ -37,7 +37,7 @@
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:src="@drawable/list_user_head2" />
+            android:src="@drawable/list_user_head" />
 
         <TextView
             android:id="@+id/textView9"

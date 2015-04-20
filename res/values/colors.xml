@@ -27,4 +27,7 @@
     
     <color name="comment_item__bg">#fbfbfb</color>
     
+    <!-- 自定义标题栏背景色 -->
+    <color name="layout_selected_bg">#dddddd</color>
+    
 </resources>

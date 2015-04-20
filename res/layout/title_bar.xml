@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="@dimen/title_bar_tv_size"
         android:text="@string/app_name"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />

@@ -12,7 +12,11 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-
+/**
+ * 扩展的品牌选择控件
+ * @author mac
+ *
+ */
 public class RadioGroup extends LinearLayout {
     // holds the checked id; the selection is empty by default
     private int mCheckedId = -1;

@@ -20,6 +20,11 @@ import android.widget.ImageView.ScaleType;
 import com.yosneaker.client.R;
 import com.yosneaker.client.ImageDetailActivity;
 
+/**
+ * 自定义测评项视图
+ * @author chendd
+ *
+ */
 public class CommentItemView extends LinearLayout {
 
 	private Context context;
@@ -145,6 +150,10 @@ public class CommentItemView extends LinearLayout {
 			e.printStackTrace();
 		}
 	
+	}
+	
+	public void removeAllItemImage() {
+		fl_item_image.removeAllViews();
 	}
 	
 	public void setCallbacks(Callbacks callbacks) {

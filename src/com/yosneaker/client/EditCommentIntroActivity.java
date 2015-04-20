@@ -121,6 +121,7 @@ public class EditCommentIntroActivity extends BaseActivity implements
 		et_intro.setText(commentDraft.getComment_intro_assess());
 		et_model.setText(commentDraft.getComment_intro_model());
 		int brandId = brands.indexOf(commentDraft.getComment_intro_brands());
+		checkIndex = brandId;
 		if (brandId!=-1&&brandId<brands.size()) {
 			brandsView.get(brandId).setChecked(true);
 		}

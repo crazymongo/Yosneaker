@@ -20,6 +20,7 @@ public class CommentDraft implements Serializable{
 	private int comment_date;// 测评日期 yyyymmdd
 	
 	private ArrayList<CommentItem> comment_items;// 测评项
+	private int comment_item_index;// 当前编辑哪个测评项(-1表示要新增)
 
 	public CommentDraft() {
 		super();
@@ -32,6 +33,7 @@ public class CommentDraft implements Serializable{
 		this.comment_status = 0;
 		this.comment_date = 0;
 		this.comment_items = new ArrayList<CommentItem>();
+		this.comment_item_index = -1;
 	}
 	
 	public String getComment_title() {
@@ -97,6 +99,19 @@ public class CommentDraft implements Serializable{
 	
 	public void removeComment_item(int i) {
 		this.comment_items.remove(i);
+	}
+	
+	public void replaceComment_item(int i,CommentItem comment_item) {
+		this.comment_items.remove(i);
+		this.comment_items.add(i, comment_item);
+	}
+	
+	public int getComment_item_index() {
+		return comment_item_index;
+	}
+
+	public void setComment_item_index(int comment_item_index) {
+		this.comment_item_index = comment_item_index;
 	}
 	
 }

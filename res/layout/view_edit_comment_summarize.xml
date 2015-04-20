@@ -3,6 +3,7 @@
     xmlns:myspace="http://schemas.android.com/apk/res/com.yosneaker.client"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/comment_item__bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -42,9 +43,9 @@
             android:id="@+id/ll_edit_summarize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="@dimen/item_tb_margin"
+            android:layout_marginLeft="@dimen/item_lr_margin"
+            android:layout_marginTop="@dimen/item_tb_margin"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
@@ -61,17 +62,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:textSize="13sp"
+                android:textSize="@dimen/tv_add_text_size"
                 android:textColor="@color/gray"
                 android:text="@string/comment_edit_add_summarize" />
         </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/ll_summarize_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_tb_margin"
+            android:background="@drawable/edit_comment_item_layout"
+            android:orientation="vertical"
+            android:visibility="gone" >
         
         <com.yosneaker.client.view.AssessStarView
                     android:id="@+id/asv_sum_assess"
                     android:layout_width="wrap_content"
                 	android:layout_height="wrap_content"
                 	android:layout_marginLeft="20dp"
-                	android:visibility="gone"
                 	myspace:starNumber="2"/>
         
         <TextView
@@ -81,10 +90,9 @@
             android:padding="5dp"
             android:layout_marginLeft="15dp"
             android:text="或许年轻人还无法体会那么多，但作为老将就不一样了，征战NBA多年的保罗.皮尔斯今天早些时候通过社交平台向大家展示了他的圣诞大战战靴，而最重要的是他将会在比赛结束后在网络进行慈善拍卖该鞋款，希望能用这些善款去帮助更多的人。"
-            android:visibility="gone"
             android:typeface="monospace" />
     </LinearLayout>
-
+    </LinearLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="2px"
