@@ -156,7 +156,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 //                	if (which == 0) {
 						Bundle bundle = new Bundle();
 						bundle.putInt("action", 1);
-                		HomeActivity.this.gotoExistActivity(AddCommentTitleActivity.class, bundle);
+                		HomeActivity.this.gotoExistActivity(AddArticleTitleActivity.class, bundle);
 //					} else if(which == 1){
 //
 //					}

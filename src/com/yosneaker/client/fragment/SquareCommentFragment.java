@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.yosneaker.client.CommentDetailActivity;
+import com.yosneaker.client.ArticleDetailActivity;
 import com.yosneaker.client.R;
-import com.yosneaker.client.adapter.CommentAdapter;
-import com.yosneaker.client.model.CommentList;
+import com.yosneaker.client.adapter.ArticleAdapter;
+import com.yosneaker.client.model.ArticleList;
 import com.yosneaker.client.view.XListView;
 import com.yosneaker.client.view.XListView.IXListViewListener;
 
@@ -27,8 +27,8 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	
 	private View viewFragment;
 	private XListView xListView=null;
-	private CommentAdapter mAdapter;
-	private ArrayList<CommentList> items = new ArrayList<CommentList>();
+	private ArticleAdapter mAdapter;
+	private ArrayList<ArticleList> items = new ArrayList<ArticleList>();
 	private Handler mHandler;
 	
 	// 测试数据
@@ -39,7 +39,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		viewFragment = inflater.inflate(R.layout.fragment_square_comment,
+		viewFragment = inflater.inflate(R.layout.fragment_square_article,
 				container, false);
 		
 		// 模拟测试数据
@@ -56,7 +56,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	private void initViews(){
 		xListView=(XListView) viewFragment.findViewById(R.id.xListView);	
 		xListView.setPullLoadEnable(true);
-		mAdapter = new CommentAdapter(getActivity(),items);
+		mAdapter = new ArticleAdapter(getActivity(),items);
 		xListView.setAdapter(mAdapter);
 		xListView.setXListViewListener(this);
 		xListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -64,7 +64,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				gotoExistActivity(CommentDetailActivity.class, new Bundle());
+				gotoExistActivity(ArticleDetailActivity.class, new Bundle());
 			}
 			
 		});
@@ -78,7 +78,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 			public void run() {
 				items.clear();
 				geneItems();
-				mAdapter = new CommentAdapter(getActivity(),items);
+				mAdapter = new ArticleAdapter(getActivity(),items);
 				xListView.setAdapter(mAdapter);
 				onLoad();
 			}
@@ -99,7 +99,7 @@ public class SquareCommentFragment extends BaseFragment implements IXListViewLis
 	
 	private void geneItems() {
 		for (int i = 0; i != 5; ++i) {
-			items.add(new CommentList("樱花AJ 测评"+start,start,start+"分钟前",start%5,heads.get(start%2),covers.get(start++%2)));
+			items.add(new ArticleList(1000,1000,"樱花AJ 测评"+start,start,start+"分钟前",start%5,heads.get(start%2),covers.get(start++%2)));
 		}
 	}
 

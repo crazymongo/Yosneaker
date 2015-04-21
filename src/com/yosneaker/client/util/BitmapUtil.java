@@ -40,6 +40,20 @@ public class BitmapUtil {
 	}
 
 	/**
+	 * 二进制流转为bitmap
+	 * @param bit
+	 * @return
+	 */
+	public Bitmap getBitmapFromByte(byte[] bit){  
+	    if(bit != null){  
+	        Bitmap bitmap = BitmapFactory.decodeByteArray(bit, 0, bit.length);  
+	        return bitmap;  
+	    }else{  
+	        return null;  
+	    }  
+	}
+	
+	/**
 	 * 从uri获取bitmap
 	 * @param context
 	 * @param uri

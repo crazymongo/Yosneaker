@@ -37,14 +37,14 @@
         
         <!-- 测评详情 -->
         <activity
-            android:name="com.yosneaker.client.CommentDetailActivity"
+            android:name="com.yosneaker.client.ArticleDetailActivity"
             android:label="@string/title_comment_detail" 
             android:screenOrientation="portrait">
         </activity>
         
         <!-- 编辑测评标题 -->
         <activity
-            android:name="com.yosneaker.client.AddCommentTitleActivity"
+            android:name="com.yosneaker.client.AddArticleTitleActivity"
             android:label="@string/title_comment_title" 
             android:screenOrientation="portrait"
             >
@@ -52,7 +52,7 @@
         
         <!-- 编辑测评详情 -->
         <activity
-            android:name="com.yosneaker.client.EditCommentActivity"
+            android:name="com.yosneaker.client.EditArticleActivity"
             android:label="@string/title_comment_detail" 
             android:screenOrientation="portrait"
             >
@@ -60,7 +60,7 @@
         
         <!-- 编辑测评简介 -->
         <activity
-            android:name="com.yosneaker.client.EditCommentIntroActivity"
+            android:name="com.yosneaker.client.EditArticleIntroActivity"
             android:label="@string/comment_detail_intro" 
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait"
@@ -69,7 +69,7 @@
         
         <!-- 编辑测评项 -->
         <activity
-            android:name="com.yosneaker.client.EditCommentItemActivity"
+            android:name="com.yosneaker.client.EditArticleItemActivity"
             android:label="@string/comment_detail_class" 
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait"
@@ -78,7 +78,7 @@
         
         <!-- 编辑测评总评 -->
         <activity
-            android:name="com.yosneaker.client.EditCommentSummarizeActivity"
+            android:name="com.yosneaker.client.EditArticleSummarizeActivity"
             android:label="@string/comment_detail_summarize" 
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait"

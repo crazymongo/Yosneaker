@@ -57,7 +57,7 @@ public class CommentItemView extends LinearLayout {
 	private void init() {		
 //		iv_deletes = new ArrayList<ImageView>();
 		inflater = LayoutInflater.from(context);
-		inflater.inflate(R.layout.view_edit_comment_item_sun, this, true);
+		inflater.inflate(R.layout.view_edit_article_item_sun, this, true);
 		tv_item_order = (TextView) findViewById(R.id.tv_item_order);
 		tv_item_name = (TextView) findViewById(R.id.tv_item_name);
 		tv_item_content = (TextView) findViewById(R.id.tv_item_content);
@@ -104,7 +104,7 @@ public class CommentItemView extends LinearLayout {
 	
 	public void addItemImage(final String imageUri) {
 		final View picView = inflater.inflate(
-				R.layout.view_edit_comment_gv_item_pic, null);
+				R.layout.view_edit_article_gv_item_pic, null);
 		final ImageButton picIBtn = (ImageButton) picView
 				.findViewById(R.id.pic);
 		final Bitmap bmp;

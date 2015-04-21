@@ -43,7 +43,7 @@ public class CommentFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_comment,
+		View view = inflater.inflate(R.layout.fragment_article,
 				container, false);
 
         ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
