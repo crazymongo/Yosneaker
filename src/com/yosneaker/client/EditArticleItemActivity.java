@@ -4,9 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,19 +27,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
-import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**

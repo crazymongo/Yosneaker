@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myspace="http://schemas.android.com/apk/res/com.yosneaker.client"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_comment_item_layout"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" >
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/item_round" />
+
+                <TextView
+                    android:id="@+id/tv_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/imageView5"
+                    android:text="外观"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/imageView5"
+                    android:layout_marginLeft="6dp"
+                    android:text="1" />
+
+                
+                <com.yosneaker.client.view.AssessStarView
+                    android:id="@+id/asv_item_assess"
+                    android:layout_width="wrap_content"
+                	android:layout_height="wrap_content"
+                	myspace:starNumber="5"
+                    android:layout_below="@id/tv_item_name"
+                    android:layout_toRightOf="@id/imageView5"/>
+                
+                <ImageView
+                    android:id="@+id/iv_remove_item"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone"
+                    android:src="@drawable/act_delpic_pressed" />
+                
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="15dp"
+            android:text="谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点"
+		/>
+
+        <LinearLayout
+            android:id="@+id/fl_item_image"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+<!-- 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:padding="5dp"
+                android:src="@drawable/list_bg" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:padding="5dp"
+                android:src="@drawable/list_bg" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:padding="5dp"
+                android:src="@drawable/list_bg" />
+ -->            
+        </LinearLayout>
+
+      <View
+        android:layout_width="fill_parent"
+        android:layout_height="2px"
+        android:background="?android:attr/listDivider" />  
+        
+</LinearLayout>

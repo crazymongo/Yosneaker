@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+     <!-- 个人数据start -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/item_spilt" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/comment_detail_personal" />
+                    </LinearLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp" >
+
+                        <TableRow
+                            android:id="@+id/tableRow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textColor="@color/gray"
+                                android:text="@string/personal_item_height" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textColor="@color/gray"
+                                android:text="@string/personal_item_weight" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textColor="@color/gray"
+                                android:text="@string/personal_item_bounce" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tableRow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/tv_personal_height"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:text="190cm" />
+
+                            <TextView
+                                android:id="@+id/tv_personal_weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:text="74kg" />
+
+                            <TextView
+                                android:id="@+id/tv_personal_bounce"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:text="60cm" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+                <!-- 个人数据end -->
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2px"
+                    android:background="?android:attr/listDivider" />
+</LinearLayout>

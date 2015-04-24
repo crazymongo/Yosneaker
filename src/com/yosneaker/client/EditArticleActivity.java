@@ -24,8 +24,9 @@ import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.view.ArticleHeadView;
 import com.yosneaker.client.view.AssessStarView;
-import com.yosneaker.client.view.CommentItemView;
+import com.yosneaker.client.view.ArticleItemView;
 import com.yosneaker.client.view.ProgressDialog;
 import com.yosneaker.client.view.RoundImageView;
 
@@ -35,7 +36,7 @@ import com.yosneaker.client.view.RoundImageView;
  * @author chendd
  *
  */
-public class EditArticleActivity extends BaseActivity implements CommentItemView.Callbacks{
+public class EditArticleActivity extends BaseActivity implements ArticleItemView.Callbacks{
 	
 	private Article commentDraft;
 	
@@ -50,13 +51,8 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 	
 	private ImageView iv_item_edit;
 	
-	// in_edit_main_img部分控件
-	private ImageView iv_comment_bg;
-	private RoundImageView riv_comment_user_icon;
-	private TextView tv_comment_date;
-	private TextView tv_comment_title;
-	private ImageView iv_comment_edit;
-		
+	private ArticleHeadView ahv_edit_article_head;
+
 	// in_edit_intro部分控件
 	private TextView tv_add_intro;
 	private TextView tv_intro_detail;
@@ -72,7 +68,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 	
 	// ll_edit_item_detail部分控件
 	
-	private ArrayList<CommentItemView> commentItemViews;//
+	private ArrayList<ArticleItemView> commentItemViews;//
 	
 	private ArrayList<Bitmap> bgBitmaps;//上面的背景
 	private Bitmap defaultBitmap;
@@ -101,7 +97,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		setTitleBarText(null);
 		showTextViewLeft(true);
 
-		commentItemViews = new ArrayList<CommentItemView>();
+		commentItemViews = new ArrayList<ArticleItemView>();
 		
 		ll_edit_intro = (LinearLayout) findViewById(R.id.ll_edit_intro);
 		ll_edit_item = (LinearLayout) findViewById(R.id.ll_edit_item);
@@ -115,11 +111,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		iv_item_edit = (ImageView) findViewById(R.id.iv_item_edit);
 		iv_item_edit.setBackgroundResource(R.drawable.item_edit);
 		
-		iv_comment_bg = (ImageView) findViewById(R.id.iv_comment_bg);
-		riv_comment_user_icon = (RoundImageView) findViewById(R.id.riv_comment_user_icon);
-		tv_comment_date = (TextView) findViewById(R.id.tv_comment_date);
-		tv_comment_title = (TextView) findViewById(R.id.tv_comment_title);
-		iv_comment_edit = (ImageView) findViewById(R.id.iv_comment_edit);
+		ahv_edit_article_head = (ArticleHeadView) findViewById(R.id.ahv_edit_article_head);
 		
 		tv_add_intro = (TextView) findViewById(R.id.tv_add_intro);
 		tv_intro_detail = (TextView) findViewById(R.id.tv_intro_detail);
@@ -147,7 +139,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		btn_save_draft.setOnClickListener(this);
 		btn_publish_draft.setOnClickListener(this);
 		btn_delete_draft.setOnClickListener(this);
-		iv_comment_edit.setOnClickListener(this);
+		ahv_edit_article_head.setArticleEditListener(this);
 		iv_item_edit.setOnClickListener(this);
 	}
 
@@ -155,9 +147,9 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 	public void fillDatas() {
 		Intent intent = getIntent();
 		Article tmpCommentDraft = (Article) intent.getSerializableExtra("CommentDraft");
-		tv_comment_title.setText(tmpCommentDraft.getComment_title());
+		ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getComment_title());
 		int date = tmpCommentDraft.getComment_date();
-		tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
+		ahv_edit_article_head.setArticleDate(date/10000+"-"+(date/100)%100+"-"+date%100);
 		commentDraft.setComment_title(tmpCommentDraft.getComment_title());
 		commentDraft.setComment_date(tmpCommentDraft.getComment_date());
 		//Todo  设置iv_comment_bgr,iv_comment_user_icon
@@ -186,7 +178,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("CommentDraft",commentDraft);
 			gotoExistActivityForResult(EditArticleSummarizeActivity.class, bundle,Constants.COMMENT_SUMMARIZE_REQUEST);
-		}else if (v == iv_comment_edit) {
+		}else if (v == ahv_edit_article_head.getArticleEditView()) {
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("CommentDraft",commentDraft);
 			gotoExistActivityForResult(AddArticleTitleActivity.class, bundle,Constants.COMMENT_TITLE_REQUEST);
@@ -266,9 +258,9 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 			case Constants.COMMENT_TITLE_REQUEST:
 				tmpCommentDraft = (Article) data
 				.getSerializableExtra("CommentDraft");
-				tv_comment_title.setText(tmpCommentDraft.getComment_title());
+				ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getComment_title());
 				int date = tmpCommentDraft.getComment_date();
-				tv_comment_date.setText(date/10000+"-"+(date/100)%100+"-"+date%100);
+				ahv_edit_article_head.setArticleDate(date/10000+"-"+(date/100)%100+"-"+date%100);
 				// 保存数据到内存
 				commentDraft.setComment_title(tmpCommentDraft.getComment_title());
 				commentDraft.setComment_date(tmpCommentDraft.getComment_date());
@@ -349,7 +341,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		int itemStar = commentItem.getItemLevel();
 		String itemTitleText = commentItem.getItemTitle();
 		String itemContentText = commentItem.getItemContent();
-		CommentItemView cItemView = new CommentItemView(this);
+		ArticleItemView cItemView = new ArticleItemView(this);
 		cItemView.setCallbacks(EditArticleActivity.this);
 		cItemView.setItemOrder(++itemsize);
 		cItemView.setItemName(itemTitleText);
@@ -383,7 +375,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		int itemStar = commentItem.getItemLevel();
 		String itemTitleText = commentItem.getItemTitle();
 		String itemContentText = commentItem.getItemContent();
-		CommentItemView cItemView = commentItemViews.get(comment_item_index);
+		ArticleItemView cItemView = commentItemViews.get(comment_item_index);
 		cItemView.setCallbacks(EditArticleActivity.this);
 		cItemView.setItemOrder(comment_item_index+1);
 		
@@ -468,7 +460,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		try {
 			bitmap = BitmapUtil.getScaleBitmap(bitmap, width,Constants.BG_SCALE);
 			if (bitmap != null) {
-				iv_comment_bg.setImageBitmap(bitmap);
+				ahv_edit_article_head.setArticleBg(bitmap);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -483,7 +475,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		int size = ll_edit_item_detail.getChildCount();
 		for (int i = 0; i < size; i++) {
 			if (i>=item_order-1) {
-				CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
+				ArticleItemView commentItemView = (ArticleItemView) ll_edit_item_detail.getChildAt(i);
 				commentItemView.setItemOrder(i+1);
 			}
 		}
@@ -508,7 +500,7 @@ public class EditArticleActivity extends BaseActivity implements CommentItemView
 		iv_item_edit.setBackgroundResource(isEdit?R.drawable.item_ok:R.drawable.item_edit);
 		int size = ll_edit_item_detail.getChildCount();
 		for (int i = 0; i < size; i++) {
-			CommentItemView commentItemView = (CommentItemView) ll_edit_item_detail.getChildAt(i);
+			ArticleItemView commentItemView = (ArticleItemView) ll_edit_item_detail.getChildAt(i);
 			commentItemView.setDeleteVisible(visible);
 //			commentItemView.setImageDeleteVisible(visible);
 		}

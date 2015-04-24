@@ -15,13 +15,14 @@
     android:fadingEdge="vertical" >
     
         <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-        
-    <include
-        android:id="@+id/in_edit_main_img"
-        layout="@layout/view_edit_article_main_img" />
+    		android:layout_width="match_parent"
+   			android:layout_height="match_parent"
+    		android:orientation="vertical" >
+    
+    <com.yosneaker.client.view.ArticleHeadView
+    	android:id="@+id/ahv_edit_article_head"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content" />
     
     <include
         android:id="@+id/in_edit_intro"

@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/comment_item__bg"
         android:showDividers="end" >
 
         <ImageView
@@ -27,12 +27,12 @@
             android:text="@string/comment_detail_yet_buy" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_top_want_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:text="5362" />
+            android:text="12" />
 
         <View
             android:layout_width="1dp"
@@ -58,12 +58,12 @@
             android:text="@string/comment_detail_want_buy" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_top_buy_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:text="5362" />
+            android:text="12" />
     </LinearLayout>
 
     <View

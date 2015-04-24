@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_comment_detail_layout"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <include android:id="@+id/mTitleBar" 
@@ -21,9 +22,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <include
-                    android:id="@+id/mainImg"
-                    layout="@layout/view_article_detail_main_img" />
+                <com.yosneaker.client.view.ArticleHeadView
+    				android:id="@+id/ahv_article_detail_head"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content" />
 
                 <include
                     android:id="@+id/buy"
@@ -33,9 +35,10 @@
                     android:id="@+id/intro"
                     layout="@layout/view_article_detail_intro" />
 
-               <include
-                    android:id="@+id/personal"
-                    layout="@layout/view_article_detail_personal" />
+                <com.yosneaker.client.view.PersonalDataView
+    				android:id="@+id/pdv_article_personal_data"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content" />
 
                 <include
                     android:id="@+id/comment"
@@ -51,7 +54,8 @@
 
                 <include
                     android:id="@+id/comment"
-                    layout="@layout/view_article_detail_discussion" />
+                    layout="@layout/view_article_detail_hot_comment" />
+                
             </LinearLayout>
 
             <include

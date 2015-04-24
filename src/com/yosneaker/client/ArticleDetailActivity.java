@@ -1,13 +1,27 @@
 package com.yosneaker.client;
 
+import java.io.FileNotFoundException;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.yosneaker.client.app.YosneakerAppState;
+import com.yosneaker.client.util.BitmapUtil;
+import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.view.ArticleHeadView;
+import com.yosneaker.client.view.ArticleItemView;
+import com.yosneaker.client.view.CommentItemView;
 import com.yosneaker.client.view.CustomScrollView;
 import com.yosneaker.client.view.CustomScrollView.OnScrollListener;
+import com.yosneaker.client.view.FlowLayout;
+import com.yosneaker.client.view.PersonalDataView;
+import com.yosneaker.client.view.RoundImageView;
 
 /**
  * 测评详情
@@ -27,6 +41,25 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 	/**  位于顶部的购买布局 */
 	private LinearLayout mTopBuyLayout;
 
+	private LinearLayout ll_want_count;
+	private LinearLayout ll_buy_count;
+	private TextView tv_want_count;
+	private TextView tv_buy_count;
+	
+	private TextView tv_top_want_count;
+	private TextView tv_top_buy_count;
+	
+	private LinearLayout ll_hot_comments;
+	
+	private TextView tv_detail_brand;
+	private TextView tv_detail_model;
+	private TextView tv_detail_intro_content;
+	
+	private LinearLayout ll_detail_comment_item;
+	
+	private ArticleHeadView ahv_article_detail_head;
+	
+	private PersonalDataView pdv_article_personal_data;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -45,6 +78,26 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		mScrollView = (CustomScrollView) findViewById(R.id.scrollView);
 		mBuyLayout = (LinearLayout) findViewById(R.id.buy);
 		mTopBuyLayout = (LinearLayout) findViewById(R.id.top_buy_layout);
+		
+		ll_want_count = (LinearLayout) findViewById(R.id.ll_want_count);
+		ll_buy_count = (LinearLayout) findViewById(R.id.ll_buy_count);
+		tv_want_count = (TextView) findViewById(R.id.tv_want_count);
+		tv_buy_count = (TextView) findViewById(R.id.tv_buy_count);
+		
+		tv_top_want_count = (TextView) findViewById(R.id.tv_top_want_count);
+		tv_top_buy_count = (TextView) findViewById(R.id.tv_top_buy_count);
+		
+		ll_hot_comments = (LinearLayout) findViewById(R.id.ll_hot_comments);
+		
+		tv_detail_brand = (TextView) findViewById(R.id.tv_detail_brand);
+		tv_detail_model = (TextView) findViewById(R.id.tv_detail_model);
+		tv_detail_intro_content = (TextView) findViewById(R.id.tv_detail_intro_content);
+		
+		ll_detail_comment_item = (LinearLayout) findViewById(R.id.ll_detail_comment_item);
+		
+		ahv_article_detail_head = (ArticleHeadView) findViewById(R.id.ahv_article_detail_head);
+		
+		pdv_article_personal_data = (PersonalDataView) findViewById(R.id.pdv_article_personal_data);
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -78,6 +131,49 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 
 	@Override
 	public void fillDatas() {
+		
+		ahv_article_detail_head.setArticleEditVisibility(View.GONE);
+		
+		// 模拟数据
+		Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.list_bg);
+		try {
+			bitmap = BitmapUtil.getScaleBitmap(bitmap, YosneakerAppState.getInstance().mWidth,Constants.BG_SCALE);
+			ahv_article_detail_head.setArticleBg(bitmap);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		ArticleItemView articleItemView = new ArticleItemView(ArticleDetailActivity.this);
+		articleItemView.setItemOrder(1);
+		articleItemView.setItemName("外观");
+		articleItemView.setItemContent("谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点");
+		articleItemView.setItemAssess(3);
+		articleItemView.addItemImage("drawable://" + R.drawable.list_bg);
+		articleItemView.addItemImage("drawable://" + R.drawable.list_bg2);
+		
+		ArticleItemView articleItemView2 = new ArticleItemView(ArticleDetailActivity.this);
+		articleItemView2.setItemOrder(2);
+		articleItemView2.setItemName("还是外观");
+		articleItemView2.setItemContent("再谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点");
+		articleItemView2.setItemAssess(4);
+		
+		ll_detail_comment_item.addView(articleItemView);
+		ll_detail_comment_item.addView(articleItemView2);
+		
+		CommentItemView commentItemView = new CommentItemView(ArticleDetailActivity.this);
+		commentItemView.setCommentContent("我是评论");
+		commentItemView.setUserName("可爱大二狗");
+		commentItemView.setUserPortrait("drawable://" + R.drawable.list_user_head);
+		commentItemView.setPraiseCount("22");
+		
+		CommentItemView commentItemView2 = new CommentItemView(ArticleDetailActivity.this);
+		commentItemView2.setCommentContent("阿萨德撒旦撒旦的撒啊是的撒大大大撒旦的撒大啊是的撒啊三大啊啊打算");
+		commentItemView2.setUserName("可爱大三狗");
+		commentItemView2.setUserPortrait("drawable://" + R.drawable.list_user_head2);
+		commentItemView2.setPraiseCount("33");
+		
+		ll_hot_comments.addView(commentItemView);
+		ll_hot_comments.addView(commentItemView2);
 		
 	}
 

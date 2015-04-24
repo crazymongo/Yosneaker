@@ -121,4 +121,6 @@
     <string name="toast_draft_publish_failure">测评发布失败！</string>
     <string name="toast_draft_delete_failure">删除该测评失败！</string>
     
+    <string name="see_more_comment">查看更多评论</string>
+    
 </resources>
