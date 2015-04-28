@@ -61,7 +61,7 @@ public class AddArticleTitleActivity extends BaseActivity{
 		action = intent.getIntExtra("action", 0);
 		if (action == 0) {
 			Article commentDraft = (Article) intent.getExtras().getSerializable("CommentDraft");
-			et_comment_title.setText(commentDraft.getComment_title());
+			et_comment_title.setText(commentDraft.getArticleTitle());
 		}
 
 	}
@@ -78,9 +78,9 @@ public class AddArticleTitleActivity extends BaseActivity{
 				et_comment_title.setError(getResources().getString(R.string.error_comment_title_no_null));
 			}else {				
 				Article commentDraft = new Article();
-				commentDraft.setComment_title(commentTitle);
+				commentDraft.setArticleTitle(commentTitle);
 				SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-				commentDraft.setComment_date(Integer.parseInt(df.format(new Date())));
+				commentDraft.setArticleCreateTime(Integer.parseInt(df.format(new Date())));
 				if (action == 0) {
 					Intent intent = new Intent();
 					intent.putExtra("CommentDraft",commentDraft);
@@ -106,9 +106,9 @@ public class AddArticleTitleActivity extends BaseActivity{
 		commentTitle = et_comment_title.getText().toString();
 		if (!TextUtils.isEmpty(commentTitle)) {
 			Article commentDraft = new Article();
-			commentDraft.setComment_title(commentTitle);
+			commentDraft.setArticleTitle(commentTitle);
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-			commentDraft.setComment_date(Integer.parseInt(df.format(new Date())));
+			commentDraft.setArticleCreateTime(Integer.parseInt(df.format(new Date())));
 			Intent intent = new Intent();
 			intent.putExtra("CommentDraft",commentDraft);
 			setResult(RESULT_OK, intent);

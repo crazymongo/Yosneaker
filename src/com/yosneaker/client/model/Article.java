@@ -56,82 +56,82 @@ public class Article implements Serializable{
 		this.articleAuthorId = articleAuthorId;
 	}
 	
-	public String getComment_title() {
+	public String getArticleTitle() {
 		return articleTitle;
 	}
-	public void setComment_title(String comment_title) {
-		this.articleTitle = comment_title;
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
-	public String getComment_intro_brands() {
+	public String getArticleTrademarkId() {
 		return articleTrademarkId;
 	}
-	public void setComment_intro_brands(String comment_intro_brands) {
-		this.articleTrademarkId = comment_intro_brands;
+	public void setArticleTrademarkId(String articleTrademarkId) {
+		this.articleTrademarkId = articleTrademarkId;
 	}
-	public String getComment_intro_model() {
+	public String getArticleModelId() {
 		return articleModelId;
 	}
-	public void setComment_intro_model(String comment_intro_model) {
-		this.articleModelId = comment_intro_model;
+	public void setArticleModelId(String articleModelId) {
+		this.articleModelId = articleModelId;
 	}
-	public String getComment_intro_assess() {
+	public String getArticleDescription() {
 		return articleDescription;
 	}
-	public void setComment_intro_assess(String comment_intro_assess) {
-		this.articleDescription = comment_intro_assess;
+	public void setArticleDescription(String articleDescription) {
+		this.articleDescription = articleDescription;
 	}
-	public int getComment_sum_star() {
+	public int getArticleLevel() {
 		return articleLevel;
 	}
-	public void setComment_sum_star(int comment_sum_star) {
-		this.articleLevel = comment_sum_star;
+	public void setArticleLevel(int articleLevel) {
+		this.articleLevel = articleLevel;
 	}
-	public String getComment_sum_content() {
+	public String getArticleComment() {
 		return articleComment;
 	}
-	public void setComment_sum_content(String comment_sum_content) {
-		this.articleComment = comment_sum_content;
+	public void setArticleComment(String articleComment) {
+		this.articleComment = articleComment;
 	}
-	public int getComment_status() {
+	public int getArticleStatus() {
 		return articleStatus;
 	}
-	public void setComment_status(int comment_status) {
-		this.articleStatus = comment_status;
+	public void setArticleStatus(int articleStatus) {
+		this.articleStatus = articleStatus;
 	}
-	public int getComment_date() {
+	public int getArticleCreateTime() {
 		return articleCreateTime;
 	}
-	public void setComment_date(int comment_date) {
-		this.articleCreateTime = comment_date;
+	public void setArticleCreateTime(int articleCreateTime) {
+		this.articleCreateTime = articleCreateTime;
 	}
 		
-	public ArrayList<ArticleItem> getComment_items() {
+	public ArrayList<ArticleItem> getItems() {
 		return items;
 	}
 
-	public void setComment_items(ArrayList<ArticleItem> comment_items) {
-		this.items = comment_items;
+	public void setItems(ArrayList<ArticleItem> items) {
+		this.items = items;
 	}
 
-	public int getComment_item_index() {
+	public int getArticleItemIndex() {
 		return articleItemIndex;
 	}
 
-	public void setComment_item_index(int comment_item_index) {
-		this.articleItemIndex = comment_item_index;
+	public void setArticleItemIndex(int articleItemIndex) {
+		this.articleItemIndex = articleItemIndex;
 	}
 	
-	public void addComment_item(ArticleItem comment_item) {
-		this.items.add(comment_item);
+	public void addItem(ArticleItem item) {
+		this.items.add(item);
 	}
 	
-	public void removeComment_item(int i) {
+	public void removeItem(int i) {
 		this.items.remove(i);
 	}
 	
-	public void replaceComment_item(int i,ArticleItem comment_item) {
+	public void replaceItem(int i,ArticleItem item) {
 		this.items.remove(i);
-		this.items.add(i, comment_item);
+		this.items.add(i, item);
 	}
 	
 }

@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     		"article_id INTEGER , "+ //对应的测评id
     		"article_item_title varchar(50) , " + //测评项标题
     		"article_item_star INTEGER , " + //测评项星数
-    		"article_item_content varchar(1600)" + //测评项内容
+    		"article_item_content varchar(1600) , " + //测评项内容
     		"article_item_image_uri varchar(100)" + //测评项图片本地uri,多张图片地址用分号隔开
     		");"; 
 

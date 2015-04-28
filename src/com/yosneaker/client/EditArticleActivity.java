@@ -147,11 +147,11 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	public void fillDatas() {
 		Intent intent = getIntent();
 		Article tmpCommentDraft = (Article) intent.getSerializableExtra("CommentDraft");
-		ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getComment_title());
-		int date = tmpCommentDraft.getComment_date();
+		ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getArticleTitle());
+		int date = tmpCommentDraft.getArticleCreateTime();
 		ahv_edit_article_head.setArticleDate(date/10000+"-"+(date/100)%100+"-"+date%100);
-		commentDraft.setComment_title(tmpCommentDraft.getComment_title());
-		commentDraft.setComment_date(tmpCommentDraft.getComment_date());
+		commentDraft.setArticleTitle(tmpCommentDraft.getArticleTitle());
+		commentDraft.setArticleCreateTime(tmpCommentDraft.getArticleCreateTime());
 		//Todo  设置iv_comment_bgr,iv_comment_user_icon
 		
 		
@@ -170,7 +170,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 		}else if (v == ll_edit_item||commentItemViews.contains(v)) {
 			Bundle bundle = new Bundle();
 			int index = commentItemViews.indexOf(v);
-			commentDraft.setComment_item_index(index);
+			commentDraft.setArticleItemIndex(index);
 			Log.d(Constants.TAG, "index:"+index);
 			bundle.putSerializable("CommentDraft",commentDraft);
 			gotoExistActivityForResult(EditArticleItemActivity.class, bundle,Constants.COMMENT_ITEM_REQUEST);
@@ -258,19 +258,19 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 			case Constants.COMMENT_TITLE_REQUEST:
 				tmpCommentDraft = (Article) data
 				.getSerializableExtra("CommentDraft");
-				ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getComment_title());
-				int date = tmpCommentDraft.getComment_date();
+				ahv_edit_article_head.setArticleTitle(tmpCommentDraft.getArticleTitle());
+				int date = tmpCommentDraft.getArticleCreateTime();
 				ahv_edit_article_head.setArticleDate(date/10000+"-"+(date/100)%100+"-"+date%100);
 				// 保存数据到内存
-				commentDraft.setComment_title(tmpCommentDraft.getComment_title());
-				commentDraft.setComment_date(tmpCommentDraft.getComment_date());
+				commentDraft.setArticleTitle(tmpCommentDraft.getArticleTitle());
+				commentDraft.setArticleCreateTime(tmpCommentDraft.getArticleCreateTime());
 				break;
 			case Constants.COMMENT_INTRO_REQUEST:
 				tmpCommentDraft = (Article) data
 						.getSerializableExtra("CommentDraft");
-				String brand = tmpCommentDraft.getComment_intro_brands();
-				String modelText = tmpCommentDraft.getComment_intro_model();
-				String introText = tmpCommentDraft.getComment_intro_assess();
+				String brand = tmpCommentDraft.getArticleTrademarkId();
+				String modelText = tmpCommentDraft.getArticleModelId();
+				String introText = tmpCommentDraft.getArticleDescription();
 
 				if (TextUtils.isEmpty(brand) && TextUtils.isEmpty(modelText)
 						&& TextUtils.isEmpty(introText)) {
@@ -284,22 +284,22 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 					tv_intro_model.setText(modelText);
 				}
 				// 保存数据到内存
-				commentDraft.setComment_intro_brands(brand);
-				commentDraft.setComment_intro_model(modelText);
-				commentDraft.setComment_intro_assess(introText);
+				commentDraft.setArticleTrademarkId(brand);
+				commentDraft.setArticleModelId(modelText);
+				commentDraft.setArticleDescription(introText);
 				break;
 			case Constants.COMMENT_ITEM_REQUEST:
 				tmpCommentDraft = (Article) data
 						.getSerializableExtra("CommentDraft");
-				ArrayList<ArticleItem> commentItems = tmpCommentDraft.getComment_items();
-				Log.d(Constants.TAG, "tmpCommentDraft.getComment_item_index():"+tmpCommentDraft.getComment_item_index());
-				if (tmpCommentDraft.getComment_item_index() == -1) {
+				ArrayList<ArticleItem> commentItems = tmpCommentDraft.getItems();
+				Log.d(Constants.TAG, "tmpCommentDraft.getComment_item_index():"+tmpCommentDraft.getArticleItemIndex());
+				if (tmpCommentDraft.getArticleItemIndex() == -1) {
 					for (ArticleItem commentItem : commentItems) {
 						addCommentItem(commentItem);
 					}
 				}else {
-					ArticleItem commentItem = commentItems.get(tmpCommentDraft.getComment_item_index());
-					replaceCommentItem(commentItem,tmpCommentDraft.getComment_item_index());
+					ArticleItem commentItem = commentItems.get(tmpCommentDraft.getArticleItemIndex());
+					replaceCommentItem(commentItem,tmpCommentDraft.getArticleItemIndex());
 				}
 				
 				isEdit = false;
@@ -311,8 +311,8 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 			case Constants.COMMENT_SUMMARIZE_REQUEST:
 				tmpCommentDraft = (Article) data
 				.getSerializableExtra("CommentDraft");
-				int sumStar = tmpCommentDraft.getComment_sum_star();
-				String sumText = tmpCommentDraft.getComment_sum_content();
+				int sumStar = tmpCommentDraft.getArticleLevel();
+				String sumText = tmpCommentDraft.getArticleComment();
 				if (TextUtils.isEmpty(sumText) && sumStar==0) {
 					ll_summarize_detail.setVisibility(View.GONE);
 					ll_edit_summarize.setVisibility(View.VISIBLE);
@@ -323,8 +323,8 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 					asv_sum_assess.setStarNumber(sumStar);
 				}
 				// 保存数据到内存
-				commentDraft.setComment_sum_star(sumStar);
-				commentDraft.setComment_sum_content(sumText);
+				commentDraft.setArticleLevel(sumStar);
+				commentDraft.setArticleComment(sumText);
 				break;
 			default:
 				break;
@@ -361,7 +361,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 		cItemView.setOnClickListener(this);
 		commentItemViews.add(cItemView);
 		// 保存数据到内存
-		commentDraft.addComment_item(commentItem);
+		commentDraft.addItem(commentItem);
 		ll_edit_item_detail.addView(cItemView);
 	}
 	
@@ -398,7 +398,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 		cItemView.setOnClickListener(this);
 		commentItemViews.set(comment_item_index, cItemView);
 		// 保存数据到内存
-		commentDraft.replaceComment_item(comment_item_index, commentItem);
+		commentDraft.replaceItem(comment_item_index, commentItem);
 		ll_edit_item_detail.removeViewAt(comment_item_index);
 		ll_edit_item_detail.addView(cItemView, comment_item_index);
 	}
@@ -418,7 +418,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
             		if (bgBitmaps.size()>item_order) {
             			bgBitmaps.remove(item_order);
 					}
-            		commentDraft.removeComment_item(item_order-1);     
+            		commentDraft.removeItem(item_order-1);     
             		commentItemViews.remove(item_order-1);
             		itemsize--;
             		resetItemOrder(item_order);

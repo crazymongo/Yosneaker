@@ -137,11 +137,11 @@ public class EditArticleItemActivity extends BaseActivity{
 //		imageUris.add(null);
 		Intent intent = getIntent();
 		commentDraft = (Article) intent.getExtras().getSerializable("CommentDraft");
-		itemIndex = commentDraft.getComment_item_index();
+		itemIndex = commentDraft.getArticleItemIndex();
 		Log.d(Constants.TAG, "itemIndex:"+itemIndex);
 		if (itemIndex!=-1) {
 			btn_add_goon.setVisibility(View.GONE);
-			ArticleItem commentItem = commentDraft.getComment_items().get(itemIndex);
+			ArticleItem commentItem = commentDraft.getItems().get(itemIndex);
 			et_item_title.setText(commentItem.getItemTitle());
 			rb_item_star.setRating(commentItem.getItemLevel());
 			et_item_intro.setText(commentItem.getItemContent());
@@ -195,7 +195,7 @@ public class EditArticleItemActivity extends BaseActivity{
 					commentItem.setItemTitle(itemTitleText);
 					commentItem.setItemContent(itemIntroText);
 					commentItem.setItemImages(imageUris);
-					commentDraft.addComment_item(commentItem);
+					commentDraft.addItem(commentItem);
 					resetDatas();//重置数据
 				}				
 			}
@@ -228,9 +228,9 @@ public class EditArticleItemActivity extends BaseActivity{
 			}
 			commentItem.setItemImages(imageUris);
 			if (itemIndex == -1) {
-				commentDraft.addComment_item(commentItem);
+				commentDraft.addItem(commentItem);
 			}else {
-				commentDraft.replaceComment_item(itemIndex, commentItem);
+				commentDraft.replaceItem(itemIndex, commentItem);
 			}
 			
 			intent.putExtra("CommentDraft",commentDraft);

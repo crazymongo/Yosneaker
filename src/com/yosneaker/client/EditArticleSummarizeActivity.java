@@ -69,8 +69,8 @@ public class EditArticleSummarizeActivity extends BaseActivity{
 	public void fillDatas() {
 		Intent intent = getIntent();
 		Article commentDraft = (Article) intent.getExtras().getSerializable("CommentDraft");
-		edit_text.setText(commentDraft.getComment_sum_content());
-		rating_bar.setRating(commentDraft.getComment_sum_star());
+		edit_text.setText(commentDraft.getArticleComment());
+		rating_bar.setRating(commentDraft.getArticleLevel());
 	}
 
 	
@@ -160,10 +160,10 @@ public class EditArticleSummarizeActivity extends BaseActivity{
 		Article commentDraft = new Article();
 		if (sumStar != 0) {
 			if (sumStar != 0) {
-				commentDraft.setComment_sum_star(sumStar);
+				commentDraft.setArticleLevel(sumStar);
 			}
 			if (!TextUtils.isEmpty(sumText)) {
-				commentDraft.setComment_sum_content(sumText);
+				commentDraft.setArticleComment(sumText);
 			}
 			intent.putExtra("CommentDraft",commentDraft);
 			setResult(RESULT_OK, intent);
