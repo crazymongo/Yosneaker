@@ -1,12 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_comment_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/activity_comment_detail_layout"
     android:background="@color/white"
     android:orientation="vertical" >
 
-    <include android:id="@+id/mTitleBar" 
-            	 layout="@layout/title_bar"/>
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
 
     <com.yosneaker.client.view.CustomScrollView
         android:id="@+id/scrollView"
@@ -23,9 +24,9 @@
                 android:orientation="vertical" >
 
                 <com.yosneaker.client.view.ArticleHeadView
-    				android:id="@+id/ahv_article_detail_head"
-    				android:layout_width="match_parent"
-    				android:layout_height="wrap_content" />
+                    android:id="@+id/ahv_article_detail_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <include
                     android:id="@+id/buy"
@@ -36,18 +37,18 @@
                     layout="@layout/view_article_detail_intro" />
 
                 <com.yosneaker.client.view.PersonalDataView
-    				android:id="@+id/pdv_article_personal_data"
-    				android:layout_width="match_parent"
-    				android:layout_height="wrap_content" />
+                    android:id="@+id/pdv_article_personal_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_article_detail_item" />
-				
-				<include
+
+                <include
                     android:id="@+id/sum"
                     layout="@layout/view_article_detail_sum" />
-				
+
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_article_detail_buy_img" />
@@ -55,7 +56,16 @@
                 <include
                     android:id="@+id/comment"
                     layout="@layout/view_article_detail_hot_comment" />
-                
+
+                <TextView
+                    android:id="@+id/tv_see_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/see_more_comment"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <include

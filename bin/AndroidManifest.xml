@@ -85,6 +85,16 @@
             >
         </activity>
         
+        <!-- 查看测评评论 -->
+        <activity
+            android:name="com.yosneaker.client.ArticleCommentListActivity"
+            android:label="@string/title_comments" 
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        
+        <!-- 查看图片详情 -->
         <activity
             android:theme="@style/AppTheme.Transparent"
             android:name="com.yosneaker.client.ImageDetailActivity"

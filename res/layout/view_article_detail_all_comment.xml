@@ -23,12 +23,12 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView2"
-            android:text="@string/comment_detail_hot_discussion" />
+            android:text="@string/comment_detail_all_discussion" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/ll_hot_comments"
+        android:id="@+id/ll_all_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:orientation="vertical"

@@ -33,7 +33,8 @@
     <string name="comment_detail_want_buy">想入</string>
     <string name="comment_detail_yet_buy">已入</string>
     <string name="comment_detail_hot_discussion">热门评论</string>
-     <string name="comment_detail_brand">品牌：</string>
+    <string name="comment_detail_all_discussion">所有评论</string>
+    <string name="comment_detail_brand">品牌：</string>
     <string name="comment_detail_model">型号：</string>
      
     <string name="comment_edit_add_intro">添加简介</string>
@@ -122,5 +123,6 @@
     <string name="toast_draft_delete_failure">删除该测评失败！</string>
     
     <string name="see_more_comment">查看更多评论</string>
+    <string name="title_comments">评论</string>
     
 </resources>

@@ -3,6 +3,7 @@ package com.yosneaker.client.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class CommentItemView extends LinearLayout {
 	private TextView tv_user_name;
 	private TextView tv_comment_content;
 	private TextView tv_praise_count;
+	private TextView tv_location;
 	
 	public CommentItemView(Context context) {
 		super(context);
@@ -48,6 +50,7 @@ public class CommentItemView extends LinearLayout {
 		tv_user_name = (TextView) findViewById(R.id.tv_user_name);
 		tv_comment_content = (TextView) findViewById(R.id.tv_comment_content);
 		tv_praise_count = (TextView) findViewById(R.id.tv_praise_count);
+		tv_location = (TextView) findViewById(R.id.tv_location);
 	}
 	
 	/**
@@ -64,6 +67,15 @@ public class CommentItemView extends LinearLayout {
 	 */
 	public void setUserName(String userName) {
 		tv_user_name.setText(userName);
+	}
+	
+	/**
+	 * 设置评论位置描述并显示(如:11楼)
+	 * @param location
+	 */
+	public void setLocation(String location) {
+		tv_location.setVisibility(View.VISIBLE);
+		tv_location.setText(location);
 	}
 	
 	/**

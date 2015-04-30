@@ -28,7 +28,6 @@ import com.yosneaker.client.view.ArticleHeadView;
 import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.ArticleItemView;
 import com.yosneaker.client.view.ProgressDialog;
-import com.yosneaker.client.view.RoundImageView;
 
 /**
  * 编辑测评

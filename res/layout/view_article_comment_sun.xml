@@ -32,21 +32,38 @@
             android:text="评论内容1"
             android:textSize="12sp" />
 
+        <View
+        	android:id="@+id/v_tmp"
+        	android:layout_width="1px"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_user_name" />
+        
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_user_name"
+            android:layout_toLeftOf="@id/v_tmp"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"
+            android:text="1楼"
+            android:textSize="10sp"  />
+        
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@id/tv_user_name"
-            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/tv_location"
+            android:layout_marginRight="5dp"
             android:src="@drawable/item_light" />
 
         <TextView
             android:id="@+id/tv_praise_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tv_user_name"
-            android:layout_alignBottom="@id/tv_user_name"
+            android:layout_alignTop="@id/tv_user_name"
             android:layout_toLeftOf="@id/imageView1"
             android:text="22"
             android:textSize="10sp" />

@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_comment_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
+
+    <include
+        android:id="@+id/hot_comments"
+        layout="@layout/view_article_detail_hot_comment" />
+
+<!--     <include
+        android:id="@+id/all_comments"
+        layout="@layout/view_article_detail_all_comment" /> -->
+    
+</LinearLayout>

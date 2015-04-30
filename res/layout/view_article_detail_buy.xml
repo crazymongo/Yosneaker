@@ -11,7 +11,7 @@
         android:showDividers="end" >
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iv_top_want"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -42,7 +42,7 @@
             android:background="@color/black" />
 
         <ImageView
-            android:id="@+id/ImageView01"
+            android:id="@+id/iv_top_buy"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,9 +20,7 @@ import com.yosneaker.client.view.ArticleItemView;
 import com.yosneaker.client.view.CommentItemView;
 import com.yosneaker.client.view.CustomScrollView;
 import com.yosneaker.client.view.CustomScrollView.OnScrollListener;
-import com.yosneaker.client.view.FlowLayout;
 import com.yosneaker.client.view.PersonalDataView;
-import com.yosneaker.client.view.RoundImageView;
 
 /**
  * 测评详情
@@ -40,12 +39,16 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 	private LinearLayout mBuyLayout;
 	/**  位于顶部的购买布局 */
 	private LinearLayout mTopBuyLayout;
-
+	
+	private ImageView iv_want;
+	private ImageView iv_buy;
 	private LinearLayout ll_want_count;
 	private LinearLayout ll_buy_count;
 	private TextView tv_want_count;
 	private TextView tv_buy_count;
 	
+	private ImageView iv_top_want;
+	private ImageView iv_top_buy;
 	private TextView tv_top_want_count;
 	private TextView tv_top_buy_count;
 	
@@ -56,11 +59,12 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 	private TextView tv_detail_intro_content;
 	
 	private LinearLayout ll_detail_comment_item;
+	private TextView tv_see_more;
 	
 	private ArticleHeadView ahv_article_detail_head;
 	
 	private PersonalDataView pdv_article_personal_data;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
@@ -79,13 +83,17 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		mBuyLayout = (LinearLayout) findViewById(R.id.buy);
 		mTopBuyLayout = (LinearLayout) findViewById(R.id.top_buy_layout);
 		
+		iv_want = (ImageView) mBuyLayout.findViewById(R.id.iv_top_want);
+		iv_buy = (ImageView) mBuyLayout.findViewById(R.id.iv_top_buy);
 		ll_want_count = (LinearLayout) findViewById(R.id.ll_want_count);
 		ll_buy_count = (LinearLayout) findViewById(R.id.ll_buy_count);
 		tv_want_count = (TextView) findViewById(R.id.tv_want_count);
 		tv_buy_count = (TextView) findViewById(R.id.tv_buy_count);
 		
-		tv_top_want_count = (TextView) findViewById(R.id.tv_top_want_count);
-		tv_top_buy_count = (TextView) findViewById(R.id.tv_top_buy_count);
+		iv_top_want = (ImageView) mTopBuyLayout.findViewById(R.id.iv_top_want);
+		iv_top_buy = (ImageView) mTopBuyLayout.findViewById(R.id.iv_top_buy);
+		tv_top_want_count = (TextView) mTopBuyLayout.findViewById(R.id.tv_top_want_count);
+		tv_top_buy_count = (TextView) mTopBuyLayout.findViewById(R.id.tv_top_buy_count);
 		
 		ll_hot_comments = (LinearLayout) findViewById(R.id.ll_hot_comments);
 		
@@ -94,10 +102,13 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		tv_detail_intro_content = (TextView) findViewById(R.id.tv_detail_intro_content);
 		
 		ll_detail_comment_item = (LinearLayout) findViewById(R.id.ll_detail_comment_item);
+		tv_see_more = (TextView) findViewById(R.id.tv_see_more);
 		
 		ahv_article_detail_head = (ArticleHeadView) findViewById(R.id.ahv_article_detail_head);
 		
 		pdv_article_personal_data = (PersonalDataView) findViewById(R.id.pdv_article_personal_data);
+		
+		
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
@@ -126,7 +137,11 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 				System.out.println(mScrollView.getScrollY());
 			}
 		});
-		
+		iv_want.setOnClickListener(this);
+		iv_buy.setOnClickListener(this);
+		iv_top_want.setOnClickListener(this);
+		iv_top_buy.setOnClickListener(this);
+		tv_see_more.setOnClickListener(this);
 	}
 
 	@Override
@@ -187,6 +202,12 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 			showToast("分享");
 		}else if (v == getTextViewRight2()) {
 			showToast("收藏");
+		}else if(v == tv_see_more) {
+			gotoExistActivity(ArticleCommentListActivity.class, new Bundle());
+		}else if(v == iv_top_want || v == iv_want) {
+			showToast("想入");
+		}else if(v == iv_top_buy || v == iv_buy) {
+			showToast("已入");
 		}
 	}
 
