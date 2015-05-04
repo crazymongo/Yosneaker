@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -15,7 +16,7 @@ import com.yosneaker.client.R;
  * @author chendd
  *
  */
-public class CommentItemView extends LinearLayout {
+public class CommentItemView extends RelativeLayout {
 
 	private Context context;
 	private LayoutInflater inflater;
@@ -43,7 +44,6 @@ public class CommentItemView extends LinearLayout {
 	 * 初始化
 	 */
 	private void init() {		
-//		iv_deletes = new ArrayList<ImageView>();
 		inflater = LayoutInflater.from(context);
 		inflater.inflate(R.layout.view_article_comment_sun, this, true);
 		riv_user_portrait = (RoundImageView) findViewById(R.id.riv_user_portrait);

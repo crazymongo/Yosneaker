@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_comment_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -9,12 +8,49 @@
         android:id="@+id/mTitleBar"
         layout="@layout/title_bar" />
 
-    <include
-        android:id="@+id/hot_comments"
-        layout="@layout/view_article_detail_hot_comment" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
-<!--     <include
-        android:id="@+id/all_comments"
-        layout="@layout/view_article_detail_all_comment" /> -->
-    
+        <com.yosneaker.client.view.CustomScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <include
+                    android:id="@+id/hot_comments"
+                    layout="@layout/view_article_detail_hot_comment" />
+
+                <include
+                    android:id="@+id/all_comments"
+                    layout="@layout/view_article_detail_all_comment" />
+
+                <TextView
+                    android:id="@+id/tv_see_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/see_more_comment"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+        </com.yosneaker.client.view.CustomScrollView>
+    </FrameLayout>
+
+    <include
+        android:id="@+id/article_comment_input"
+        android:layout_height="50dp"
+        layout="@layout/view_article_comment_input" />
+	<include
+            android:id="@+id/chat_face_container"
+            layout="@layout/chat_face_container"
+            android:visibility="gone" />
 </LinearLayout>

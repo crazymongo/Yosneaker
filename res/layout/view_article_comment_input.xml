@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/chat_bottom_shape" >
+
+            <ImageView
+                android:id="@+id/image_face"
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dip"
+                android:src="@drawable/chat_emo_normal"
+                android:visibility="visible" />
+
+            <com.yosneaker.client.view.CustomEditText
+                android:id="@+id/input_sms"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dip"
+                android:layout_marginRight="9dip"
+                android:layout_toLeftOf="@+id/send_sms"
+                android:layout_toRightOf="@id/image_face"
+                android:background="@null"
+                android:singleLine="true"
+                android:hint="@string/title_comments_input"
+                android:padding="4dip"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/send_sms"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@id/input_sms"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/input_sms"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:background="@drawable/button_shape"
+                android:gravity="center"
+                android:text="@string/title_comments"
+                android:textColor="#578fbe"
+                android:textSize="14sp" />
+
+</RelativeLayout>

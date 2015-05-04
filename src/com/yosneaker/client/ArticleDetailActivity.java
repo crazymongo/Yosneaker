@@ -95,7 +95,7 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		tv_top_want_count = (TextView) mTopBuyLayout.findViewById(R.id.tv_top_want_count);
 		tv_top_buy_count = (TextView) mTopBuyLayout.findViewById(R.id.tv_top_buy_count);
 		
-		ll_hot_comments = (LinearLayout) findViewById(R.id.ll_hot_comments);
+		ll_hot_comments = (LinearLayout) findViewById(R.id.ll_hot_comments_list);
 		
 		tv_detail_brand = (TextView) findViewById(R.id.tv_detail_brand);
 		tv_detail_model = (TextView) findViewById(R.id.tv_detail_model);

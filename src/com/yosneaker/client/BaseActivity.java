@@ -1,10 +1,13 @@
 package com.yosneaker.client;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,8 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
 		initViews();
 		addListnners() ;
 		fillDatas();
-
+		
+		hideSoftInputView();
 	}
 	
 	/** 初始化所需要的控件 */
@@ -180,5 +184,15 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
         } 
     } 
     
+    /**
+     * 隐藏软键盘
+     */
+    public void hideSoftInputView() {
+		InputMethodManager manager = ((InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE));
+		if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+			if (getCurrentFocus() != null)
+				manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+	}
     
 }
