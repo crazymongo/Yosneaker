@@ -102,6 +102,29 @@
             android:label="@string/app_name" >
             
         </activity>
+        <!-- 登录/注册页 -->
+        <activity
+            android:name="com.yosneaker.client.UserUnLoginActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+            
+        </activity>
+        
+        <!-- 登录 -->
+        <activity
+            android:name="com.yosneaker.client.UserLoginActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/user_login" >
+            
+        </activity>
+        
+        <!-- 注册页 -->
+        <activity
+            android:name="com.yosneaker.client.UserRegisterActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/user_register" >
+            
+        </activity>
         
     </application>
 

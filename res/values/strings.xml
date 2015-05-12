@@ -125,4 +125,22 @@
     <string name="see_more_comment">查看更多评论</string>
     <string name="title_comments">评论</string>
     <string name="title_comments_input">没事写两句</string>
+    
+    <string name="dialog_tip">提示</string>
+    <string name="dialog_user_is_login">登录后才有权查看？</string>
+    <string name="dialog_user_ok">是</string>
+    <string name="dialog_user_cancle">否</string>
+    
+    <string name="app_logo_tip">From sneaker For sneaker</string>
+    <string name="user_what_todo">我想用</string>
+    <string name="user_mobile_login">手机号登录</string>
+    <string name="user_mobile_register">注册</string>
+    
+    <string name="hint_username">用户(3-15位)</string>
+    <string name="hint_password">密码(6-16位)</string>
+    <string name="hint_re_password">确认密码</string>
+    <string name="user_find_password">找回密码</string>
+    <string name="user_login">登录</string>
+    <string name="user_register">注册</string>
+    <string name="user_star_yosneaker">开启Yosneaker之旅</string>
 </resources>

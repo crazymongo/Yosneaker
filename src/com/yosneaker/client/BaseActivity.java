@@ -1,12 +1,16 @@
 package com.yosneaker.client;
 
+import com.yosneaker.client.app.YosneakerAppState;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -194,5 +198,39 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
 				manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 		}
 	}
+    
+    /**
+     * 判读用户是否登录
+     * @return
+     */
+    public boolean isLogin() {
+    	return YosneakerAppState.getInstance().user_id == -1 ? false : true;
+    }
+    
+    /**
+     * 未登录时弹出框去登录
+     */
+    public void showUnLoginDialog() {
+    	AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+    	dialog.setTitle(R.string.dialog_tip);
+    	dialog.setMessage(R.string.dialog_user_is_login);
+    	dialog.setCancelable(false);
+    	dialog.setPositiveButton(R.string.dialog_user_ok, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				gotoExistActivity(UserUnLoginActivity.class, new Bundle());
+			}
+		});
+    	dialog.setNegativeButton(R.string.dialog_user_cancle, new DialogInterface.OnClickListener() {
+    		
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	dialog.show();
+    }
     
 }

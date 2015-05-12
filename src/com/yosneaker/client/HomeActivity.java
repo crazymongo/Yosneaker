@@ -153,13 +153,13 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 //                @Override
 //                public void onClick(DialogInterface dialog, int which) {
 //                    
-//                	if (which == 0) {
+                	if (isLogin()) {
 						Bundle bundle = new Bundle();
 						bundle.putInt("action", 1);
-                		HomeActivity.this.gotoExistActivity(AddArticleTitleActivity.class, bundle);
-//					} else if(which == 1){
-//
-//					}
+                		HomeActivity.this.gotoExistActivity(AddArticleTitleActivity.class, bundle);			
+					} else{
+						showUnLoginDialog();
+					}
 //                }
 //
 //            }).show();

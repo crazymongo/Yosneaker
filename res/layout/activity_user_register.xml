@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
+
+    <EditText
+        android:id="@+id/et_register_username"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_bg_focus"
+        android:hint="@string/hint_username"
+        android:maxLength="30" />
+
+    <EditText
+        android:id="@+id/et_register_password"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:inputType="textPassword"
+        android:background="@drawable/input_bg_focus"
+        android:hint="@string/hint_password"
+        android:maxLength="30" />
+
+    <EditText
+        android:id="@+id/et_register_repassword"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:inputType="textPassword"
+        android:background="@drawable/input_bg_focus"
+        android:hint="@string/hint_re_password"
+        android:maxLength="30" />
+
+    
+    <Button
+        android:id="@+id/btn_user_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/user_star_yosneaker"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/btn_text_size" />
+
+</LinearLayout>

@@ -34,7 +34,7 @@ public class YosneakerAppState {
 	public int mHeigh;//屏幕宽度
 	public static DatabaseHelper db;
 	
-	public static int user_id;// 当前用户id
+	public static int user_id = -1;// 当前用户id
 
 	public static DisplayImageOptions mNormalImageOptions;
 	public static final String SDCARD_PATH = Environment.getExternalStorageDirectory().toString();
@@ -54,8 +54,6 @@ public class YosneakerAppState {
 		// 数据库初始化
 		db = new DatabaseHelper(context,1);
 		db.getWritableDatabase();
-		
-		user_id = 10000;//临时写法
 		
 		mContext = context.getApplicationContext();
 	}
