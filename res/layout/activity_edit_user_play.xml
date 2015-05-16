@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_press"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <EditText
+            android:id="@+id/et_user_signature"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:layout_marginTop="5dp"
+            android:background="@color/transparent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal" >
+
+        <ImageView           
+            android:layout_width="24dp"
+            android:layout_height="24dp"       
+            android:background="@drawable/act_tip" />
+        
+        <TextView 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"      
+        	android:hint="@string/user_personal_play_tip"
+            />
+    </LinearLayout>
+
+</LinearLayout>

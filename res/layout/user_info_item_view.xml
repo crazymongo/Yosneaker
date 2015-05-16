@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userChangePwd"
+    android:layout_width="match_parent"
+    android:layout_height="48dp" >
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="14dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/soardsdk_arrow"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/user_nickname"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/tv_label"
+        android:text="lj神经刀"
+        android:layout_marginLeft="20dp" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/listDivider" />
+
+</RelativeLayout>

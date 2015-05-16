@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.yosneaker.client.model.Article;
+import com.yosneaker.client.util.Validation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * 用户登录界面
@@ -21,6 +24,13 @@ import android.widget.EditText;
  */
 public class UserLoginActivity extends BaseActivity{
 
+	private EditText et_login_username;
+	private EditText et_login_password;
+	private TextView tv_login_find_password;
+	private Button btn_login;
+	
+	private String Username;
+	private String Password;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -38,13 +48,19 @@ public class UserLoginActivity extends BaseActivity{
 		setTitleBarText(null);
 		showTextViewLeft(true);
 		
+		et_login_username = (EditText) findViewById(R.id.et_login_username);
+		et_login_password = (EditText) findViewById(R.id.et_login_password);
+		tv_login_find_password = (TextView) findViewById(R.id.tv_login_find_password);
+		btn_login = (Button) findViewById(R.id.btn_login);
+		
 	}
 
 	@Override
 	public void addListnners() {
 		
 		getTextViewLeft().setOnClickListener(this);			
-	
+		tv_login_find_password.setOnClickListener(this);	
+		btn_login.setOnClickListener(this);	
 	}
 
 	@Override
@@ -56,7 +72,31 @@ public class UserLoginActivity extends BaseActivity{
 	
 	@Override
 	public void onClick(View v) {
-		
+		switch (v.getId()) {
+		case R.id.tv_login_find_password:
+			showToast("求我啊！求我再告诉你密码~");
+			break;
+		case R.id.btn_login:
+			Username = et_login_username.getText().toString();
+			Password = et_login_password.getText().toString();
+			if (TextUtils.isEmpty(Username)) {
+				et_login_username.setError(getResources().getString(R.string.error_login_username_no_null));
+			}else if(!Validation.isUsernameValid(Username)){
+				et_login_username.setError(getResources().getString(R.string.error_login_username_illegal));
+			}else if (TextUtils.isEmpty(Password)) {
+				et_login_password.setError(getResources().getString(R.string.error_login_password_no_null));
+			}else if(!Validation.isPasswordValid(Password)){
+				et_login_password.setError(getResources().getString(R.string.error_login_re_password_illegal));
+			}else {
+				gotoExistActivity(EditUserInfoActivity.class, new Bundle());
+			}
+			break;
+		case R.id.mTextViewLeft:
+			finish();
+			break;
+		default:
+			break;
+		}
 	}
 	
 }

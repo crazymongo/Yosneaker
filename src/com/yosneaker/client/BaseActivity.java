@@ -226,8 +226,9 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
     		
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
+				Bundle bundle = new Bundle();
+				bundle.putInt("action", 1);
+        		BaseActivity.this.gotoExistActivity(AddArticleTitleActivity.class, bundle);
 			}
 		});
     	dialog.show();

@@ -125,7 +125,30 @@
             android:label="@string/user_register" >
             
         </activity>
-        
+        <!-- 完善个人信息 -->
+        <activity
+            android:name="com.yosneaker.client.EditUserInfoActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/edit_user_info" >           
+        </activity>
+        <!-- 编辑昵称 -->
+        <activity
+            android:name="com.yosneaker.client.EditUserNicknameActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/user_nickname" >           
+        </activity>
+        <!-- 编辑签名 -->
+        <activity
+            android:name="com.yosneaker.client.EditUserSignatrueActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/user_signature" >           
+        </activity>
+        <!-- 编辑打法 -->
+        <activity
+            android:name="com.yosneaker.client.EditUserPlayActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/user_personal_play" >           
+        </activity>
     </application>
 
 </manifest>

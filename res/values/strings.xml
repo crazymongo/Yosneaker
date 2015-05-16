@@ -101,7 +101,16 @@
     <string name="error_comment_item_sumstar_no_null">o(╯□╰)o请对该测评项打分！</string>
     <string name="error_comment_item_intro_no_null">o(╯□╰)o面对爱鞋，怎么也得写个20字表达下感受吧？</string>
     <string name="error_comment_intro_no_null">o(╯□╰)o面对爱鞋，怎么也得写个20字表达下感受吧？</string>
-    <string name="error_comment_sumstar_no_null">o(╯□╰)o来给爱鞋打个总分吧~</string>
+    <string name="error_comment_sumstar_no_null">o(╯□╰)o来给爱鞋打个总分吧~</string>    
+    <string name="error_login_username_no_null">o(╯□╰)o用户名不可为空哦！</string>
+    <string name="error_login_username_illegal">o(╯□╰)o用户名不合法！</string>
+    <string name="error_login_password_no_null">o(╯□╰)o密码不可为空哦！</string>
+    <string name="error_login_password_illegal">o(╯□╰)o密码不合法！</string>
+    <string name="error_login_re_password_no_null">o(╯□╰)o确认密码不可为空哦！</string>
+    <string name="error_login_re_password_illegal">o(╯□╰)o确认密码不合法！</string>
+    <string name="error_login_passwords_no_same">o(╯□╰)o密码和确认密码不一致！</string>
+    <string name="error_user_no_nickname">o(╯□╰)o身为sneaker,在江湖行走怎么可以没有酷炫吊炸天的昵称呢？</string>
+    
     
     <string name="dialog_comment_save_intro">保存简介</string>
     <string name="dialog_comment_drop_intro">舍弃简介</string>
@@ -133,7 +142,6 @@
     
     <string name="app_logo_tip">From sneaker For sneaker</string>
     <string name="user_what_todo">我想用</string>
-    <string name="user_mobile_login">手机号登录</string>
     <string name="user_mobile_register">注册</string>
     
     <string name="hint_username">用户(3-15位)</string>
@@ -143,4 +151,21 @@
     <string name="user_login">登录</string>
     <string name="user_register">注册</string>
     <string name="user_star_yosneaker">开启Yosneaker之旅</string>
+    
+    <string name="edit_user_info">完善资料</string>
+    <string name="user_info">基本资料</string>
+    <string name="user_personal">个人数据</string>
+    <string name="user_edit_portrait">更换头像</string>
+    <string name="user_nickname">昵称</string>
+    <string name="user_gender">性别</string>
+    <string name="user_signature">签名</string>
+    <string name="user_personal_seat">位置</string>
+    <string name="user_personal_play">打法</string>
+    
+    
+    <string name="user_nickname_input">请输入昵称</string>
+    <string name="user_nickname_tip">酷炫的昵称可以更好的彰显你的个性！</string>
+    
+    <string name="user_personal_play_tip">明确的打法不仅可以展示骚年的特色，更可以让你的测评有参考依据</string>
+    
 </resources>
