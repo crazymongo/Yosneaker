@@ -162,6 +162,8 @@
     <string name="user_personal_seat">位置</string>
     <string name="user_personal_play">打法</string>
     
+    <string name="user_ok">确定</string>
+    <string name="user_cancle">取消</string>
     
     <string name="user_nickname_input">请输入昵称</string>
     <string name="user_nickname_tip">酷炫的昵称可以更好的彰显你的个性！</string>

@@ -5,4 +5,18 @@
         	<attr name="border_inside_color" format="color" />
         	<attr name="border_outside_color" format="color"></attr>
     	</declare-styleable>
+    	
+    <string-array name="user_info_genders">
+        <item>男生</item>
+        <item>女生</item>
+    </string-array>
+      
+    <string-array name="user_info_seats">
+        <item>C</item>
+        <item>PF</item>
+        <item>PG</item>
+        <item>SG</item>
+        <item>SF</item>
+    </string-array>
+    
 </resources>

@@ -1,11 +1,19 @@
 package com.yosneaker.client;
 
+import java.util.Arrays;
+
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.view.WheelView;
 
 /**
  * 编辑用户个人信息
@@ -95,6 +103,8 @@ public class EditUserInfoActivity extends BaseActivity{
 
 	@Override
 	public void onClick(View v) {
+		View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
+        WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
 		switch (v.getId()) {
 		case R.id.rl_edit_portrait:
 			
@@ -103,22 +113,116 @@ public class EditUserInfoActivity extends BaseActivity{
 			gotoExistActivity(EditUserNicknameActivity.class, new Bundle());
 			break;
 		case R.id.rl_edit_gender:
-	
+            wv.setOffset(1);
+            wv.setSeletion(0);
+            String[] genders = getResources().getStringArray(R.array.user_info_genders);
+            wv.setItems(Arrays.asList(genders));
+            
+            wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.user_gender))
+                    .setView(outerView)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setNegativeButton(getResources().getString(R.string.user_cancle), null)
+                    .show();
 			break;
 		case R.id.rl_edit_signature:
 			gotoExistActivity(EditUserSignatrueActivity.class, new Bundle());
 			break;
 		case R.id.rl_edit_height:
-	
+			wv.setOffset(1);
+            wv.setSeletion(20);
+            String[] heights = new String[50];
+            for (int i = 0; i < heights.length; i++) {
+            	heights[i] = 150+i+"cm";
+			}
+            wv.setItems(Arrays.asList(heights));
+            
+            wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setView(outerView)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setNegativeButton(getResources().getString(R.string.user_cancle), null)
+                    .show();
 			break;
 		case R.id.rl_edit_weight:
-	
+			wv.setOffset(1);
+            wv.setSeletion(20);
+            String[] weights = new String[50];
+            for (int i = 0; i < weights.length; i++) {
+            	weights[i] = 35+i+"kg";
+			}
+            wv.setItems(Arrays.asList(weights));
+            
+            wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setView(outerView)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setNegativeButton(getResources().getString(R.string.user_cancle), null)
+                    .show();
 			break;
 		case R.id.rl_edit_bounce:
-	
+			wv.setOffset(1);
+            wv.setSeletion(20);
+            String[] bounces = new String[50];
+            for (int i = 0; i < bounces.length; i++) {
+            	bounces[i] = 20+i+"cm";
+			}
+            wv.setItems(Arrays.asList(bounces));
+            
+            wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setView(outerView)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setNegativeButton(getResources().getString(R.string.user_cancle), null)
+                    .show();
 			break;
 		case R.id.rl_edit_seat:
-	
+			wv.setOffset(1);
+            wv.setSeletion(2);
+            String[] seats = getResources().getStringArray(R.array.user_info_seats);
+            wv.setItems(Arrays.asList(seats));
+            
+            wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+
+            new AlertDialog.Builder(this)
+                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setView(outerView)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setNegativeButton(getResources().getString(R.string.user_cancle), null)
+                    .show();
 			break;
 		case R.id.rl_edit_play:
 			gotoExistActivity(EditUserPlayActivity.class, new Bundle());
