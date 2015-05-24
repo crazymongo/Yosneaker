@@ -1,6 +1,8 @@
 package com.yosneaker.client.app;
 
 import java.io.File;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +10,8 @@ import android.graphics.Bitmap.Config;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.sina.weibo.SinaWeibo;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.MemoryCacheAware;
@@ -33,6 +37,7 @@ public class YosneakerAppState {
 	public int mWidth;//屏幕宽度
 	public int mHeigh;//屏幕宽度
 	public static DatabaseHelper db;
+	public final static  Map<String,Platform> PLATFORMS = new ConcurrentHashMap<String,Platform>();
 	
 	public static int user_id = -1;// 当前用户id
 
@@ -62,7 +67,6 @@ public class YosneakerAppState {
 		if (mContext == null) {
 			throw new IllegalStateException("YosneakerAppState inited before app context set");
 		}
-
 		mScreenDensity = mContext.getResources().getDisplayMetrics().density;
 		mWidth = mContext.getResources().getDisplayMetrics().widthPixels;
 		mHeigh = mContext.getResources().getDisplayMetrics().heightPixels;

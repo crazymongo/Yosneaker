@@ -133,5 +133,18 @@ public class Article implements Serializable{
 		this.items.remove(i);
 		this.items.add(i, item);
 	}
+
+	@Override
+	public String toString() {
+		return "Article [articleTitle=" + articleTitle + ", articleImages="
+				+ articleImages + ", articleAuthorId=" + articleAuthorId
+				+ ", articleTrademarkId=" + articleTrademarkId
+				+ ", articleModelId=" + articleModelId
+				+ ", articleDescription=" + articleDescription
+				+ ", articleLevel=" + articleLevel + ", articleComment="
+				+ articleComment + ", articleCreateTime=" + articleCreateTime
+				+ ", items=" + items + ", articleStatus=" + articleStatus
+				+ ", articleItemIndex=" + articleItemIndex + "]";
+	}
 	
 }

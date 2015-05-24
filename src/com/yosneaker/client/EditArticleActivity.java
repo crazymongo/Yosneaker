@@ -2,6 +2,12 @@ package com.yosneaker.client;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -19,14 +25,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yosneaker.client.app.YosneakerAppState;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.view.ArticleHeadView;
-import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.ArticleItemView;
+import com.yosneaker.client.view.AssessStarView;
 import com.yosneaker.client.view.ProgressDialog;
 
 /**
@@ -205,8 +215,45 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	 * 发布测评草稿
 	 */
 	private void publishDraft() {
+		for(ArticleItem item : commentDraft.getItems()){
+			final List<String> newImages = new ArrayList<String>();
+			if(item.getImagesList()!=null&&item.getImagesList().size()>0){
+				final CountDownLatch latch=new CountDownLatch(item.getImagesList().size());
+				for(String image:item.getImagesList()){
+					Log.d(Constants.TAG, "=======start upload"+image);
+					// 测试post图片到服务器,使用
+					HttpClientUtil.uploadResources(BitmapUtil.getBitmapFromUri(this, image), new AsyncHttpResponseHandler() {
+
+						@Override
+						public void onFailure(int arg0, Header[] arg1,
+								byte[] arg2, Throwable arg3) {
+							latch.countDown();
+						}
+
+						@Override
+						public void onSuccess(int arg0, Header[] arg1,
+								byte[] arg2) {
+							String responseStr = new String(arg2);
+							com.alibaba.fastjson.JSONObject response = JSON.parseObject(responseStr);
+							Log.d(Constants.TAG, "post image success:"+response.toString());
+							Log.d("newImageAddress", response.getString("content"));
+							newImages.add(response.getString("content"));
+							latch.countDown();
+						}
+						});
+				}
+				try {
+					Log.d(Constants.TAG, "staring wait!");
+					latch.await();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			item.setImagesList(newImages);
+		}
+		//HttpClientUtil.publishArticle(commentDraft, responseHandler);
 		ProgressDialog dialog = ProgressDialog.createDialog(this);
-		dialog.setMessage("发布测评中...");
+		dialog.setMessage(commentDraft.toString());
 		dialog.show();
 //		showToast(getResources().getString(R.string.toast_draft_publish_success));
 	}
@@ -336,7 +383,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	 * @param commentItem
 	 */
 	public void addCommentItem(ArticleItem commentItem) {
-		ArrayList<String> imageUris = commentItem.getItemImages();
+		List<String> imageUris = commentItem.getImagesList();
 		int itemStar = commentItem.getItemLevel();
 		String itemTitleText = commentItem.getItemTitle();
 		String itemContentText = commentItem.getItemContent();
@@ -370,7 +417,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	 * @param comment_item_index
 	 */
 	private void replaceCommentItem(ArticleItem commentItem, int comment_item_index) {
-		ArrayList<String> imageUris = commentItem.getItemImages();
+		List<String> imageUris = commentItem.getImagesList();
 		int itemStar = commentItem.getItemLevel();
 		String itemTitleText = commentItem.getItemTitle();
 		String itemContentText = commentItem.getItemContent();

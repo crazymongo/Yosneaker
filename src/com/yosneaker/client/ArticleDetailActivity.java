@@ -1,10 +1,16 @@
 package com.yosneaker.client;
 
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
@@ -12,9 +18,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yosneaker.client.app.YosneakerAppState;
+import com.yosneaker.client.model.ArticleDetails;
+import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.view.ArticleHeadView;
 import com.yosneaker.client.view.ArticleItemView;
 import com.yosneaker.client.view.CommentItemView;
@@ -64,9 +75,15 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 	private ArticleHeadView ahv_article_detail_head;
 	
 	private PersonalDataView pdv_article_personal_data;
+	
+	private int articleId = 0;
+	
+	private ArticleDetails detail;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {		
+	protected void onCreate(Bundle savedInstanceState) {	
+		articleId = getIntent().getExtras().getInt("articleId");
+		Log.d("articleId",""+ articleId);
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_article_detail);
@@ -149,16 +166,71 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		
 		ahv_article_detail_head.setArticleEditVisibility(View.GONE);
 		
-		// 模拟数据
-		Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.list_bg);
-		try {
-			bitmap = BitmapUtil.getScaleBitmap(bitmap, YosneakerAppState.getInstance().mWidth,Constants.BG_SCALE);
-			ahv_article_detail_head.setArticleBg(bitmap);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		HttpClientUtil.getArticleDetial(articleId, new JsonHttpResponseHandler(){
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable throwable, JSONObject errorResponse) {
+				super.onFailure(statusCode, headers, throwable, errorResponse);
+				System.out.println("*********"+errorResponse);
+			}
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				System.out.println("*********"+response);
+				detail = JSON.parseObject(response.toString(), ArticleDetails.class);
+				
+				//设置介绍
+				tv_detail_intro_content.setText(detail.getModel().getModelStory());
+				//设置型号
+				tv_detail_model.setText(detail.getModel().getModelName());
+				//设置品牌
+				tv_detail_brand.setText(detail.getBrand().getBrandName());
+				
+				//设置标题
+				ahv_article_detail_head.setArticleTitle(detail.getArticle().getArticleTitle());
+				ahv_article_detail_head.setArticleDate(""+detail.getArticle().getArticleCreateTime());
+				ahv_article_detail_head.setArticleUserPortrait(detail.getAuthorInfo().getAccountImages());
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmdd", Locale.CHINA);
+				ahv_article_detail_head.setArticleDate(simpleDateFormat.format(detail.getArticle().getArticleCreateTime()));
+				
+				//个人数据相关
+				pdv_article_personal_data.setPersonalBounce(""+detail.getAuthorInfo().getAccountBounce());
+				pdv_article_personal_data.setPersonalHeight(""+detail.getAuthorInfo().getAccountStature());
+				pdv_article_personal_data.setPersonalWeight(""+detail.getAuthorInfo().getAccountWeight());
+				
+				tv_top_want_count.setText(""+detail.getIntendInfo().getWantCount());
+				tv_top_buy_count.setText(""+detail.getIntendInfo().getBuyCount());
+				
+				tv_want_count.setText(""+detail.getIntendInfo().getWantCount());
+				tv_buy_count.setText(""+detail.getIntendInfo().getBuyCount());
+				
+				// 模拟数据
+				Bitmap bitmap = BitmapFactory.decodeResource(ArticleDetailActivity.this.getResources(), R.drawable.list_bg);
+				try {
+					bitmap = BitmapUtil.getScaleBitmap(bitmap, YosneakerAppState.getInstance().mWidth,Constants.BG_SCALE);
+					ahv_article_detail_head.setArticleBg(bitmap);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				int i = 1;
+				for(ArticleItem articleItem : detail.getItems()){
+					ArticleItemView articleItemView = new ArticleItemView(ArticleDetailActivity.this);
+					articleItemView.setItemOrder(++i);
+					articleItemView.setItemName(articleItem.getItemTitle());
+					articleItemView.setItemContent(articleItem.getItemContent());
+					articleItemView.setItemAssess(3);
+					for(String image : articleItem.getImagesList()){
+						articleItemView.addItemImage(image);
+					}
+					ll_detail_comment_item.addView(articleItemView);
+				}
+			}
+			
+		});
 		
-		ArticleItemView articleItemView = new ArticleItemView(ArticleDetailActivity.this);
+/*		ArticleItemView articleItemView = new ArticleItemView(ArticleDetailActivity.this);
 		articleItemView.setItemOrder(1);
 		articleItemView.setItemName("外观");
 		articleItemView.setItemContent("谈论Return of The Mac的外观是一件颇令人伤感的事情，这双似是而非的低端鞋拥有adidas T-Mac II大部分的外观基因，这是人们喜欢Return of The Mac的原因，同时也成为了部分鞋友厌恶它的理由。鞋头的线条依然是外观的重点");
@@ -173,7 +245,7 @@ public class ArticleDetailActivity extends BaseActivity implements OnScrollListe
 		articleItemView2.setItemAssess(4);
 		
 		ll_detail_comment_item.addView(articleItemView);
-		ll_detail_comment_item.addView(articleItemView2);
+		ll_detail_comment_item.addView(articleItemView2);*/
 		
 		CommentItemView commentItemView = new CommentItemView(ArticleDetailActivity.this);
 		commentItemView.setCommentContent("我是评论");

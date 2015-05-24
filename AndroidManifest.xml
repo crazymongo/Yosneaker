@@ -149,6 +149,12 @@
             android:screenOrientation="portrait"
             android:label="@string/user_personal_play" >           
         </activity>
+        
+        <activity
+            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

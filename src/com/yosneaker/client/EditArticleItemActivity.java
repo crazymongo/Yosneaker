@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,10 +35,12 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**
@@ -145,7 +150,7 @@ public class EditArticleItemActivity extends BaseActivity{
 			et_item_title.setText(commentItem.getItemTitle());
 			rb_item_star.setRating(commentItem.getItemLevel());
 			et_item_intro.setText(commentItem.getItemContent());
-			imageUris = commentItem.getItemImages();
+			imageUris = commentItem.getImagesList();
 			for (String uri : imageUris) {
 				viewList.add(0, BitmapUtil.getBitmapFromUri(EditArticleItemActivity.this, uri));
 			}
@@ -194,7 +199,7 @@ public class EditArticleItemActivity extends BaseActivity{
 					commentItem.setItemLevel(itemStar);
 					commentItem.setItemTitle(itemTitleText);
 					commentItem.setItemContent(itemIntroText);
-					commentItem.setItemImages(imageUris);
+					commentItem.setImagesList(imageUris);
 					commentDraft.addItem(commentItem);
 					resetDatas();//重置数据
 				}				
@@ -226,7 +231,7 @@ public class EditArticleItemActivity extends BaseActivity{
 			if (!TextUtils.isEmpty(itemIntroText)) {
 				commentItem.setItemContent(itemIntroText);
 			}
-			commentItem.setItemImages(imageUris);
+			commentItem.setImagesList(imageUris);
 			if (itemIndex == -1) {
 				commentDraft.addItem(commentItem);
 			}else {

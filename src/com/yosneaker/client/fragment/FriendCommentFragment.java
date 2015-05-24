@@ -1,6 +1,12 @@
 package com.yosneaker.client.fragment;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yosneaker.client.ArticleDetailActivity;
 import com.yosneaker.client.R;
 import com.yosneaker.client.adapter.ArticleAdapter;
 import com.yosneaker.client.model.ArticleList;
+import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.view.XListView;
 import com.yosneaker.client.view.XListView.IXListViewListener;
 
@@ -33,6 +41,7 @@ public class FriendCommentFragment extends BaseFragment implements IXListViewLis
 	
 	// 测试数据
 	int start = 1;
+	int rows = 5;
 	ArrayList<String> heads = new ArrayList<String>();
 	ArrayList<String> covers = new ArrayList<String>();
 	
@@ -98,9 +107,31 @@ public class FriendCommentFragment extends BaseFragment implements IXListViewLis
 	}
 	
 	private void geneItems() {
-		for (int i = 0; i != 5; ++i) {
-			items.add(new ArticleList(1000,1000,"樱花AJ 测评"+start,start,start+"分钟前",start%5,heads.get(start%2),covers.get(start++%2)));
-		}
+		HttpClientUtil.getPublicArticle(++start, rows, new JsonHttpResponseHandler(){
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable throwable, JSONObject errorResponse) {
+				System.out.println("==========4"+errorResponse);
+			}
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					JSONObject response) {
+				int total = 0;
+				List<ArticleList> result = null;
+				try {
+					total = (Integer) response.get("total");
+					JSONArray list = response.getJSONArray("articles");
+					result  = com.alibaba.fastjson.JSONArray.parseArray(list.toString(),ArticleList.class);
+					items.addAll(result);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("==========5"+total+"result:"+items+"resp"+response);
+				mAdapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	private void onLoad() {

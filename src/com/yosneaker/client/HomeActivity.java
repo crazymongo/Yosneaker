@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
+import cn.sharesdk.framework.ShareSDK;
+
 import com.yosneaker.client.fragment.CommentFragment;
 import com.yosneaker.client.fragment.MineFragment;
 
@@ -85,7 +87,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
-		
+		ShareSDK.initSDK(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);	
 		setContentView(R.layout.activity_main);
 		

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -204,7 +205,9 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
      * @return
      */
     public boolean isLogin() {
-    	return YosneakerAppState.getInstance().user_id == -1 ? false : true;
+    	//return YosneakerAppState.getInstance().user_id == -1 ? false : true;
+    	SharedPreferences sharedPreferences = getSharedPreferences("account", 0);
+    	return sharedPreferences.contains("accountId");
     }
     
     /**
