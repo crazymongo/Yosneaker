@@ -1,5 +1,6 @@
 package com.yosneaker.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -43,8 +44,7 @@ public class EditUserNicknameActivity extends BaseActivity{
 	public void addListnners() {
 		
 		getTextViewLeft().setOnClickListener(this);		
-		getTextViewRight1().setOnClickListener(this);		
-		et_user_nickname.setOnClickListener(this);		
+		getTextViewRight1().setOnClickListener(this);			
 	}
 
 	@Override
@@ -61,6 +61,11 @@ public class EditUserNicknameActivity extends BaseActivity{
 			Nickname = et_user_nickname.getText().toString();
 			if (TextUtils.isEmpty(Nickname)) {
 				et_user_nickname.setError(getResources().getString(R.string.error_user_no_nickname));
+			}else {
+				Intent intent =new Intent();
+				intent.putExtra("nickname_return", Nickname);
+				setResult(RESULT_OK, intent);
+				finish();
 			}
 			break;
 		case R.id.mTextViewLeft:

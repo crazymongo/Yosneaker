@@ -16,7 +16,7 @@
         android:padding="10dip" >
 
         <EditText
-            android:id="@+id/et_user_signature"
+            android:id="@+id/et_user_play"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"

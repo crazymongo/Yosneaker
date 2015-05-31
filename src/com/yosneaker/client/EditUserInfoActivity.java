@@ -3,6 +3,8 @@ package com.yosneaker.client;
 import java.util.Arrays;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +44,16 @@ public class EditUserInfoActivity extends BaseActivity{
 	private TextView tv_bounce;
 	private TextView tv_seat;
 	private TextView tv_play;
+	
+	private String Portrait;
+	private String Nickname;
+	private String Gender;
+	private String Signature;
+	private String Height;
+	private String Weight;
+	private String Bounce;
+	private String Seat;
+	private String Play;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +110,12 @@ public class EditUserInfoActivity extends BaseActivity{
 
 	@Override
 	public void fillDatas() {
-		
+		// 选择项的初始数据
+		Gender = "男生";
+		Height = "170cm";
+		Weight = "55kg";
+		Bounce = "40cm";
+		Seat = "PG";
 	}
 
 	@Override
@@ -106,11 +123,17 @@ public class EditUserInfoActivity extends BaseActivity{
 		View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
         WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
 		switch (v.getId()) {
+		case R.id.mTextViewLeft:
+			finish();
+			break;
+		case R.id.mTextviewRight1:
+			showToast("提交保存个人信息");	
+			break;			
 		case R.id.rl_edit_portrait:
-			
+			showToast("选择修改头像");	
 			break;
 		case R.id.rl_edit_nickname:
-			gotoExistActivity(EditUserNicknameActivity.class, new Bundle());
+			gotoExistActivityForResult(EditUserNicknameActivity.class, new Bundle(),Constants.USER_NICKNAME_REQUEST);
 			break;
 		case R.id.rl_edit_gender:
             wv.setOffset(1);
@@ -122,18 +145,25 @@ public class EditUserInfoActivity extends BaseActivity{
                 @Override
                 public void onSelected(int selectedIndex, String item) {
                     Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    Gender = item;
                 }
             });
 
             new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.user_gender))
                     .setView(outerView)
-                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setPositiveButton(getResources().getString(R.string.user_ok), new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							tv_gender.setText(Gender);
+						}
+					})
                     .setNegativeButton(getResources().getString(R.string.user_cancle), null)
                     .show();
 			break;
 		case R.id.rl_edit_signature:
-			gotoExistActivity(EditUserSignatrueActivity.class, new Bundle());
+			gotoExistActivityForResult(EditUserSignatrueActivity.class, new Bundle(),Constants.USER_SIGNATURE_REQUEST);
 			break;
 		case R.id.rl_edit_height:
 			wv.setOffset(1);
@@ -148,13 +178,20 @@ public class EditUserInfoActivity extends BaseActivity{
                 @Override
                 public void onSelected(int selectedIndex, String item) {
                     Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    Height = item;
                 }
             });
 
             new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setTitle(getResources().getString(R.string.personal_item_height))
                     .setView(outerView)
-                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setPositiveButton(getResources().getString(R.string.user_ok),  new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							tv_height.setText(Height);
+						}
+					})
                     .setNegativeButton(getResources().getString(R.string.user_cancle), null)
                     .show();
 			break;
@@ -171,13 +208,20 @@ public class EditUserInfoActivity extends BaseActivity{
                 @Override
                 public void onSelected(int selectedIndex, String item) {
                     Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    Weight = item;
                 }
             });
 
             new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setTitle(getResources().getString(R.string.personal_item_weight))
                     .setView(outerView)
-                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setPositiveButton(getResources().getString(R.string.user_ok),  new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							tv_weight.setText(Weight);
+						}
+					})
                     .setNegativeButton(getResources().getString(R.string.user_cancle), null)
                     .show();
 			break;
@@ -194,13 +238,20 @@ public class EditUserInfoActivity extends BaseActivity{
                 @Override
                 public void onSelected(int selectedIndex, String item) {
                     Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    Bounce = item;
                 }
             });
 
             new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.user_personal_seat))
+                    .setTitle(getResources().getString(R.string.personal_item_bounce))
                     .setView(outerView)
-                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setPositiveButton(getResources().getString(R.string.user_ok),  new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							tv_bounce.setText(Bounce);
+						}
+					})
                     .setNegativeButton(getResources().getString(R.string.user_cancle), null)
                     .show();
 			break;
@@ -214,18 +265,51 @@ public class EditUserInfoActivity extends BaseActivity{
                 @Override
                 public void onSelected(int selectedIndex, String item) {
                     Log.d(Constants.TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    Seat = item;
                 }
             });
 
             new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.user_personal_seat))
                     .setView(outerView)
-                    .setPositiveButton(getResources().getString(R.string.user_ok), null)
+                    .setPositiveButton(getResources().getString(R.string.user_ok),  new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							tv_seat.setText(Seat);
+						}
+					})
                     .setNegativeButton(getResources().getString(R.string.user_cancle), null)
                     .show();
 			break;
 		case R.id.rl_edit_play:
-			gotoExistActivity(EditUserPlayActivity.class, new Bundle());
+			gotoExistActivityForResult(EditUserPlayActivity.class, new Bundle(),Constants.USER_PLAY_REQUEST);
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case Constants.USER_NICKNAME_REQUEST:
+			if (resultCode == RESULT_OK) {
+				Nickname = data.getStringExtra("nickname_return");
+				tv_nickname.setText(Nickname);
+			}
+			break;
+		case Constants.USER_SIGNATURE_REQUEST:
+			if (resultCode == RESULT_OK) {
+				Signature = data.getStringExtra("signature_return");
+				tv_signature.setText(Signature);
+			}
+			break;
+		case Constants.USER_PLAY_REQUEST:
+			if (resultCode == RESULT_OK) {
+				Play = data.getStringExtra("play_return");
+				tv_play.setText(Play);
+			}
 			break;
 		default:
 			break;

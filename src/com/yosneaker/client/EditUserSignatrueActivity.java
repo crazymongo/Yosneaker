@@ -1,8 +1,10 @@
 package com.yosneaker.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
  */
 public class EditUserSignatrueActivity extends BaseActivity{
 
+	private EditText et_user_signature;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class EditUserSignatrueActivity extends BaseActivity{
 		showTextViewRight1(true);
 		getTextViewRight1().setBackgroundResource(R.drawable.ic_ok);
 
+		et_user_signature = (EditText) findViewById(R.id.et_user_signature);
 	}
 
 	@Override
@@ -48,7 +52,20 @@ public class EditUserSignatrueActivity extends BaseActivity{
 
 	@Override
 	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.mTextviewRight1:
+			Intent intent =new Intent();
+			intent.putExtra("signature_return", et_user_signature.getText().toString());
+			setResult(RESULT_OK, intent);
+			finish();
+			break;
+		case R.id.mTextViewLeft:
+			finish();
+			break;
 
+		default:
+			break;
+		}
 	}
 
 }

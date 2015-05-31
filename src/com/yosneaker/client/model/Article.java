@@ -1,7 +1,9 @@
+
 package com.yosneaker.client.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 测评草稿
@@ -19,7 +21,7 @@ public class Article implements Serializable{
 	private int articleLevel;// 测评总评星数（取值0~5）
 	private String articleComment;// 测评总评内容
 	private int articleCreateTime;// 测评日期 yyyymmdd	
-	private ArrayList<ArticleItem> items;// 测评项
+	private List<ArticleItem> items;// 测评项
 	
 	private int articleStatus;// 测评状态 0-未保存草稿，1-已保存草稿，2-已发布
 	private int articleItemIndex;// 当前编辑哪个测评项(-1表示要新增)
@@ -105,7 +107,7 @@ public class Article implements Serializable{
 		this.articleCreateTime = articleCreateTime;
 	}
 		
-	public ArrayList<ArticleItem> getItems() {
+	public List<ArticleItem> getItems() {
 		return items;
 	}
 
@@ -132,19 +134,6 @@ public class Article implements Serializable{
 	public void replaceItem(int i,ArticleItem item) {
 		this.items.remove(i);
 		this.items.add(i, item);
-	}
-
-	@Override
-	public String toString() {
-		return "Article [articleTitle=" + articleTitle + ", articleImages="
-				+ articleImages + ", articleAuthorId=" + articleAuthorId
-				+ ", articleTrademarkId=" + articleTrademarkId
-				+ ", articleModelId=" + articleModelId
-				+ ", articleDescription=" + articleDescription
-				+ ", articleLevel=" + articleLevel + ", articleComment="
-				+ articleComment + ", articleCreateTime=" + articleCreateTime
-				+ ", items=" + items + ", articleStatus=" + articleStatus
-				+ ", articleItemIndex=" + articleItemIndex + "]";
 	}
 	
 }

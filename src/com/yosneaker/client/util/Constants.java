@@ -28,5 +28,7 @@ public interface Constants {
 	public static final int PHOTO_CROP_REQUEST = 10005;
 	public static final int PHOTO_CAREMA_REQUEST = 10006;// 拍照
 	public static final int PHOTO_GALLERY_REQUEST = 10007;// 从相册中选择
-	
+	public static final int USER_NICKNAME_REQUEST = 10008;
+	public static final int USER_SIGNATURE_REQUEST = 10009;
+	public static final int USER_PLAY_REQUEST = 10010;
 }

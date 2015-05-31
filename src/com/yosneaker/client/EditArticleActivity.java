@@ -337,7 +337,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 			case Constants.COMMENT_ITEM_REQUEST:
 				tmpCommentDraft = (Article) data
 						.getSerializableExtra("CommentDraft");
-				ArrayList<ArticleItem> commentItems = tmpCommentDraft.getItems();
+				List<ArticleItem> commentItems = tmpCommentDraft.getItems();
 				Log.d(Constants.TAG, "tmpCommentDraft.getComment_item_index():"+tmpCommentDraft.getArticleItemIndex());
 				if (tmpCommentDraft.getArticleItemIndex() == -1) {
 					for (ArticleItem commentItem : commentItems) {
