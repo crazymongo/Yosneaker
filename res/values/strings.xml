@@ -13,9 +13,11 @@
     <string name="tab_square">最新</string>
     <string name="tab_friend">好友</string>
 	<string name="tab_discuss">评论</string>
-    <string name="tab_wish">心愿</string>
+    <string name="tab_wish">心愿单</string>
     <string name="tab_fans">粉丝</string>
     <string name="tab_inform">通知</string>
+    <string name="tab_collect">收藏</string>
+    <string name="tab_attention">关注</string>
     
     <string name="dialog_add_what">选择您要发布的类别?</string>
     <string name="dialog_add_comment">发布测评</string>
@@ -169,5 +171,8 @@
     <string name="user_nickname_tip">酷炫的昵称可以更好的彰显你的个性！</string>
     
     <string name="user_personal_play_tip">明确的打法不仅可以展示骚年的特色，更可以让你的测评有参考依据</string>
+    
+    
+    <string name="mine_share_article">马上分享你的第一篇测评吧！</string>
     
 </resources>

@@ -3,5 +3,214 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <RelativeLayout
+        android:id="@+id/rl_mine_bg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/user_center_bg" >
+
+        <com.yosneaker.client.view.RoundImageView
+            android:id="@+id/riv_mine_user_icon"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/list_user_head" />
+
+        <ImageView
+            android:id="@+id/iv_mine_edit_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/riv_mine_user_icon"
+            android:background="@drawable/ic_next" />
+
+        <LinearLayout
+            android:id="@+id/ll_mine_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/riv_mine_user_icon"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tv_mine_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lj神经刀"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_mine_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/male" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_mine_signature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_mine_info"
+            android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="生活不只是眼前的苟且，还有诗和远方-weibo"
+            android:textColor="@color/tab_text_normal" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_center_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black" >
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:stretchColumns="*"
+                android:text="@string/hello_world" >
+
+                <TableRow>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tab_wish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_frame_gray"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:text="@string/tab_wish"
+                            android:textColor="@color/tab_text_normal" />
+
+                        <TextView
+                            android:id="@+id/tv_tab_wish_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="232"
+                            android:textColor="@color/tab_text_normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tab_collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_frame_gray"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:text="@string/tab_collect"
+                            android:textColor="@color/tab_text_normal" />
+
+                        <TextView
+                            android:id="@+id/tv_tab_collect_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="232"
+                            android:textColor="@color/tab_text_normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tab_attention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_frame_gray"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:text="@string/tab_attention"
+                            android:textColor="@color/tab_text_normal" />
+
+                        <TextView
+                            android:id="@+id/tv_tab_attention_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="232"
+                            android:textColor="@color/tab_text_normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tab_fans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_frame_gray"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:text="@string/tab_fans"
+                            android:textColor="@color/tab_text_normal" />
+
+                        <TextView
+                            android:id="@+id/tv_tab_fans_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="232"
+                            android:textColor="@color/tab_text_normal" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_mine_no_article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_mine_bg" >
+
+        <TextView
+            android:id="@+id/tv_mine_share_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mine_share_article"
+            android:textColor="@color/gray"
+            android:layout_centerInParent="true"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_mine_share_tip"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_mine_share_article"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_down" />
+
+        <ImageView
+            android:id="@+id/iv_mine_share_tip2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/iv_mine_share_tip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"
+            android:background="@drawable/ic_down" />
+    </RelativeLayout>
 
 </RelativeLayout>

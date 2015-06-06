@@ -229,7 +229,6 @@ public class HomeActivity extends BaseActivity implements OnClickListener{
 //			}
 //			break;
 		case 3:
-		default:
 //			setTitleBarText(getResources().getString(R.string.tab_mine));
 			// 当点击了设置tab时，改变控件的图片和文字颜色
 			mineImage.setImageResource(R.drawable.tab_mine_selected);
