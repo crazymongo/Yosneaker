@@ -149,7 +149,34 @@
             android:screenOrientation="portrait"
             android:label="@string/user_personal_play" >           
         </activity>
-        
+        <!-- 心愿 -->
+        <activity
+            android:name="com.yosneaker.client.MineWishActivity"
+            android:label="@string/tab_wish" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 收藏 -->
+        <activity
+            android:name="com.yosneaker.client.MineCollectActivity"
+            android:label="@string/tab_collect" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 粉丝 -->
+        <activity
+            android:name="com.yosneaker.client.MineFansActivity"
+            android:label="@string/tab_fans" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 关注 -->
+        <activity
+            android:name="com.yosneaker.client.MineAttentionActivity"
+            android:label="@string/tab_attention" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
         <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

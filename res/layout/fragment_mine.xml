@@ -189,7 +189,7 @@
             android:id="@+id/tv_mine_share_article"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mine_share_article"
+            android:text="@string/mine_share_article_none"
             android:textColor="@color/gray"
             android:layout_centerInParent="true"
             android:textSize="18sp" />

@@ -3,6 +3,10 @@ package com.yosneaker.client.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 
 /**
  * 
@@ -10,8 +14,9 @@ import android.support.v4.app.Fragment;
  * 
  * @author chendd
  */
-public class BaseFragment extends Fragment {
-
+public class BaseFragment extends Fragment implements OnClickListener{
+	
+	
 	/**
 	 * 从当前activity跳转到目标activity,
 	 * 如果目标activity曾经打开过,就重新展现,
@@ -24,6 +29,12 @@ public class BaseFragment extends Fragment {
 		intent = new Intent(this.getActivity(), cls);
 		intent.putExtras(bundle);
 		startActivity(intent);
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

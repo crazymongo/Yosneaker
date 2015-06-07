@@ -173,6 +173,11 @@
     <string name="user_personal_play_tip">明确的打法不仅可以展示骚年的特色，更可以让你的测评有参考依据</string>
     
     
-    <string name="mine_share_article">马上分享你的第一篇测评吧！</string>
+    <string name="mine_share_article_none">马上分享你的第一篇测评吧！</string>
+    <string name="mine_wish_none">你的心愿单里空无一物，人不能没有梦想，快去搜寻吧~</string>
+    <string name="mine_fans_none">你还没有粉丝哦，多多发布测评才能得到大家的关注~</string>
+    <string name="mine_collect_none">收藏夹里空无一物，快去搜寻好文章吧~</string>
+    <string name="mine_attention_none">你还没有关注任何鞋友，关注鞋友才能发现更多有趣的测评内容~</string>
+    
     
 </resources>
