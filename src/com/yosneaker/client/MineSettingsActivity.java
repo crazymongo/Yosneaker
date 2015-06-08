@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.yosneaker.client.model.Article;
+import com.yosneaker.client.util.Validation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,22 +12,23 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
- * 发布测评标题
+ * 用户登录界面
  * 
  * @author chendd
  *
  */
-public class MineAttentionActivity extends BaseActivity{
-
+public class MineSettingsActivity extends BaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);	
-		setContentView(R.layout.activity_mine_attention_none);
+		setContentView(R.layout.activity_mine_settings);
 		
 		super.onCreate(savedInstanceState);
 	}
@@ -37,33 +39,30 @@ public class MineAttentionActivity extends BaseActivity{
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
-		showTextViewRight1(true);
-		getTextViewRight1().setBackgroundResource(R.drawable.ic_add_friend);
-		
 		
 	}
 
 	@Override
 	public void addListnners() {
 		
-		getTextViewLeft().setOnClickListener(this);		
-		getTextViewRight1().setOnClickListener(this);		
-	
+		getTextViewLeft().setOnClickListener(this);			
 	}
 
 	@Override
 	public void fillDatas() {
+		
 
 	}
 
 	
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		if (v == getTextViewLeft()) {
+		switch (v.getId()) {
+		case R.id.mTextViewLeft:
 			finish();
-		}else if (v == getTextViewRight1()) {
-			gotoExistActivity(MineSearchActivity.class, new Bundle());
+			break;
+		default:
+			break;
 		}
 	}
 	

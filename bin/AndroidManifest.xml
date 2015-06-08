@@ -178,6 +178,18 @@
             >
         </activity>
         <activity
+            android:name="com.yosneaker.client.MineSearchActivity"
+            android:label="@string/title_add_friend" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="com.yosneaker.client.MineSettingsActivity"
+            android:label="@string/title_settings" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"

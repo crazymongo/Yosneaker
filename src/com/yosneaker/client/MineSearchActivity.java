@@ -1,17 +1,8 @@
 package com.yosneaker.client;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.yosneaker.client.model.Article;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 
 /**
  * 发布测评标题
@@ -19,14 +10,14 @@ import android.widget.EditText;
  * @author chendd
  *
  */
-public class MineAttentionActivity extends BaseActivity{
+public class MineSearchActivity extends BaseActivity{
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);	
-		setContentView(R.layout.activity_mine_attention_none);
+		setContentView(R.layout.activity_mine_search);
 		
 		super.onCreate(savedInstanceState);
 	}
@@ -37,8 +28,7 @@ public class MineAttentionActivity extends BaseActivity{
 		
 		setTitleBarText(null);
 		showTextViewLeft(true);
-		showTextViewRight1(true);
-		getTextViewRight1().setBackgroundResource(R.drawable.ic_add_friend);
+		showTextViewRight1(false);
 		
 		
 	}
@@ -46,8 +36,7 @@ public class MineAttentionActivity extends BaseActivity{
 	@Override
 	public void addListnners() {
 		
-		getTextViewLeft().setOnClickListener(this);		
-		getTextViewRight1().setOnClickListener(this);		
+		getTextViewLeft().setOnClickListener(this);	
 	
 	}
 
@@ -62,9 +51,6 @@ public class MineAttentionActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		if (v == getTextViewLeft()) {
 			finish();
-		}else if (v == getTextViewRight1()) {
-			gotoExistActivity(MineSearchActivity.class, new Bundle());
 		}
 	}
-	
 }

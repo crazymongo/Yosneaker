@@ -63,7 +63,7 @@ public class MineFansActivity extends BaseActivity{
 		if (v == getTextViewLeft()) {
 			finish();
 		}else if (v == getTextViewRight1()) {
-			
+			gotoExistActivity(MineSearchActivity.class, new Bundle());
 		}
 	}
 	

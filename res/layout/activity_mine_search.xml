@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/comment_item__bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <include
+        android:id="@+id/mTitleBar"
+        layout="@layout/title_bar" />
+    
+    <RelativeLayout android:id="@+id/top"
+    	android:layout_width="fill_parent"
+    	android:layout_below="@id/mTitleBar"
+    	android:paddingLeft="24dp"
+    	android:paddingRight="24dp"
+		android:layout_marginTop="10dp"
+    	android:layout_height="wrap_content">
+
+        
+        <RelativeLayout android:id="@+id/rlSearchFrameDelete"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+        	android:layout_centerVertical="true"
+			android:gravity="center_vertical">
+            
+		    	<EditText android:id="@+id/etSearch"
+		        	android:layout_width="fill_parent"
+		        	android:layout_height="wrap_content"
+					android:singleLine="true"
+		        	android:background="@drawable/search_frame"
+		        	android:paddingLeft="32dp"
+		        	android:textSize="13sp"
+		        	android:hint="@string/mine_shearch"/>
+            
+        </RelativeLayout>
+        
+    	
+    </RelativeLayout>
+   
+    <LinearLayout 
+    	android:id="@+id/ll_add_other_way_tip"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:layout_below="@id/top"
+    	android:orientation="horizontal" >
+    
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/mine_add_other_way" />
+        
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+        
+    </LinearLayout>
+        
+    <RelativeLayout
+        android:id="@+id/rl_add_weibo"
+        android:background="@drawable/user_info_item_style"
+        android:layout_width="match_parent"
+        android:layout_below="@id/ll_add_other_way_tip"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_height="40dp" >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/soardsdk_arrow"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_weibo"
+            android:contentDescription="@null" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="@string/mine_add_weibo" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/rl_add_address_book"
+        android:background="@drawable/user_info_item_style"
+        android:layout_width="match_parent"
+        android:layout_below="@id/rl_add_weibo"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_height="40dp" >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/soardsdk_arrow"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_tongxunbu"
+            android:contentDescription="@null" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="@string/mine_add_address_book" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rl_add_weixin"
+        android:background="@drawable/user_info_item_style"
+        android:layout_width="match_parent"
+        android:layout_below="@id/rl_add_address_book"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_height="40dp" >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/soardsdk_arrow"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_weixin"
+            android:contentDescription="@null" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="@string/mine_add_weixin" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rl_add_qq"
+        android:background="@drawable/user_info_item_style"
+        android:layout_width="match_parent"
+        android:layout_below="@id/rl_add_weixin"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_height="40dp" >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/soardsdk_arrow"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_qq_round"
+            android:contentDescription="@null" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:text="@string/mine_add_qq" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider" />
+    </RelativeLayout>
+    
+</RelativeLayout>

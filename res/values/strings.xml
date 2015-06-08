@@ -151,6 +151,7 @@
     <string name="hint_re_password">确认密码</string>
     <string name="user_find_password">找回密码</string>
     <string name="user_login">登录</string>
+    <string name="user_logout">退出</string>
     <string name="user_register">注册</string>
     <string name="user_star_yosneaker">开启Yosneaker之旅</string>
     
@@ -179,5 +180,21 @@
     <string name="mine_collect_none">收藏夹里空无一物，快去搜寻好文章吧~</string>
     <string name="mine_attention_none">你还没有关注任何鞋友，关注鞋友才能发现更多有趣的测评内容~</string>
     
+    <string name="title_add_friend">添加好友</string>
+    <string name="mine_shearch">搜索用户名...</string>
+    <string name="mine_add_other_way">或从以下方式添加</string>
+    <string name="mine_add_weibo">添加新浪微博朋友</string>
+    <string name="mine_add_address_book">添加通讯录朋友</string>
+    <string name="mine_add_weixin">添加微信好友</string>
+    <string name="mine_add_qq">添加qq好友</string>
+    
+     <string name="title_settings">设置</string>
+    <string name="mine_settings_personal">个人设置</string>
+    <string name="mine_settings_net">连接社交网络</string>
+    <string name="mine_settings_notice">消息推送设置</string>
+    <string name="mine_settings_other">其他</string>
+    <string name="mine_settings_clean_cache">清空缓存</string>
+    <string name="mine_settings_check_newversoin">检查新版本</string>
+    <string name="mine_settings_feedback">意见反馈</string>
     
 </resources>
