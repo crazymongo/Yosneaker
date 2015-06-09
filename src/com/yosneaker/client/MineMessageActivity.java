@@ -1,53 +1,58 @@
 package com.yosneaker.client;
 
-import com.yosneaker.client.fragment.MessageFragment;
-import com.yosneaker.client.fragment.WishFragment;
-
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import butterknife.ButterKnife.Setter;
+import cn.sharesdk.framework.ShareSDK;
+
+import com.yosneaker.client.fragment.ArticleFragment;
+import com.yosneaker.client.fragment.MessageFragment;
+import com.yosneaker.client.fragment.MineFragment;
 
 /**
- * 个人心愿单
+ * 
+ * 我的消息界面
  * 
  * @author chendd
- *
+ * 
  */
-public class MineWishActivity extends BaseActivity{
+public class MineMessageActivity extends BaseActivity{
 
 	/** 用于展示个人通知的Fragment */
-	private WishFragment mNoticeFragment;
+	private MessageFragment mNoticeFragment;
 
 	/** 用于对Fragment进行管理 */
 	private FragmentManager fragmentManager;
-	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {		
-		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);	
-		setContentView(R.layout.activity_mine_wish);
-		
+	protected void onCreate(Bundle savedInstanceState) {
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_mine_message);
+
 		super.onCreate(savedInstanceState);
 	}
 
-
 	@Override
 	public void initViews() {
-		
+
+		fragmentManager = getSupportFragmentManager();
 		setTitleBarText(null);
 		showTextViewLeft(true);
 		
-		fragmentManager = getSupportFragmentManager();
 	}
-
+	
+	
 	@Override
 	public void addListnners() {
-		
-		getTextViewLeft().setOnClickListener(this);	
-	
+
+		getTextViewLeft().setOnClickListener(this);
 	}
 
 	@Override
@@ -56,10 +61,15 @@ public class MineWishActivity extends BaseActivity{
 		setTabSelection(0);
 	}
 
-	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.comment_layout:
+			setTabSelection(0);
+			break;
+		case R.id.mine_layout:
+			setTabSelection(1);
+			break;
 		case R.id.mTextViewLeft:
 			finish();
 			break;
@@ -67,6 +77,7 @@ public class MineWishActivity extends BaseActivity{
 			break;
 		}
 	}
+
 	/**
 	 * 根据传入的index参数来设置选中的tab页。
 	 * 
@@ -83,7 +94,7 @@ public class MineWishActivity extends BaseActivity{
 			// commentText.setTextColor(tabTextSelectedColor);
 			if (mNoticeFragment == null) {
 				// 如果mNoticeFragment为空，则创建一个并添加到界面上
-				mNoticeFragment = new WishFragment();
+				mNoticeFragment = new MessageFragment();
 				transaction.add(R.id.content, mNoticeFragment);
 			} else {
 				// 如果mNoticeFragment不为空，则直接将它显示出来

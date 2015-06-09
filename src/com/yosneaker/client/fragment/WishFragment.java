@@ -1,7 +1,6 @@
 package com.yosneaker.client.fragment;
 
-import com.yosneaker.client.R;
-import com.yosneaker.client.view.PagerSlidingTabStrip;
+
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,64 +14,72 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yosneaker.client.R;
+import com.yosneaker.client.view.PagerSlidingTabStrip;
+
 /**
  * 
- * 消息Fragment
+ * 心愿单Fragment
  * 
  * @author chendd
  *
  */
-public class MessageFragment extends BaseFragment {
-
-	private MessageCommentFragment discussMessageFragment;
-	private MessageWishFragment wishMessageFragment;
-	private MessageFansFragment fansMessageFragment;
-	private MessageNoticeFragment informMessageFragment;
+public class WishFragment extends BaseFragment {
 	
-	private  PagerSlidingTabStrip mTabStrip1;
+	/** 
+     * 想入界面的Fragment 
+     */  
+    private WishWantFragment squareFragment;  
+  
+    /** 
+     * 已入界面的Fragment 
+     */  
+    private WishYetFragment friendFragment;  
+	
+	private  PagerSlidingTabStrip mTabStrip;
 	
 	private DisplayMetrics dm; 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_message, container,
-				false);
-		
-		ViewPager pager = (ViewPager) view.findViewById(R.id.pager1);
-        mTabStrip1 = (PagerSlidingTabStrip) view.findViewById(R.id.tabs1);
+		View view = inflater.inflate(R.layout.fragment_wish,
+				container, false);
+
+        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
+        mTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         dm = getResources().getDisplayMetrics(); 
         pager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));  
-        mTabStrip1.setViewPager(pager);  
+        mTabStrip.setViewPager(pager);  
         setTabsValue();  
-		
+      
 		return view;
 	}
-
+	
 	/** 
      * 对PagerSlidingTabStrip的各项属性进行赋值。 
      */  
     private void setTabsValue() {  
         // 设置Tab是自动填充满屏幕的  
-        mTabStrip1.setShouldExpand(true);  
+        mTabStrip.setShouldExpand(true);  
         // 设置Tab的分割线是透明的  
-        mTabStrip1.setDividerColor(Color.TRANSPARENT);  
+        mTabStrip.setDividerColor(Color.TRANSPARENT);  
         // 设置Tab底部线的高度  
-        mTabStrip1.setUnderlineHeight((int) TypedValue.applyDimension(  
+        mTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(  
                 TypedValue.COMPLEX_UNIT_DIP, 1, dm));  
         // 设置Tab Indicator的高度  
-        mTabStrip1.setIndicatorHeight((int) TypedValue.applyDimension(  
+        mTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(  
                 TypedValue.COMPLEX_UNIT_DIP, 4, dm));  
         // 设置Tab标题文字的大小  
-        mTabStrip1.setTextSize((int) TypedValue.applyDimension(  
-                TypedValue.COMPLEX_UNIT_SP, 16, dm));  
+        mTabStrip.setTextSize((int) TypedValue.applyDimension(  
+                TypedValue.COMPLEX_UNIT_SP, 15, dm));  
         
         // 设置Tab Indicator的颜色  
-        mTabStrip1.setIndicatorColor(Color.parseColor("#2CD6C0"));  
+        mTabStrip.setIndicatorColor(Color.parseColor("#2CD6C0"));  
         // 设置选中Tab文字的颜色 (这是我自定义的一个方法)  
-        mTabStrip1.setSelectedTextColor(Color.parseColor("#2CD6C0"));  
+        mTabStrip.setSelectedTextColor(Color.parseColor("#2CD6C0"));  
         // 取消点击Tab时的背景色  
-        mTabStrip1.setTabBackground(0);  
+        mTabStrip.setTabBackground(0);  
     }  
   
     public class MyPagerAdapter extends FragmentPagerAdapter {  
@@ -81,7 +88,7 @@ public class MessageFragment extends BaseFragment {
             super(fm);  
         }  
   
-        private final String[] titles = { "评论", "心愿", "粉丝", "通知" };  
+        private final String[] titles = { "想入", "已入" };  
   
         @Override  
         public CharSequence getPageTitle(int position) {  
@@ -97,25 +104,15 @@ public class MessageFragment extends BaseFragment {
         public Fragment getItem(int position) {  
             switch (position) {  
             case 0:  
-                if (discussMessageFragment == null) {  
-                	discussMessageFragment = new MessageCommentFragment();  
+                if (squareFragment == null) {  
+                	squareFragment = new WishWantFragment();  
                 }  
-                return discussMessageFragment;  
+                return squareFragment;  
             case 1:  
-                if (wishMessageFragment == null) {  
-                	wishMessageFragment = new MessageWishFragment();  
+                if (friendFragment == null) {  
+                	friendFragment = new WishYetFragment();  
                 }  
-                return wishMessageFragment;  
-            case 2:  
-                if (fansMessageFragment == null) {  
-                	fansMessageFragment = new MessageFansFragment();  
-                }  
-                return fansMessageFragment;  
-            case 3:  
-                if (informMessageFragment == null) {  
-                	informMessageFragment = new MessageNoticeFragment();  
-                }  
-                return informMessageFragment;  
+                return friendFragment;  
             default:  
                 return null;  
             }  
@@ -123,5 +120,4 @@ public class MessageFragment extends BaseFragment {
   
     }
 
-	
 }

@@ -9,17 +9,17 @@ import android.view.ViewGroup;
 
 /**
  * 
- * 发布Fragment
+ * 我的Fragment
  * 
  * @author chendd
  *
  */
-public class AddFragment extends BaseFragment {
+public class MessageCommentFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_add,
+		View view = inflater.inflate(R.layout.fragment_message_comment,
 				container, false);
 		return view;
 	}

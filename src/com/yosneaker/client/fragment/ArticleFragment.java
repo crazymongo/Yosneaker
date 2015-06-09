@@ -24,17 +24,17 @@ import com.yosneaker.client.view.PagerSlidingTabStrip;
  * @author chendd
  *
  */
-public class CommentFragment extends BaseFragment {
+public class ArticleFragment extends BaseFragment {
 	
 	/** 
      * 广场界面的Fragment 
      */  
-    private SquareCommentFragment squareFragment;  
+    private ArticleSquareFragment squareFragment;  
   
     /** 
      * 朋友界面的Fragment 
      */  
-    private FriendCommentFragment friendFragment;  
+    private ArticleFriendFragment friendFragment;  
 	
 	private  PagerSlidingTabStrip mTabStrip;
 	
@@ -105,12 +105,12 @@ public class CommentFragment extends BaseFragment {
             switch (position) {  
             case 0:  
                 if (squareFragment == null) {  
-                	squareFragment = new SquareCommentFragment();  
+                	squareFragment = new ArticleSquareFragment();  
                 }  
                 return squareFragment;  
             case 1:  
                 if (friendFragment == null) {  
-                	friendFragment = new FriendCommentFragment();  
+                	friendFragment = new ArticleFriendFragment();  
                 }  
                 return friendFragment;  
             default:  

@@ -201,6 +201,17 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
 	}
     
     /**
+     * 返回主界面
+     */
+    public void gotoHome() {
+    	Intent intent = new Intent();   
+		intent.setClass(BaseActivity.this, HomeActivity.class);  
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意本行的FLAG设置  
+		startActivity(intent);  
+		finish();//关掉自己
+	}
+    
+    /**
      * 判读用户是否登录
      * @return
      */

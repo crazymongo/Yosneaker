@@ -14,12 +14,12 @@ import android.view.ViewGroup;
  * @author chendd
  *
  */
-public class FansMessageFragment extends BaseFragment {
+public class MessageWishFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_fans_message,
+		View view = inflater.inflate(R.layout.fragment_message_wish,
 				container, false);
 		return view;
 	}

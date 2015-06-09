@@ -1,26 +1,19 @@
 package com.yosneaker.client;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.yosneaker.client.model.Article;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 /**
- * 发布测评标题
+ * 个人粉丝
  * 
  * @author chendd
  *
  */
 public class MineFansActivity extends BaseActivity{
 
+	private ImageView iv_add_fans;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -40,7 +33,7 @@ public class MineFansActivity extends BaseActivity{
 		showTextViewRight1(true);
 		getTextViewRight1().setBackgroundResource(R.drawable.ic_add_friend);
 		
-		
+		iv_add_fans = (ImageView) findViewById(R.id.iv_add_fans);
 	}
 
 	@Override
@@ -49,6 +42,7 @@ public class MineFansActivity extends BaseActivity{
 		getTextViewLeft().setOnClickListener(this);		
 		getTextViewRight1().setOnClickListener(this);		
 	
+		iv_add_fans.setOnClickListener(this);				
 	}
 
 	@Override
@@ -59,11 +53,16 @@ public class MineFansActivity extends BaseActivity{
 	
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		if (v == getTextViewLeft()) {
+		switch (v.getId()) {
+		case R.id.mTextViewLeft:
 			finish();
-		}else if (v == getTextViewRight1()) {
-			gotoExistActivity(MineSearchActivity.class, new Bundle());
+			break;
+		case R.id.mTextviewRight1:
+		case R.id.iv_add_fans:
+			gotoHome();
+			break;
+		default:
+			break;
 		}
 	}
 	

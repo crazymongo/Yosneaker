@@ -31,7 +31,7 @@ import com.yosneaker.client.view.XListView.IXListViewListener;
  * @author chendd
  *
  */
-public class FriendCommentFragment extends BaseFragment implements IXListViewListener{
+public class ArticleFriendFragment extends BaseFragment implements IXListViewListener{
 	
 	private View viewFragment;
 	private XListView xListView=null;

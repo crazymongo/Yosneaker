@@ -1,5 +1,8 @@
 package com.yosneaker.client.fragment;
 
+import com.yosneaker.client.BaseActivity;
+import com.yosneaker.client.HomeActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +34,17 @@ public class BaseFragment extends Fragment implements OnClickListener{
 		startActivity(intent);
 	}
 
+	/**
+     * 返回主界面
+     */
+    public void gotoHome() {
+    	Intent intent = new Intent();   
+		intent.setClass(getActivity(), HomeActivity.class);  
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意本行的FLAG设置  
+		startActivity(intent);  
+		getActivity().finish();//关掉自己
+	}
+	
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub

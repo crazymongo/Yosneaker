@@ -197,4 +197,19 @@
     <string name="mine_settings_check_newversoin">检查新版本</string>
     <string name="mine_settings_feedback">意见反馈</string>
     
+    <string name="title_settings_net">连接社交网络</string>
+    <string name="mine_settings_net_bind_weibo">绑定新浪微博</string>
+    <string name="mine_settings_net_bind_qzone">绑定QQ空间</string>
+    
+    <string name="title_settings_notice">消息推送设置</string>
+    <string name="mine_settings_notice_handpick">精选推荐</string>
+    <string name="mine_settings_notice_collect">收藏测评</string>
+    <string name="mine_settings_notice_wish">想入/已入</string>
+    <string name="mine_settings_notice_comment">评论</string>
+    
+    <string name="dialog_mine_settings_clean_cache">你确定要清除所有缓存吗?</string>
+    <string name="toast_mine_settings_clean_cache">清理缓存成功</string>
+    
+    <string name="toast_mine_settings_check_newversoin">已是最新版本</string>
+    
 </resources>

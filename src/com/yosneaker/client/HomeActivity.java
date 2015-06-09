@@ -1,17 +1,15 @@
 package com.yosneaker.client;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import cn.sharesdk.framework.ShareSDK;
 
-import com.yosneaker.client.fragment.CommentFragment;
+import com.yosneaker.client.fragment.ArticleFragment;
 import com.yosneaker.client.fragment.MineFragment;
 
 /**
@@ -21,10 +19,10 @@ import com.yosneaker.client.fragment.MineFragment;
  * @author chendd
  * 
  */
-public class HomeActivity extends BaseActivity implements OnClickListener {
+public class HomeActivity extends BaseActivity{
 
 	/** 用于展示评测的Fragment */
-	private CommentFragment mCommentFragment;
+	private ArticleFragment mCommentFragment;
 
 	/** 用于展示"我的"的Fragment */
 	private MineFragment mMineFragment;
@@ -128,7 +126,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			setTabSelection(1);
 			break;
 		case R.id.mTextViewLeft:
-
+			gotoExistActivity(MineMessageActivity.class, new Bundle());
 			break;
 		case R.id.mTextviewRight1:
 			gotoExistActivity(MineSettingsActivity.class, new Bundle());
@@ -162,7 +160,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 			// commentText.setTextColor(tabTextSelectedColor);
 			if (mCommentFragment == null) {
 				// 如果mCommentFragment为空，则创建一个并添加到界面上
-				mCommentFragment = new CommentFragment();
+				mCommentFragment = new ArticleFragment();
 				transaction.add(R.id.content, mCommentFragment);
 			} else {
 				// 如果mCommentFragment不为空，则直接将它显示出来

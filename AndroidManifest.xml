@@ -177,15 +177,45 @@
             android:screenOrientation="portrait"
             >
         </activity>
+        <!-- 搜索好友 -->
         <activity
             android:name="com.yosneaker.client.MineSearchActivity"
             android:label="@string/title_add_friend" 
             android:screenOrientation="portrait"
             >
         </activity>
+        <!-- 应用设置 -->
         <activity
             android:name="com.yosneaker.client.MineSettingsActivity"
             android:label="@string/title_settings" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 推送设置 -->
+        <activity
+            android:name="com.yosneaker.client.MineSettingsNoticeActivity"
+            android:label="@string/title_settings_notice" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 连接设置 -->
+        <activity
+            android:name="com.yosneaker.client.MineSettingsNetActivity"
+            android:label="@string/title_settings_net" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 意见反馈 -->
+        <activity
+            android:name="com.yosneaker.client.MineSettingsFeedBackActivity"
+            android:label="@string/mine_settings_feedback" 
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 个人消息 -->
+        <activity
+            android:name="com.yosneaker.client.MineMessageActivity"
+            android:label="@string/tab_message" 
             android:screenOrientation="portrait"
             >
         </activity>
