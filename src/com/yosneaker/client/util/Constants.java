@@ -9,7 +9,7 @@ package com.yosneaker.client.util;
 public interface Constants {
 
 	/** 服务器地址 */
-	public static final String HTTP_BASE_URL = "http://yosneaker.com/";  
+	public static final String HTTP_BASE_URL = "http://api.yosneaker.com/";  
 	
 	/** 网络超时(毫秒) */
 	public static final int HTTP_TIME_OUT = 20000;

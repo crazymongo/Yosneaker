@@ -1,19 +1,30 @@
 package com.yosneaker.client;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,8 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.JSONScanner;
 import com.yosneaker.client.app.YosneakerAppState;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
@@ -215,50 +226,105 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	 * 发布测评草稿
 	 */
 	private void publishDraft() {
-		for(ArticleItem item : commentDraft.getItems()){
-			final List<String> newImages = new ArrayList<String>();
-			if(item.getImagesList()!=null&&item.getImagesList().size()>0){
-				final CountDownLatch latch=new CountDownLatch(item.getImagesList().size());
-				for(String image:item.getImagesList()){
-					Log.d(Constants.TAG, "=======start upload"+image);
-					// 测试post图片到服务器,使用
-					HttpClientUtil.uploadResources(BitmapUtil.getBitmapFromUri(this, image), new AsyncHttpResponseHandler() {
-
-						@Override
-						public void onFailure(int arg0, Header[] arg1,
-								byte[] arg2, Throwable arg3) {
-							latch.countDown();
-						}
-
-						@Override
-						public void onSuccess(int arg0, Header[] arg1,
-								byte[] arg2) {
-							String responseStr = new String(arg2);
-							com.alibaba.fastjson.JSONObject response = JSON.parseObject(responseStr);
-							Log.d(Constants.TAG, "post image success:"+response.toString());
-							Log.d("newImageAddress", response.getString("content"));
-							newImages.add(response.getString("content"));
-							latch.countDown();
-						}
-						});
-				}
-				try {
-					Log.d(Constants.TAG, "staring wait!");
-					latch.await();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			item.setImagesList(newImages);
-		}
-		//HttpClientUtil.publishArticle(commentDraft, responseHandler);
 		ProgressDialog dialog = ProgressDialog.createDialog(this);
-		dialog.setMessage(commentDraft.toString());
+		dialog.setMessage("正在发布请稍等");
 		dialog.show();
 //		showToast(getResources().getString(R.string.toast_draft_publish_success));
+		SubmitApplyTask task = new  SubmitApplyTask(dialog,this);
+		task.execute(commentDraft);
+		showToast(getResources().getString(R.string.toast_draft_publish_success));
 	}
 
+	 private class SubmitApplyTask extends AsyncTask<Article,Void,String> {
+		 
+		 ProgressDialog dialog;
+		 
+		 Context context;
+		 
+		
+		public SubmitApplyTask(ProgressDialog dialog, Context context) {
+			super();
+			this.dialog = dialog;
+			this.context = context;
+		}
 
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			dialog.cancel();
+		}
+
+
+		@Override
+		protected String doInBackground(Article... params) {
+
+			HttpClient httpClient = new DefaultHttpClient();
+			for(ArticleItem item : commentDraft.getItems()){
+				final List<String> newImages = new ArrayList<String>();
+				if(item.getImagesList()!=null&&item.getImagesList().size()>0){
+					for(String image:item.getImagesList()){
+						Log.d(Constants.TAG, "=======start upload"+image);
+						// 测试post图片到服务器,使用
+	/*					HttpClientUtil.uploadResources(BitmapUtil.getBitmapFromUri(this, image), new AsyncHttpResponseHandler() {
+
+							@Override
+							public void onFailure(int arg0, Header[] arg1,
+									byte[] arg2, Throwable arg3) {
+								latch.countDown();
+							}
+
+							@Override
+							public void onSuccess(int arg0, Header[] arg1,
+									byte[] arg2) {
+								String responseStr = new String(arg2);
+								com.alibaba.fastjson.JSONObject response = JSON.parseObject(responseStr);
+								Log.d(Constants.TAG, "post image success:"+response.toString());
+								Log.d("newImageAddress", response.getString("content"));
+								newImages.add(response.getString("content"));
+								latch.countDown();
+							}
+							});*/
+						List<BasicNameValuePair> params2 = new LinkedList<BasicNameValuePair>();
+						params2.add(new BasicNameValuePair("image", BitmapUtil.bitmap2Base64Str(YosneakerAppState.getInstance().getContext(), BitmapUtil.getBitmapFromUri(context, image))));
+						
+						try {  
+						    HttpPost postMethod = new HttpPost(HttpClientUtil.getAbsoluteUrl("upload/resources/picture.json"));  
+						    postMethod.setEntity(new UrlEncodedFormEntity(params2, "utf-8")); //将参数填入POST Entity中  
+						                  
+						    HttpResponse response = httpClient.execute(postMethod); //执行POST方法  
+						    Log.i("", "resCode = " + response.getStatusLine().getStatusCode()); //获取响应码  
+						    
+						  //判断请求是否成功    
+				            if(response.getStatusLine().getStatusCode()==HttpStatus.SC_OK){  
+				                Log.i("SUCCESS", "请求服务器端成功");  
+				                JSONObject json = (JSONObject) JSON.parse(EntityUtils.toString(response.getEntity(), "utf-8"));
+				                Log.i("SUCCESS", (String) json.get("content"));  
+				                newImages.add((String) json.get("content"));
+				                }else {  
+				                    Log.i("error", "请求服务器端失败");  
+				                } 
+						} catch (UnsupportedEncodingException e) {  
+						    // TODO Auto-generated catch block  
+						    e.printStackTrace();  
+						} catch (ClientProtocolException e) {  
+						    // TODO Auto-generated catch block  
+						    e.printStackTrace();  
+						} catch (IOException e) {  
+						    // TODO Auto-generated catch block  
+						    e.printStackTrace();  
+						}  
+						
+					}
+				}
+				item.setImagesList(newImages);
+			}
+			//HttpClientUtil.publishArticle(commentDraft, responseHandler);
+			 Log.i("error", commentDraft.toString());  
+			return commentDraft.toString();
+		}
+		 
+	 }
 	/**
 	 * 保存草稿
 	 */

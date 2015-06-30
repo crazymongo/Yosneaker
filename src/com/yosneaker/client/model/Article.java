@@ -88,6 +88,19 @@ public class Article implements Serializable{
 	public void setArticleLevel(int articleLevel) {
 		this.articleLevel = articleLevel;
 	}
+	@Override
+	public String toString() {
+		return "Article [articleTitle=" + articleTitle + ", articleImages="
+				+ articleImages + ", articleAuthorId=" + articleAuthorId
+				+ ", articleTrademarkId=" + articleTrademarkId
+				+ ", articleModelId=" + articleModelId
+				+ ", articleDescription=" + articleDescription
+				+ ", articleLevel=" + articleLevel + ", articleComment="
+				+ articleComment + ", articleCreateTime=" + articleCreateTime
+				+ ", items=" + items + ", articleStatus=" + articleStatus
+				+ ", articleItemIndex=" + articleItemIndex + "]";
+	}
+
 	public String getArticleComment() {
 		return articleComment;
 	}

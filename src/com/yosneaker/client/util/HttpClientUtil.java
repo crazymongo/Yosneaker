@@ -51,7 +51,7 @@ public class HttpClientUtil {
      * @param relativeUrl
      * @return
      */
-    private static String getAbsoluteUrl(String relativeUrl) {
+    public static String getAbsoluteUrl(String relativeUrl) {
         return Constants.HTTP_BASE_URL + relativeUrl;
     }
 
