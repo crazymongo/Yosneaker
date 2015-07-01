@@ -21,6 +21,7 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 
 import com.alibaba.fastjson.JSON;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.utils.L;
 import com.yosneaker.client.model.Account;
 import com.yosneaker.client.model.ThridPlatFormInfo;
 import com.yosneaker.client.util.HttpClientUtil;
@@ -46,6 +47,8 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 	private static final int MSG_AUTH_CANCEL = 3;
 	private static final int MSG_AUTH_ERROR = 4;
 	private static final int MSG_AUTH_COMPLETE = 5;
+	
+	Account account;
 	
 	
 	@Override
@@ -116,26 +119,7 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 			String userId = plat.getDb().getUserId();
 			if (userId != null) {
 				UIHandler.sendEmptyMessage(MSG_USERID_FOUND, this);
-				Account account = new Account();
-				account.setAccountName(plat.getDb().getUserName());
-				account.setAccountThridPartId(plat.getDb().getPlatformNname()+"-"+plat.getDb().getUserId());
-				account.setAccountUsername(plat.getDb().getUserName());
-				account.setAccountImages(plat.getDb().getUserIcon());
-				SharedPreferences sharedPreferences = getSharedPreferences("account", 0);
-				SharedPreferences.Editor mEditor = sharedPreferences.edit();  
-		        mEditor.putString("accountId",account.getAccountThridPartId());  
-		        mEditor.commit();  
-				//account.setAccountSex();
-				//login(plat.getName(), userId, null);
-				ThridPlatFormInfo info = new ThridPlatFormInfo();
-				info.setExpiresIn(plat.getDb().getExpiresIn());
-				info.setExpiresTime(plat.getDb().getExpiresTime());
-				info.setPlatformNname(plat.getDb().getPlatformNname());
-				info.setId(userId);
-				info.setToken(plat.getDb().getToken());
-				info.setTokenSecret(plat.getDb().getTokenSecret());
-				account.setAccountName(JSON.toJSONString(info));
-				System.out.println(account);
+				login(plat);
 				Log.i(TAG, "id:" + userId);
 				Log.i(TAG, "sex:" + plat.getDb().get("sex"));
 				Log.i(TAG, "getExpiresIn:" + plat.getDb().getExpiresIn());
@@ -160,13 +144,29 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 		plat.showUser(null);
 	}
 	
-	private void login(String plat, String userId,
-			HashMap<String, Object> userInfo,Account account) {
+	private void login(Platform plat) {
 		Log.i(TAG, "login执行了");
 		Message msg = new Message();
 		msg.what = MSG_LOGIN;
 		msg.obj = plat;
 		UIHandler.sendMessage(msg, this);
+		
+		account = new Account();
+		account.setAccountName(plat.getDb().getUserName());
+		account.setAccountThridPartId(plat.getDb().getPlatformNname()+"-"+plat.getDb().getUserId());
+		account.setAccountUsername(plat.getDb().getUserName());
+		account.setAccountImages(plat.getDb().getUserIcon());
+		//account.setAccountSex();
+		//login(plat.getName(), userId, null);
+		ThridPlatFormInfo info = new ThridPlatFormInfo();
+		info.setExpiresIn(plat.getDb().getExpiresIn());
+		info.setExpiresTime(plat.getDb().getExpiresTime());
+		info.setPlatformNname(plat.getDb().getPlatformNname());
+		info.setId(plat.getDb().getUserId());
+		info.setToken(plat.getDb().getToken());
+		info.setTokenSecret(plat.getDb().getTokenSecret());
+		account.setAccountName(JSON.toJSONString(info));
+		System.out.println(account);
 		HttpClientUtil.login(account,new JsonHttpResponseHandler(){
 
 			@Override
@@ -178,10 +178,15 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					JSONObject response) {
+				L.i("===", response);
+				SharedPreferences sharedPreferences = getSharedPreferences("account", 0);
+				SharedPreferences.Editor mEditor = sharedPreferences.edit();  
+		        mEditor.putInt("accountId",account.getAccountId());  
+		        mEditor.commit();  
 				super.onSuccess(statusCode, headers, response);
 			}
 			
-		});
+		},this);
 	}
 
 
@@ -191,7 +196,7 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 		Log.i(TAG, "onComplete执行了");
 		if (action == Platform.ACTION_USER_INFOR) {
 			UIHandler.sendEmptyMessage(MSG_AUTH_COMPLETE, this);
-			login(platform.getName(), platform.getDb().getUserId(), res,null);
+			login(platform);
 		}
 		Log.i(TAG, res.toString());
 	}

@@ -22,9 +22,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -192,9 +194,15 @@ public class HttpClientUtil {
     }
 
 	public static void login(Account account,
-			JsonHttpResponseHandler jsonHttpResponseHandler) {
-		RequestParams params = new RequestParams(BeanToMapUtil.getValue(account));
-		client.post(getAbsoluteUrl("store/register"),params, jsonHttpResponseHandler);
+			JsonHttpResponseHandler jsonHttpResponseHandler,Context context) {
+		StringEntity entity = null;
+		try {
+			entity = new StringEntity(JSON.toJSONString(account));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client.post(context,getAbsoluteUrl("store/register"),entity, "application/json", jsonHttpResponseHandler);
 	}
     
 	 private static String invoke(DefaultHttpClient httpclient,  

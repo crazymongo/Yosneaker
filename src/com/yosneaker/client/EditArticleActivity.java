@@ -319,6 +319,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 				}
 				item.setImagesList(newImages);
 			}
+			//commentDraft.setArticleAuthorId("");
 			//HttpClientUtil.publishArticle(commentDraft, responseHandler);
 			 Log.i("error", commentDraft.toString());  
 			return commentDraft.toString();
