@@ -31,4 +31,6 @@ public interface Constants {
 	public static final int USER_NICKNAME_REQUEST = 10008;
 	public static final int USER_SIGNATURE_REQUEST = 10009;
 	public static final int USER_PLAY_REQUEST = 10010;
+
+	public static final String HTTP_IMAGE_BASE_URL = "http://api.yosneaker.com/upload/resources/generic/";
 }

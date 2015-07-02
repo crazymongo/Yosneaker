@@ -119,7 +119,7 @@ public class EditArticleIntroActivity extends BaseActivity implements
 		
 		Article commentDraft = (Article) intent.getExtras().getSerializable("CommentDraft");
 		et_intro.setText(commentDraft.getArticleDescription());
-		et_model.setText(commentDraft.getArticleModelId());
+		et_model.setText(""+commentDraft.getArticleModelId());
 		int brandId = brands.indexOf(commentDraft.getArticleTrademarkId());
 		checkIndex = brandId;
 		if (brandId!=-1&&brandId<brands.size()) {
@@ -254,10 +254,12 @@ public class EditArticleIntroActivity extends BaseActivity implements
 		Article commentDraft = new Article();
 		if (checkIndex != -1||!TextUtils.isEmpty(modelText)||!TextUtils.isEmpty(introText)) {
 			if (checkIndex != -1) {
-				commentDraft.setArticleTrademarkId(brands.get(checkIndex));
+				//commentDraft.setArticleTrademarkId(brands.get(checkIndex));
+				commentDraft.setArticleTrademarkId(1);
 			}
 			if (!TextUtils.isEmpty(modelText)) {
-				commentDraft.setArticleModelId(modelText);
+				commentDraft.setArticleModelId(1);
+				//commentDraft.setArticleModelId(modelText);
 			}
 			if (!TextUtils.isEmpty(introText)) {
 				commentDraft.setArticleDescription(introText);

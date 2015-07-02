@@ -3,6 +3,7 @@ package com.yosneaker.client;
 import java.util.HashMap;
 
 import org.apache.http.Header;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.SharedPreferences;
@@ -47,8 +48,6 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 	private static final int MSG_AUTH_CANCEL = 3;
 	private static final int MSG_AUTH_ERROR = 4;
 	private static final int MSG_AUTH_COMPLETE = 5;
-	
-	Account account;
 	
 	
 	@Override
@@ -151,7 +150,7 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 		msg.obj = plat;
 		UIHandler.sendMessage(msg, this);
 		
-		account = new Account();
+		Account account = new Account();
 		account.setAccountName(plat.getDb().getUserName());
 		account.setAccountThridPartId(plat.getDb().getPlatformNname()+"-"+plat.getDb().getUserId());
 		account.setAccountUsername(plat.getDb().getUserName());
@@ -179,6 +178,13 @@ public class UserUnLoginActivity extends BaseActivity implements  Callback,Platf
 			public void onSuccess(int statusCode, Header[] headers,
 					JSONObject response) {
 				L.i("===", response);
+				Account account = null;
+				try {
+					JSONObject obj = (JSONObject) response.get("obj");
+					account = JSON.parseObject(obj.toString(), Account.class);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 				SharedPreferences sharedPreferences = getSharedPreferences("account", 0);
 				SharedPreferences.Editor mEditor = sharedPreferences.edit();  
 		        mEditor.putInt("accountId",account.getAccountId());  

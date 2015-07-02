@@ -63,10 +63,9 @@ public class HttpClientUtil {
      * @param responseHandler
      */
     public static void publishArticle(Article article,JsonHttpResponseHandler responseHandler) {
-    	Gson gson = new Gson();
     	try {
-			StringEntity stringEntity = new StringEntity(gson.toJson(article));
-			client.post(YosneakerAppState.getInstance().getContext(),getAbsoluteUrl("store/articles"),stringEntity,"application/json",responseHandler);
+			StringEntity stringEntity = new StringEntity(JSON.toJSONString(article));
+			syncClient.post(YosneakerAppState.getInstance().getContext(),getAbsoluteUrl("store/articles"),stringEntity,"application/json",responseHandler);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

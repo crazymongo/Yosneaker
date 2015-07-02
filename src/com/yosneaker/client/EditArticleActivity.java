@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -22,10 +23,12 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -39,6 +42,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.JSONScanner;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.utils.L;
 import com.yosneaker.client.app.YosneakerAppState;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
@@ -300,7 +305,7 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 				                Log.i("SUCCESS", "请求服务器端成功");  
 				                JSONObject json = (JSONObject) JSON.parse(EntityUtils.toString(response.getEntity(), "utf-8"));
 				                Log.i("SUCCESS", (String) json.get("content"));  
-				                newImages.add((String) json.get("content"));
+				                newImages.add(Constants.HTTP_IMAGE_BASE_URL+(String) json.get("content"));
 				                }else {  
 				                    Log.i("error", "请求服务器端失败");  
 				                } 
@@ -319,8 +324,27 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 				}
 				item.setImagesList(newImages);
 			}
-			//commentDraft.setArticleAuthorId("");
-			//HttpClientUtil.publishArticle(commentDraft, responseHandler);
+			  SharedPreferences sharedPreferences = getSharedPreferences("account", 0);
+			  int accountId = sharedPreferences.getInt("accountId", 0);
+			  commentDraft.setArticleAuthorId(accountId);
+			  Looper.prepare();
+			  HttpClientUtil.publishArticle(commentDraft, new JsonHttpResponseHandler(){
+
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						Throwable throwable, org.json.JSONObject errorResponse) {
+					super.onFailure(statusCode, headers, throwable, errorResponse);
+				}
+
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						org.json.JSONObject response) {
+					L.i(Constants.TAG, response);
+					super.onSuccess(statusCode, headers, response);
+					gotoExistActivity(HomeActivity.class, new Bundle());
+				}
+				  
+			  });
 			 Log.i("error", commentDraft.toString());  
 			return commentDraft.toString();
 		}
@@ -381,12 +405,12 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 			case Constants.COMMENT_INTRO_REQUEST:
 				tmpCommentDraft = (Article) data
 						.getSerializableExtra("CommentDraft");
-				String brand = tmpCommentDraft.getArticleTrademarkId();
-				String modelText = tmpCommentDraft.getArticleModelId();
+				String brand = String.valueOf(tmpCommentDraft.getArticleTrademarkId());
+				int modelText = tmpCommentDraft.getArticleModelId();
 				String introText = tmpCommentDraft.getArticleDescription();
 
-				if (TextUtils.isEmpty(brand) && TextUtils.isEmpty(modelText)
-						&& TextUtils.isEmpty(introText)) {
+				if (TextUtils.isEmpty(brand+"") && TextUtils.isEmpty(modelText+"")
+						&& TextUtils.isEmpty(introText+"")) {
 					ll_edit_intro.setVisibility(View.VISIBLE);
 					ll_intro_detail.setVisibility(View.GONE);
 				} else {
@@ -394,10 +418,10 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 					ll_intro_detail.setVisibility(View.VISIBLE);
 					tv_intro_detail.setText(introText);
 					tv_intro_brand.setText(brand);
-					tv_intro_model.setText(modelText);
+					tv_intro_model.setText(String.valueOf(modelText));
 				}
 				// 保存数据到内存
-				commentDraft.setArticleTrademarkId(brand);
+				commentDraft.setArticleTrademarkId(1);
 				commentDraft.setArticleModelId(modelText);
 				commentDraft.setArticleDescription(introText);
 				break;

@@ -15,8 +15,8 @@ public class Article implements Serializable{
 	private String articleTitle;// 测评标题
 	private String articleImages;// 测评缩略图
 	private int articleAuthorId;// 测评作者id
-	private String articleTrademarkId;// 测评简介品牌
-	private String articleModelId;// 测评简介型号
+	private int articleTrademarkId;// 测评简介品牌
+	private int articleModelId;// 测评简介型号
 	private String articleDescription;// 测评简介评价
 	private int articleLevel;// 测评总评星数（取值0~5）
 	private String articleComment;// 测评总评内容
@@ -31,8 +31,8 @@ public class Article implements Serializable{
 		this.articleTitle = "";
 		this.articleImages = "";
 		this.articleAuthorId = -1;
-		this.articleTrademarkId = "";
-		this.articleModelId = "";
+		this.articleTrademarkId = 0;
+		this.articleModelId = 0;
 		this.articleDescription = "";
 		this.articleLevel = 0;
 		this.articleComment = "";
@@ -64,16 +64,16 @@ public class Article implements Serializable{
 	public void setArticleTitle(String articleTitle) {
 		this.articleTitle = articleTitle;
 	}
-	public String getArticleTrademarkId() {
+	public int getArticleTrademarkId() {
 		return articleTrademarkId;
 	}
-	public void setArticleTrademarkId(String articleTrademarkId) {
+	public void setArticleTrademarkId(int articleTrademarkId) {
 		this.articleTrademarkId = articleTrademarkId;
 	}
-	public String getArticleModelId() {
+	public int getArticleModelId() {
 		return articleModelId;
 	}
-	public void setArticleModelId(String articleModelId) {
+	public void setArticleModelId(int articleModelId) {
 		this.articleModelId = articleModelId;
 	}
 	public String getArticleDescription() {
