@@ -46,6 +46,9 @@ public class PickerImageUtil {
 		windowWidth = wm.getDefaultDisplay().getWidth();
 	}
 
+	/**
+	 * 打开本地相簿
+	 */
 	public void OpenGallery() {
 		Intent intent = new Intent(Intent.ACTION_PICK);
 		intent.setType("image/*");
@@ -56,6 +59,9 @@ public class PickerImageUtil {
 		}
 	}
 
+	/**
+	 * 打开拍照
+	 */
 	public void OpenCamera() {
 		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 		if (hasSdcard()) {
@@ -86,6 +92,13 @@ public class PickerImageUtil {
 		}
 	}
 
+	/**
+	 * 获取图片本地地址
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 * @return
+	 */
 	public String getBitmapFilePath(int requestCode, int resultCode, Intent data) {
 		if (requestCode == Constants.PHOTO_GALLERY_REQUEST) {
 			if (data != null) {
@@ -120,9 +133,11 @@ public class PickerImageUtil {
 		return null;
 	}
 
-	private int aspectX = 0;
-	private int aspectY = 0;
-
+	/**
+	 * 获取加工后的图片
+	 * @param picturePath
+	 * @return
+	 */
 	public Bitmap getBitmapByOpt(String picturePath) {
 		Options opt = new Options();
 		opt.inJustDecodeBounds = true;
@@ -143,6 +158,9 @@ public class PickerImageUtil {
 		return BitmapFactory.decodeFile(picturePath, opt);
 	}
 
+	/**
+	 * 本机是否有sd卡
+	 */
 	private boolean hasSdcard() {
 		if (Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED)) {

@@ -1,12 +1,14 @@
 package com.yosneaker.client.util;
 
+import android.provider.BaseColumns;
+
 /**
  * 定义系统常量
  * 
  * @author chendd
  *
  */
-public interface Constants {
+public interface Constants extends BaseColumns {
 
 	/** 服务器地址 */
 	public static final String HTTP_BASE_URL = "http://api.yosneaker.com/";  
