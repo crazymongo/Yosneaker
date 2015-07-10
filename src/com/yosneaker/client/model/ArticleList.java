@@ -182,4 +182,5 @@ public class ArticleList implements Serializable{
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	
 }

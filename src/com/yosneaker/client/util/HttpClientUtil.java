@@ -24,6 +24,8 @@ import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -48,6 +50,16 @@ public class HttpClientUtil {
         client.setTimeout(Constants.HTTP_TIME_OUT);   //设置链接超时，如果不设置，默认为10s
     }
 
+    /**
+	 * 判断网络状态
+	 */
+	public static boolean isNetWorkConnected(Context context){
+		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+		NetworkInfo info = manager.getActiveNetworkInfo();
+	
+		return (info!=null&&info.isConnected());
+	}
+    
     /**
      * 返回 服务器地址+命名空间的拼接串(即完整请求地址)
      * @param relativeUrl

@@ -1,11 +1,18 @@
 package com.yosneaker.client;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yosneaker.client.util.Constants;
+import com.yosneaker.client.util.PickerImageUtil;
 import com.yosneaker.client.view.WheelView;
 
 /**
@@ -55,6 +63,9 @@ public class EditUserInfoActivity extends BaseActivity{
 	private String Seat;
 	private String Play;
 	
+	private PickerImageUtil mPickerImageUtil;
+	private Uri imageUri;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -90,6 +101,8 @@ public class EditUserInfoActivity extends BaseActivity{
 		tv_bounce = (TextView) findViewById(R.id.tv_bounce);
 		tv_seat = (TextView) findViewById(R.id.tv_seat);
 		tv_play = (TextView) findViewById(R.id.tv_play);
+		
+		mPickerImageUtil = new PickerImageUtil(this);
 		
 	}
 
@@ -130,7 +143,17 @@ public class EditUserInfoActivity extends BaseActivity{
 			showToast("提交保存个人信息");	
 			break;			
 		case R.id.rl_edit_portrait:
-			showToast("选择修改头像");	
+			new AlertDialog.Builder(this).setItems(EditUserInfoActivity.this.getResources().getStringArray(R.array.edit_portrait_way), new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if (which == 0) {
+						mPickerImageUtil.OpenCamera();
+					}else {
+						mPickerImageUtil.OpenGallery();
+					}
+				}
+			}).show();
 			break;
 		case R.id.rl_edit_nickname:
 			gotoExistActivityForResult(EditUserNicknameActivity.class, new Bundle(),Constants.USER_NICKNAME_REQUEST);
@@ -309,6 +332,30 @@ public class EditUserInfoActivity extends BaseActivity{
 			if (resultCode == RESULT_OK) {
 				Play = data.getStringExtra("play_return");
 				tv_play.setText(Play);
+			}
+			break;
+		case Constants.PHOTO_CAREMA_REQUEST:
+		case Constants.PHOTO_GALLERY_REQUEST:
+			imageUri = data.getData();
+			Intent intent = new Intent("com.android.camera.action.CROP");
+			intent.setDataAndType(imageUri, "image/*");
+			intent.putExtra("scale", false);
+			intent.putExtra("aspectX", 1);//裁剪框比例  
+	        intent.putExtra("aspectY", 1);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+			startActivityForResult(intent, Constants.PHOTO_CROP_REQUEST);
+			break;
+		case Constants.PHOTO_CROP_REQUEST:
+
+			Bitmap bmp;
+			try {
+				bmp = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+				if (bmp != null) {
+					iv_portrait.setBackground(new BitmapDrawable(bmp));
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			break;
 		default:
