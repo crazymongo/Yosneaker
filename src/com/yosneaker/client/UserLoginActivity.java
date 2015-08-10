@@ -1,20 +1,15 @@
 package com.yosneaker.client;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.yosneaker.client.model.Article;
-import com.yosneaker.client.util.Validation;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.gc.materialdesign.views.ButtonRectangle;
+import com.yosneaker.client.util.Validation;
 
 /**
  * 用户登录界面
@@ -27,7 +22,7 @@ public class UserLoginActivity extends BaseActivity{
 	private EditText et_login_username;
 	private EditText et_login_password;
 	private TextView tv_login_find_password;
-	private Button btn_login;
+	private ButtonRectangle btn_login;
 	
 	private String Username;
 	private String Password;
@@ -51,7 +46,7 @@ public class UserLoginActivity extends BaseActivity{
 		et_login_username = (EditText) findViewById(R.id.et_login_username);
 		et_login_password = (EditText) findViewById(R.id.et_login_password);
 		tv_login_find_password = (TextView) findViewById(R.id.tv_login_find_password);
-		btn_login = (Button) findViewById(R.id.btn_login);
+		btn_login = (ButtonRectangle) findViewById(R.id.btn_login);
 		
 	}
 

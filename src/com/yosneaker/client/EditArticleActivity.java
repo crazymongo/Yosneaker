@@ -2,7 +2,6 @@ package com.yosneaker.client;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -41,7 +40,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.parser.JSONScanner;
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.utils.L;
 import com.yosneaker.client.app.YosneakerAppState;
@@ -70,9 +69,9 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 	private LinearLayout ll_edit_summarize;
 	private LinearLayout ll_edit_item_detail;
 	
-	private Button btn_save_draft;
-	private Button btn_publish_draft;
-	private Button btn_delete_draft;
+	private ButtonRectangle btn_save_draft;
+	private ButtonRectangle btn_publish_draft;
+	private ButtonRectangle btn_delete_draft;
 	
 	private ImageView iv_item_edit;
 	
@@ -129,9 +128,9 @@ public class EditArticleActivity extends BaseActivity implements ArticleItemView
 		ll_edit_summarize = (LinearLayout) findViewById(R.id.ll_edit_summarize);
 		ll_edit_item_detail = (LinearLayout)findViewById(R.id.ll_edit_item_detail);
 		
-		btn_save_draft = (Button) findViewById(R.id.btn_save_draft);
-		btn_publish_draft = (Button) findViewById(R.id.btn_publish_draft);
-		btn_delete_draft = (Button) findViewById(R.id.btn_delete_draft);
+		btn_save_draft = (ButtonRectangle) findViewById(R.id.btn_save_draft);
+		btn_publish_draft = (ButtonRectangle) findViewById(R.id.btn_publish_draft);
+		btn_delete_draft = (ButtonRectangle) findViewById(R.id.btn_delete_draft);
 		
 		iv_item_edit = (ImageView) findViewById(R.id.iv_item_edit);
 		iv_item_edit.setBackgroundResource(R.drawable.item_edit);

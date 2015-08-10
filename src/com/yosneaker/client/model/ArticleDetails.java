@@ -18,7 +18,7 @@ public class ArticleDetails implements Serializable{
 	private List<Comment> hotCommonts;
 	
 	private IntentionInfo intendInfo;
-
+	
 	public ArticleList getArticle() {
 		return article;
 	}

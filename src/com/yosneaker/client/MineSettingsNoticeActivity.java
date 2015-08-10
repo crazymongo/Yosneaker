@@ -1,13 +1,13 @@
 package com.yosneaker.client;
 
-import com.yosneaker.client.util.SettingUtils;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ToggleButton;
+
+import com.gc.materialdesign.views.Switch;
+import com.gc.materialdesign.views.Switch.OnCheckListener;
+import com.yosneaker.client.util.SettingUtils;
 
 /**
  * 消息推送设置
@@ -15,12 +15,12 @@ import android.widget.ToggleButton;
  * @author chendd
  *
  */
-public class MineSettingsNoticeActivity extends BaseActivity implements OnCheckedChangeListener{
+public class MineSettingsNoticeActivity extends BaseActivity{
 
-	private ToggleButton tb_notice_handpick;
-	private ToggleButton tb_notice_collect;
-	private ToggleButton tb_notice_wish;
-	private ToggleButton tb_notice_comment;
+	private Switch tb_notice_handpick;
+	private Switch tb_notice_collect;
+	private Switch tb_notice_wish;
+	private Switch tb_notice_comment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -40,10 +40,10 @@ public class MineSettingsNoticeActivity extends BaseActivity implements OnChecke
 		showTextViewRight1(true);
 		getTextViewRight1().setBackgroundResource(R.drawable.ic_home2);
 		
-		tb_notice_handpick = (ToggleButton) findViewById(R.id.tb_notice_handpick);
-		tb_notice_collect = (ToggleButton) findViewById(R.id.tb_notice_collect);
-		tb_notice_wish = (ToggleButton) findViewById(R.id.tb_notice_wish);
-		tb_notice_comment = (ToggleButton) findViewById(R.id.tb_notice_comment);
+		tb_notice_handpick = (Switch) findViewById(R.id.tb_notice_handpick);
+		tb_notice_collect = (Switch) findViewById(R.id.tb_notice_collect);
+		tb_notice_wish = (Switch) findViewById(R.id.tb_notice_wish);
+		tb_notice_comment = (Switch) findViewById(R.id.tb_notice_comment);
 	}
 
 	@Override
@@ -52,10 +52,34 @@ public class MineSettingsNoticeActivity extends BaseActivity implements OnChecke
 		getTextViewLeft().setOnClickListener(this);		
 		getTextViewRight1().setOnClickListener(this);		
 	
-		tb_notice_handpick.setOnCheckedChangeListener(this);
-		tb_notice_collect.setOnCheckedChangeListener(this);
-		tb_notice_wish.setOnCheckedChangeListener(this);
-		tb_notice_comment.setOnCheckedChangeListener(this);
+		tb_notice_handpick.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNoticeActivity.this, SettingUtils.settings_notice_handpick, check);
+			}
+		});
+		tb_notice_collect.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNoticeActivity.this, SettingUtils.settings_notice_collect, check);
+			}
+		});
+		tb_notice_wish.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNoticeActivity.this, SettingUtils.settings_notice_wish, check);
+			}
+		});
+		tb_notice_comment.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNoticeActivity.this, SettingUtils.settings_notice_comment, check);
+			}
+		});
 		
 	}
 
@@ -82,25 +106,5 @@ public class MineSettingsNoticeActivity extends BaseActivity implements OnChecke
 		}
 	}
 
-
-	@Override
-	public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-		switch (v.getId()) {
-		case R.id.tb_notice_handpick:
-			SettingUtils.set(this, SettingUtils.settings_notice_handpick, isChecked);
-			break;
-		case R.id.tb_notice_collect:
-			SettingUtils.set(this, SettingUtils.settings_notice_collect, isChecked);
-			break;
-		case R.id.tb_notice_wish:
-			SettingUtils.set(this, SettingUtils.settings_notice_wish, isChecked);
-			break;
-		case R.id.tb_notice_comment:
-			SettingUtils.set(this, SettingUtils.settings_notice_comment, isChecked);
-			break;
-		default:
-			break;
-		}
-	}
 	
 }

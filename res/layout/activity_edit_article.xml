@@ -57,7 +57,7 @@
         android:text="两天前"
         />
     </LinearLayout>
-    <Button 
+<!--     <Button 
             android:id="@+id/btn_save_draft"
             android:layout_width="240dp"
     		android:layout_height="wrap_content"
@@ -67,10 +67,20 @@
     		android:layout_marginLeft="10dp"
     		android:text="@string/comment_edit_save_draft"
     		android:textColor="@color/gray"
-            />
+            /> -->
   
+    <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_save_draft"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="40dp"
+        		android:layout_marginRight="40dp"
+        		android:layout_marginTop="20dp"
+                android:background="@color/tab_text_selected"
+                android:textSize="@dimen/btn_text_size"
+                android:text="@string/comment_edit_save_draft" />
     
-    <Button 
+<!--     <Button 
             android:id="@+id/btn_publish_draft"
             android:layout_width="240dp"
     		android:layout_height="wrap_content"
@@ -80,9 +90,20 @@
     		android:layout_marginLeft="10dp"
     		android:text="@string/comment_edit_publisht"
     		android:textColor="@color/gray"
-            />
+            /> -->
     
-    <Button 
+    <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_publish_draft"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="40dp"
+        		android:layout_marginRight="40dp"
+        		android:layout_marginTop="16dp"
+                android:background="@color/tab_text_selected"
+                android:textSize="@dimen/btn_text_size"
+                android:text="@string/comment_edit_publisht" />
+    
+<!--     <Button 
             android:id="@+id/btn_delete_draft"
             android:layout_width="240dp"
     		android:layout_height="wrap_content"
@@ -92,7 +113,19 @@
     		android:layout_marginLeft="10dp"
     		android:text="@string/comment_edit_delete_draft"
     		android:textColor="@color/gray"
-            />
+            /> -->
+    
+    <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_delete_draft"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="40dp"
+        		android:layout_marginRight="40dp"
+        		android:layout_marginTop="16dp"
+                android:background="@color/tab_text_selected"
+                android:textSize="@dimen/btn_text_size"
+                android:text="@string/comment_edit_delete_draft" />
+    
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

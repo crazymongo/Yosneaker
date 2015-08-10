@@ -1,14 +1,12 @@
 package com.yosneaker.client;
 
-import com.yosneaker.client.util.SettingUtils;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.gc.materialdesign.views.Switch;
+import com.gc.materialdesign.views.Switch.OnCheckListener;
+import com.yosneaker.client.util.SettingUtils;
 
 /**
  * 发布测评标题
@@ -16,10 +14,10 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
  * @author chendd
  *
  */
-public class MineSettingsNetActivity extends BaseActivity implements OnCheckedChangeListener{
+public class MineSettingsNetActivity extends BaseActivity{
 
-	private ToggleButton tb_net_bind_weibo;
-	private ToggleButton tb_net_bind_qzone;
+	private Switch tb_net_bind_weibo;
+	private Switch tb_net_bind_qzone;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -39,8 +37,8 @@ public class MineSettingsNetActivity extends BaseActivity implements OnCheckedCh
 		showTextViewRight1(true);
 		getTextViewRight1().setBackgroundResource(R.drawable.ic_home2);
 		
-		tb_net_bind_weibo = (ToggleButton) findViewById(R.id.tb_net_bind_weibo);
-		tb_net_bind_qzone = (ToggleButton) findViewById(R.id.tb_net_bind_qzone);
+		tb_net_bind_weibo = (Switch) findViewById(R.id.tb_net_bind_weibo);
+		tb_net_bind_qzone = (Switch) findViewById(R.id.tb_net_bind_qzone);
 		
 	}
 
@@ -50,8 +48,20 @@ public class MineSettingsNetActivity extends BaseActivity implements OnCheckedCh
 		getTextViewLeft().setOnClickListener(this);		
 		getTextViewRight1().setOnClickListener(this);	
 		
-		tb_net_bind_weibo.setOnCheckedChangeListener(this);
-		tb_net_bind_qzone.setOnCheckedChangeListener(this);
+		tb_net_bind_weibo.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNetActivity.this, SettingUtils.settings_net_bind_weibo, check);
+			}
+		});
+		tb_net_bind_qzone.setOncheckListener(new OnCheckListener() {
+			
+			@Override
+			public void onCheck(boolean check) {
+				SettingUtils.set(MineSettingsNetActivity.this, SettingUtils.settings_net_bind_qzone, check);
+			}
+		});
 	
 	}
 
@@ -75,18 +85,5 @@ public class MineSettingsNetActivity extends BaseActivity implements OnCheckedCh
 			break;
 		}
 	}
-	
-	@Override
-	public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-		switch (v.getId()) {
-		case R.id.tb_net_bind_weibo:
-			SettingUtils.set(this, SettingUtils.settings_net_bind_weibo, isChecked);
-			break;
-		case R.id.tb_net_bind_qzone:
-			SettingUtils.set(this, SettingUtils.settings_net_bind_qzone, isChecked);
-			break;
-		default:
-			break;
-		}
-	}
+
 }

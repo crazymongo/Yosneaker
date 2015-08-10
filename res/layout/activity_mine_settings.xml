@@ -254,16 +254,15 @@
             android:background="?android:attr/listDivider" />
     </RelativeLayout>
     
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/user_logout"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/btn_text_size" />
+    <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="25dp"
+        		android:layout_marginRight="25dp"
+        		android:layout_marginTop="32dp"
+                android:background="@color/tab_text_selected"
+                android:textSize="@dimen/btn_text_size"
+                android:text="@string/user_logout" />
     
 </LinearLayout>

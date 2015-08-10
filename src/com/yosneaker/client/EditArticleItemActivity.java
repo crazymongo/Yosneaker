@@ -4,9 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,12 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.yosneaker.client.model.Article;
 import com.yosneaker.client.model.ArticleItem;
 import com.yosneaker.client.util.BitmapUtil;
 import com.yosneaker.client.util.Constants;
-import com.yosneaker.client.util.HttpClientUtil;
 import com.yosneaker.client.util.PickerImageUtil;
 
 /**
@@ -66,7 +62,7 @@ public class EditArticleItemActivity extends BaseActivity{
 	
 	private int itemIndex;
 	
-	private Button btn_add_goon;
+	private ButtonRectangle btn_add_goon;
 	private ImageButton sendPic;
 	private ImageButton sendCamera;
 	
@@ -104,7 +100,7 @@ public class EditArticleItemActivity extends BaseActivity{
 		tv_item_intro = (TextView)findViewById(R.id.tv_item_intro);
 		et_item_title = (EditText)findViewById(R.id.et_item_title);
 		rb_item_star = (RatingBar)findViewById(R.id.rb_item_star);
-		btn_add_goon = (Button)findViewById(R.id.btn_add_goon);
+		btn_add_goon = (ButtonRectangle)findViewById(R.id.btn_add_goon);
 		
 		// 图库照相机BMP业务
 		sendmoreLyt = (LinearLayout) findViewById(R.id.layout_sendmore);

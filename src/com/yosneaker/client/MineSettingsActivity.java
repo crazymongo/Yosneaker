@@ -1,7 +1,5 @@
 package com.yosneaker.client;
 
-import com.yosneaker.client.util.DataCleanManager;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,6 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+
+import com.gc.materialdesign.views.ButtonRectangle;
+import com.yosneaker.client.util.DataCleanManager;
 
 /**
  * 用户登录界面
@@ -24,7 +25,7 @@ public class MineSettingsActivity extends BaseActivity{
 	private RelativeLayout rl_settings_check_newversoin;
 	private RelativeLayout rl_settings_feedback;
 	
-	private Button btn_logout;
+	private ButtonRectangle btn_logout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -48,8 +49,7 @@ public class MineSettingsActivity extends BaseActivity{
 		rl_settings_check_newversoin = (RelativeLayout) findViewById(R.id.rl_settings_check_newversoin);
 		rl_settings_feedback = (RelativeLayout) findViewById(R.id.rl_settings_feedback);
 		
-		btn_logout = (Button) findViewById(R.id.btn_logout);
-		
+		btn_logout = (ButtonRectangle) findViewById(R.id.btn_logout);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class MineSettingsActivity extends BaseActivity{
 		rl_settings_check_newversoin.setOnClickListener(this);		
 		rl_settings_feedback.setOnClickListener(this);		
 		
-		btn_logout.setOnClickListener(this);		
+		btn_logout.setOnClickListener(this);
 	}
 
 	@Override
