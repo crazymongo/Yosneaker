@@ -2,7 +2,6 @@ package com.yosneaker.client.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,8 +33,6 @@ public class WheelView extends ScrollView {
     public static class OnWheelViewListener {
         public void onSelected(int selectedIndex, String item) {
         }
-
-        ;
     }
 
 

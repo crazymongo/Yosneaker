@@ -149,6 +149,8 @@
     <string name="hint_username">用户(3-15位)</string>
     <string name="hint_password">密码(6-16位)</string>
     <string name="hint_re_password">确认密码</string>
+    <string name="hint_input_signature">请输入签名</string>
+    
     <string name="user_find_password">找回密码</string>
     <string name="user_login">登录</string>
     <string name="user_logout">退出</string>
@@ -170,6 +172,7 @@
     
     <string name="user_nickname_input">请输入昵称</string>
     <string name="user_nickname_tip">酷炫的昵称可以更好的彰显你的个性！</string>
+    
     
     <string name="user_personal_play_tip">明确的打法不仅可以展示骚年的特色，更可以让你的测评有参考依据</string>
     

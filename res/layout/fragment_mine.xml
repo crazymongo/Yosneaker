@@ -180,11 +180,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/ll_mine_no_article"
+        android:id="@+id/rl_mine_no_article"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_mine_bg"
-         >
+        android:layout_below="@id/rl_mine_bg">
 
         <TextView
             android:id="@+id/tv_mine_share_article"
@@ -222,7 +221,5 @@
         	android:fastScrollEnabled="true"
         	android:visibility="gone"
         	android:cacheColorHint="@color/transparent" />
-    
-    
     
 </RelativeLayout>

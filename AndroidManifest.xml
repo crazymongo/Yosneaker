@@ -27,11 +27,13 @@
             android:label="@string/app_name" 
             android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait">
+            <!--  
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
         
         <!-- 首页 -->
@@ -135,7 +137,13 @@
         <activity
             android:name="com.yosneaker.client.EditUserInfoActivity"
             android:screenOrientation="portrait"
-            android:label="@string/edit_user_info" >           
+            android:label="@string/edit_user_info" >  
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!-- 编辑昵称 -->
         <activity
